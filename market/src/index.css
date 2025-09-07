@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  color: #1A1812;
+  background-color: #ffffff;
+}
+
+h2 {
+  font-family: 'Tenor Sans', sans-serif;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}

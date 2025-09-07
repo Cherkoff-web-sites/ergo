@@ -1,0 +1,7 @@
+
+/* MOBILE */
+@media (max-width: 991px) {
+  .hero-bg {
+    background-image: url('../img/hero_mob.webp');
+  }
+}

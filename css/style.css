@@ -1,0 +1,36 @@
+body {
+  touch-action: pan-x pan-y;
+}
+
+/* hero */
+.hero {
+  margin-bottom: 70px;
+}
+.hero-bg {
+  background-image: url('../img/hero.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+/* category */
+.btn__category {
+  border: 1px solid #1A181252;
+}
+
+/* Swiper кнопки навигации */
+.swiper-button-next,
+.swiper-button-prev {
+  position: static;
+  margin: 0;
+  padding: 0;
+  width: 14px;
+}
+
+.swiper-button-next::before,
+.swiper-button-next::after,
+.swiper-button-prev::before,
+.swiper-button-prev::after {
+  content: '';
+}
