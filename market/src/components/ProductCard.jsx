@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 
 const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onProductClick }) => {
@@ -17,13 +18,14 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
             <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-        <img
-          src={product.image}
-          alt={product.name}
-          className={`w-full h-full object-cover cursor-pointer ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
-          onLoad={() => setImageLoaded(true)}
-          onClick={() => onProductClick && onProductClick(product)}
-        />
+        <Link to={`/product/${product.id}`}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className={`w-full h-full object-cover cursor-pointer ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+            onLoad={() => setImageLoaded(true)}
+          />
+        </Link>
         
         {/* Бейджи */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
@@ -41,7 +43,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
 
         {/* Кнопка избранного */}
         <button
-          onClick={() => onToggleFavorite(product.id)}
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleFavorite(product.id); }}
           className={`absolute top-3 right-3 p-2 rounded-full transition-colors duration-200 ${
             isFavorite 
               ? 'bg-red-500 text-white' 
@@ -60,12 +62,11 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
         </span>
 
         {/* Название */}
-        <h3 
-          className="text-body-md font-medium text-text-main mt-1 mb-2 line-clamp-2 cursor-pointer hover:text-primary transition-colors"
-          onClick={() => onProductClick && onProductClick(product)}
-        >
-          {product.name}
-        </h3>
+        <Link to={`/product/${product.id}`}>
+          <h3 className="text-body-md font-medium text-text-main mt-1 mb-2 line-clamp-2 cursor-pointer hover:text-primary transition-colors">
+            {product.name}
+          </h3>
+        </Link>
 
         {/* Рейтинг */}
         <div className="flex items-center gap-1 mb-3">
@@ -108,12 +109,12 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
 
         {/* Кнопки */}
         <div className="flex gap-2">
-          <button
-            onClick={() => onProductClick && onProductClick(product)}
-            className="flex-1 py-2 px-3 border border-border-light text-text-main rounded-lg hover:bg-gray-50 transition-colors text-sm"
+          <Link
+            to={`/product/${product.id}`}
+            className="flex-1 py-2 px-3 border border-border-light text-text-main rounded-lg hover:bg-gray-50 transition-colors text-sm text-center"
           >
             Подробнее
-          </button>
+          </Link>
           <button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}

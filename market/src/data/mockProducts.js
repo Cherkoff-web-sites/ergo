@@ -3,8 +3,9 @@ export const mockProducts = [
   {
     id: 1,
     name: "Диван угловой 'Модерн'",
-    category: "Диваны",
+    category: "Мягкая мебель",
     subcategory: "Угловые",
+    series: "BERLIN",
     price: 125000,
     oldPrice: 150000,
     image: "/img/product_example_for_app.png",
@@ -20,8 +21,9 @@ export const mockProducts = [
   {
     id: 2,
     name: "Кресло 'Комфорт'",
-    category: "Кресла",
+    category: "Кресла и стулья",
     subcategory: "Офисные",
+    series: "RIVA",
     price: 45000,
     oldPrice: null,
     image: "/img/product_example_for_app.png",
@@ -36,9 +38,10 @@ export const mockProducts = [
   },
   {
     id: 3,
-    name: "Стол обеденный 'Дуб'",
-    category: "Столы",
-    subcategory: "Обеденные",
+    name: "Стол переговорный 'Дуб'",
+    category: "Переговорные столы",
+    subcategory: "Овальные",
+    series: "BERLIN",
     price: 85000,
     oldPrice: 95000,
     image: "/img/product_example_for_app.png",
@@ -49,13 +52,14 @@ export const mockProducts = [
     isNew: false,
     rating: 4.9,
     reviews: 32,
-    description: "Массивный дубовый стол для семейных обедов."
+    description: "Массивный дубовый стол для переговорных комнат."
   },
   {
     id: 4,
-    name: "Шкаф-купе 'Классик'",
-    category: "Шкафы",
+    name: "Шкаф для кабинета 'Классик'",
+    category: "Кабинет руководителя",
     subcategory: "Купе",
+    series: "BERLIN",
     price: 180000,
     oldPrice: null,
     image: "/img/product_example_for_app.png",
@@ -66,13 +70,14 @@ export const mockProducts = [
     isNew: true,
     rating: 4.7,
     reviews: 15,
-    description: "Просторный шкаф-купе с зеркальными дверями."
+    description: "Просторный шкаф-купе для кабинета руководителя с зеркальными дверями."
   },
   {
     id: 5,
-    name: "Кровать двуспальная 'Рояль'",
-    category: "Кровати",
-    subcategory: "Двуспальные",
+    name: "Стол для персонала 'Рояль'",
+    category: "Мебель для персонала",
+    subcategory: "Рабочие столы",
+    series: "RIVA",
     price: 95000,
     oldPrice: 110000,
     image: "/img/product_example_for_app.png",
@@ -83,13 +88,14 @@ export const mockProducts = [
     isNew: false,
     rating: 4.8,
     reviews: 28,
-    description: "Элегантная кровать с изголовьем и ящиками для хранения."
+    description: "Элегантный рабочий стол с ящиками для хранения документов."
   },
   {
     id: 6,
     name: "Диван прямой 'Минимализм'",
-    category: "Диваны",
+    category: "Мягкая мебель",
     subcategory: "Прямые",
+    series: "BERLIN",
     price: 75000,
     oldPrice: null,
     image: "/img/product_example_for_app.png",
@@ -105,8 +111,9 @@ export const mockProducts = [
   {
     id: 7,
     name: "Стул 'Офис'",
-    category: "Стулья",
+    category: "Кресла и стулья",
     subcategory: "Офисные",
+    series: "RIVA",
     price: 25000,
     oldPrice: 30000,
     image: "/img/product_example_for_app.png",
@@ -121,9 +128,10 @@ export const mockProducts = [
   },
   {
     id: 8,
-    name: "Комод 'Винтаж'",
-    category: "Комоды",
+    name: "Стойка ресепшен 'Винтаж'",
+    category: "Стойки ресепшен",
     subcategory: "Классические",
+    series: "BERLIN",
     price: 65000,
     oldPrice: null,
     image: "/img/product_example_for_app.png",
@@ -134,13 +142,14 @@ export const mockProducts = [
     isNew: false,
     rating: 4.6,
     reviews: 8,
-    description: "Винтажный комод с резными деталями."
+    description: "Винтажная стойка ресепшен с резными деталями."
   },
   {
     id: 9,
     name: "Диван модульный 'Трансформер'",
-    category: "Диваны",
+    category: "Мягкая мебель",
     subcategory: "Модульные",
+    series: "BERLIN",
     price: 145000,
     oldPrice: 165000,
     image: "/img/product_example_for_app.png",
@@ -156,8 +165,9 @@ export const mockProducts = [
   {
     id: 10,
     name: "Стол письменный 'Офис'",
-    category: "Столы",
+    category: "Мебель для персонала",
     subcategory: "Письменные",
+    series: "RIVA",
     price: 55000,
     oldPrice: null,
     image: "/img/product_example_for_app.png",
@@ -173,8 +183,9 @@ export const mockProducts = [
   {
     id: 11,
     name: "Кресло-качалка 'Ретро'",
-    category: "Кресла",
+    category: "Кресла и стулья",
     subcategory: "Качалки",
+    series: "RIVA",
     price: 85000,
     oldPrice: 95000,
     image: "/img/product_example_for_app.png",
@@ -189,9 +200,10 @@ export const mockProducts = [
   },
   {
     id: 12,
-    name: "Кровать односпальная 'Детская'",
-    category: "Кровати",
-    subcategory: "Односпальные",
+    name: "Мебель на заказ 'Детская'",
+    category: "Мебель на заказ",
+    subcategory: "Индивидуальные",
+    series: "CUSTOM",
     price: 45000,
     oldPrice: null,
     image: "/img/product_example_for_app.png",
@@ -202,20 +214,64 @@ export const mockProducts = [
     isNew: true,
     rating: 4.8,
     reviews: 31,
-    description: "Безопасная детская кровать с бортиками."
+    description: "Индивидуальная мебель на заказ с бортиками."
+  },
+  {
+    id: 13,
+    name: "Вешалка напольная 'Стиль'",
+    category: "Другое",
+    subcategory: "Аксессуары",
+    series: "ACCESSORIES",
+    price: 8500,
+    oldPrice: null,
+    image: "/img/product_example_for_app.png",
+    material: "Металл",
+    color: "Черный",
+    size: "40x40x180 см",
+    inStock: true,
+    isNew: false,
+    rating: 4.2,
+    reviews: 8,
+    description: "Стильная напольная вешалка для одежды."
+  },
+  {
+    id: 14,
+    name: "Зеркало настенное 'Элегант'",
+    category: "Другое",
+    subcategory: "Аксессуары",
+    series: "ACCESSORIES",
+    price: 12000,
+    oldPrice: 15000,
+    image: "/img/product_example_for_app.png",
+    material: "Стекло",
+    color: "Серебристый",
+    size: "80x60 см",
+    inStock: true,
+    isNew: true,
+    rating: 4.6,
+    reviews: 15,
+    description: "Элегантное настенное зеркало в современном стиле."
   }
 ];
 
 export const categories = [
   { id: 'all', name: 'Все товары', count: mockProducts.length },
-  { id: 'Диваны', name: 'Диваны', count: mockProducts.filter(p => p.category === 'Диваны').length },
-  { id: 'Кресла', name: 'Кресла', count: mockProducts.filter(p => p.category === 'Кресла').length },
-  { id: 'Столы', name: 'Столы', count: mockProducts.filter(p => p.category === 'Столы').length },
-  { id: 'Шкафы', name: 'Шкафы', count: mockProducts.filter(p => p.category === 'Шкафы').length },
-  { id: 'Кровати', name: 'Кровати', count: mockProducts.filter(p => p.category === 'Кровати').length },
-  { id: 'Стулья', name: 'Стулья', count: mockProducts.filter(p => p.category === 'Стулья').length },
-  { id: 'Комоды', name: 'Комоды', count: mockProducts.filter(p => p.category === 'Комоды').length },
+  { id: 'Кабинет руководителя', name: 'Кабинет руководителя', count: mockProducts.filter(p => p.category === 'Кабинет руководителя').length },
+  { id: 'Мебель для персонала', name: 'Мебель для персонала', count: mockProducts.filter(p => p.category === 'Мебель для персонала').length },
+  { id: 'Кресла и стулья', name: 'Кресла и стулья', count: mockProducts.filter(p => p.category === 'Кресла и стулья').length },
+  { id: 'Мягкая мебель', name: 'Мягкая мебель', count: mockProducts.filter(p => p.category === 'Мягкая мебель').length },
+  { id: 'Переговорные столы', name: 'Переговорные столы', count: mockProducts.filter(p => p.category === 'Переговорные столы').length },
+  { id: 'Стойки ресепшен', name: 'Стойки ресепшен', count: mockProducts.filter(p => p.category === 'Стойки ресепшен').length },
+  { id: 'Мебель на заказ', name: 'Мебель на заказ', count: mockProducts.filter(p => p.category === 'Мебель на заказ').length },
+  { id: 'Другое', name: 'Другое', count: mockProducts.filter(p => p.category === 'Другое').length },
 ];
 
-export const materials = ['Все', 'Ткань', 'Кожа', 'Дуб', 'ЛДСП', 'МДФ', 'Экокожа', 'Пластик', 'Массив', 'Дерево'];
-export const colors = ['Все', 'Серый', 'Черный', 'Натуральный', 'Белый', 'Венге', 'Бежевый', 'Синий', 'Дуб'];
+export const series = [
+  { id: 'BERLIN', name: 'BERLIN', description: 'Классическая серия мебели в современном стиле' },
+  { id: 'RIVA', name: 'RIVA', description: 'Эргономичная офисная мебель' },
+  { id: 'CUSTOM', name: 'CUSTOM', description: 'Индивидуальные заказы' },
+  { id: 'ACCESSORIES', name: 'ACCESSORIES', description: 'Аксессуары и дополнения' }
+];
+
+export const materials = ['Все', 'Ткань', 'Кожа', 'Дуб', 'ЛДСП', 'МДФ', 'Экокожа', 'Пластик', 'Массив', 'Дерево', 'Металл', 'Стекло'];
+export const colors = ['Все', 'Серый', 'Черный', 'Натуральный', 'Белый', 'Венге', 'Бежевый', 'Синий', 'Дуб', 'Серебристый'];

@@ -1,29 +1,23 @@
-import { useState, useEffect, useMemo } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { ShoppingCart, Heart, Menu, X } from 'lucide-react';
-import { mockProducts, categories, materials, colors } from './data/mockProducts';
-import ProductGrid from './components/ProductGrid';
-import Filters from './components/Filters';
-import SearchBar from './components/SearchBar';
+import { mockProducts } from './data/mockProducts';
+
+// Components
+import CatalogMain from './components/CatalogMain';
+import AllProductsPage from './components/AllProductsPage';
+import CategoryPage from './components/CategoryPage';
+import SeriesPage from './components/SeriesPage';
+import ProductPage from './components/ProductPage';
 import Cart from './components/Cart';
 import FavoritesModal from './components/FavoritesModal';
-import ProductDetail from './components/ProductDetail';
 
 function App() {
-  // Состояние фильтров
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedMaterial, setSelectedMaterial] = useState('Все');
-  const [selectedColor, setSelectedColor] = useState('Все');
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('name');
-
   // Состояние корзины и избранного
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Загрузка данных из localStorage при инициализации
   useEffect(() => {
@@ -47,70 +41,19 @@ function App() {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  // Фильтрация и сортировка товаров
-  const filteredProducts = useMemo(() => {
-    let filtered = mockProducts.filter(product => {
-      // Фильтр по категории
-      if (selectedCategory !== 'all' && product.category !== selectedCategory) {
-        return false;
-      }
-
-      // Фильтр по материалу
-      if (selectedMaterial !== 'Все' && product.material !== selectedMaterial) {
-        return false;
-      }
-
-      // Фильтр по цвету
-      if (selectedColor !== 'Все' && product.color !== selectedColor) {
-        return false;
-      }
-
-      // Фильтр по цене
-      if (priceRange.min > 0 && product.price < priceRange.min) {
-        return false;
-      }
-      if (priceRange.max > 0 && product.price > priceRange.max) {
-        return false;
-      }
-
-      // Поиск по названию
-      if (searchTerm && !product.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-        return false;
-      }
-
-      return true;
-    });
-
-    // Сортировка
-    filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'price-asc':
-          return a.price - b.price;
-        case 'price-desc':
-          return b.price - a.price;
-        case 'rating':
-          return b.rating - a.rating;
-        case 'name':
-        default:
-          return a.name.localeCompare(b.name);
-      }
-    });
-
-    return filtered;
-  }, [selectedCategory, selectedMaterial, selectedColor, priceRange, searchTerm, sortBy]);
-
-  // Обработчики
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product, quantityToAdd = 1) => {
     const existingItem = cartItems.find(item => item.id === product.id);
-    
+
     if (existingItem) {
-      setCartItems(cartItems.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ));
+      setCartItems(
+        cartItems.map(item =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + quantityToAdd }
+            : item
+        )
+      );
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      setCartItems([...cartItems, { ...product, quantity: quantityToAdd }]);
     }
   };
 
@@ -142,201 +85,144 @@ function App() {
     );
   };
 
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-  };
-
-  const handleResetFilters = () => {
-    setSelectedCategory('all');
-    setSelectedMaterial('Все');
-    setSelectedColor('Все');
-    setPriceRange({ min: 0, max: 0 });
-    setSearchTerm('');
-  };
-
-  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalFavorites = favorites.length;
 
   return (
-    <div className="min-h-screen bg-bg-light">
-      {/* Header */}
-      <header className="bg-white border-b border-border-light sticky top-0 z-30">
-        <div className="max-w-container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-                className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <Menu size={20} />
-              </button>
-              <h1 className="text-title-3 text-primary font-bold">ЭРГО</h1>
-            </div>
-
-            {/* Search */}
-            <div className="flex-1 max-w-md mx-4">
-              <SearchBar
-                onSearch={setSearchTerm}
-                placeholder="Поиск мебели..."
-              />
-            </div>
-
-            {/* Actions */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-                className="hidden lg:flex items-center gap-2 px-4 py-2 border border-border-light rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <span className="text-body-sm">Фильтры</span>
-              </button>
-
-              <button 
-                onClick={() => setIsFavoritesOpen(true)}
-                className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <Heart size={20} />
-                {favorites.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                    {favorites.length}
-                  </span>
-                )}
-              </button>
-
-              <button
-                onClick={() => setIsCartOpen(true)}
-                className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ShoppingCart size={20} />
-                {totalCartItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                    {totalCartItems}
-                  </span>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="max-w-container mx-auto px-4 py-6">
-        <div className="flex gap-6">
-          {/* Sidebar Filters */}
-          <div className={`hidden lg:block w-80 flex-shrink-0 ${isFiltersOpen ? 'block' : 'hidden'}`}>
-            <Filters
-              categories={categories}
-              materials={materials}
-              colors={colors}
-              selectedCategory={selectedCategory}
-              selectedMaterial={selectedMaterial}
-              selectedColor={selectedColor}
-              priceRange={priceRange}
-              onCategoryChange={setSelectedCategory}
-              onMaterialChange={setSelectedMaterial}
-              onColorChange={setSelectedColor}
-              onPriceRangeChange={setPriceRange}
-              onResetFilters={handleResetFilters}
-            />
-          </div>
-
-          {/* Main Content */}
-          <div className="flex-1">
-            {/* Results Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-title-3 text-text-main mb-2">
-                  Каталог мебели
-                </h2>
-                <p className="text-body-sm text-text-secondary">
-                  Найдено товаров: {filteredProducts.length}
-                </p>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <header className="bg-white shadow-sm sticky top-0 z-30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-4">
+              {/* Logo */}
+              <div className="flex items-center">
+                <Link to="/catalog" className="text-2xl font-bold text-primary">
+                  ЭРГО
+                </Link>
               </div>
 
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-              >
-                <option value="name">По названию</option>
-                <option value="price-asc">Цена: по возрастанию</option>
-                <option value="price-desc">Цена: по убыванию</option>
-                <option value="rating">По рейтингу</option>
-              </select>
-            </div>
+              {/* Search */}
+              <div className="flex-1 max-w-lg mx-8">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Поиск мебели..."
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
 
-            {/* Products Grid */}
-            <ProductGrid
-              products={filteredProducts}
-              onAddToCart={handleAddToCart}
-              onToggleFavorite={handleToggleFavorite}
-              favorites={favorites}
-              onProductClick={handleProductClick}
+              {/* Actions */}
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setIsFavoritesOpen(true)}
+                  className="relative p-2 text-gray-600 hover:text-gray-900"
+                >
+                  <Heart size={24} />
+                  {totalFavorites > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {totalFavorites}
+                    </span>
+                  )}
+                </button>
+                
+                <button
+                  onClick={() => setIsCartOpen(true)}
+                  className="relative p-2 text-gray-600 hover:text-gray-900"
+                >
+                  <ShoppingCart size={24} />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                      {totalItems}
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main>
+          <Routes>
+            <Route path="/" element={<Navigate to="/catalog" replace />} />
+            <Route path="/catalog" element={<CatalogMain />} />
+            <Route
+              path="/catalog/all"
+              element={
+                <AllProductsPage
+                  onAddToCart={handleAddToCart}
+                  onToggleFavorite={handleToggleFavorite}
+                  favorites={favorites}
+                />
+              }
             />
-          </div>
-        </div>
-      </div>
+            <Route
+              path="/catalog/:categoryId"
+              element={
+                <CategoryPage
+                  onAddToCart={handleAddToCart}
+                  onToggleFavorite={handleToggleFavorite}
+                  favorites={favorites}
+                  openCart={() => setIsCartOpen(true)}
+                  openFavorites={() => setIsFavoritesOpen(true)}
+                />
+              }
+            />
+            <Route
+              path="/catalog/:categoryId/series/:seriesId"
+              element={
+                <SeriesPage
+                  onAddToCart={handleAddToCart}
+                  onToggleFavorite={handleToggleFavorite}
+                  favorites={favorites}
+                  openCart={() => setIsCartOpen(true)}
+                  openFavorites={() => setIsFavoritesOpen(true)}
+                />
+              }
+            />
+            <Route
+              path="/product/:productId"
+              element={
+                <ProductPage
+                  onAddToCart={handleAddToCart}
+                  onToggleFavorite={handleToggleFavorite}
+                  favorites={favorites}
+                  openCart={() => setIsCartOpen(true)}
+                  openFavorites={() => setIsFavoritesOpen(true)}
+                />
+              }
+            />
+          </Routes>
+        </main>
 
-      {/* Mobile Filters Overlay */}
-      {isFiltersOpen && (
-        <div className="lg:hidden fixed inset-0 bg-black/50 z-40">
-          <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-xl">
-            <div className="p-4 border-b border-border-light flex items-center justify-between">
-              <h3 className="text-title-3 text-text-main">Фильтры</h3>
-              <button
-                onClick={() => setIsFiltersOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="p-4">
-              <Filters
-                categories={categories}
-                materials={materials}
-                colors={colors}
-                selectedCategory={selectedCategory}
-                selectedMaterial={selectedMaterial}
-                selectedColor={selectedColor}
-                priceRange={priceRange}
-                onCategoryChange={setSelectedCategory}
-                onMaterialChange={setSelectedMaterial}
-                onColorChange={setSelectedColor}
-                onPriceRangeChange={setPriceRange}
-                onResetFilters={handleResetFilters}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+        {/* Cart Modal */}
+        <Cart
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cartItems={cartItems}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemoveItem={handleRemoveItem}
+          onClearCart={handleClearCart}
+        />
 
-      {/* Cart */}
-      <Cart
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cartItems={cartItems}
-        onUpdateQuantity={handleUpdateQuantity}
-        onRemoveItem={handleRemoveItem}
-        onClearCart={handleClearCart}
-      />
-
-      {/* Favorites Modal */}
-      <FavoritesModal
-        isOpen={isFavoritesOpen}
-        onClose={() => setIsFavoritesOpen(false)}
-        favorites={favorites}
-        products={mockProducts}
-        onToggleFavorite={handleToggleFavorite}
-        onAddToCart={handleAddToCart}
-      />
-
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <ProductDetail
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
+        {/* Favorites Modal */}
+        <FavoritesModal
+          isOpen={isFavoritesOpen}
+          onClose={() => setIsFavoritesOpen(false)}
+          favorites={favorites}
+          products={mockProducts}
+          onToggleFavorite={handleToggleFavorite}
           onAddToCart={handleAddToCart}
         />
-      )}
-    </div>
+      </div>
+    </Router>
   );
 }
 
