@@ -1,6 +1,6 @@
 import ProductCard from './ProductCard';
 
-const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => {
+const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites, onProductClick }) => {
   if (products.length === 0) {
     return (
       <div className="col-span-full flex flex-col items-center justify-center py-16">
@@ -22,6 +22,7 @@ const ProductGrid = ({ products, onAddToCart, onToggleFavorite, favorites }) => 
           onAddToCart={onAddToCart}
           onToggleFavorite={onToggleFavorite}
           isFavorite={favorites.includes(product.id)}
+          onProductClick={onProductClick}
         />
       ))}
     </div>

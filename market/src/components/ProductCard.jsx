@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 
-const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => {
+const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onProductClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const formatPrice = (price) => {
@@ -20,8 +20,9 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
         <img
           src={product.image}
           alt={product.name}
-          className={`w-full h-full object-cover ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+          className={`w-full h-full object-cover cursor-pointer ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
           onLoad={() => setImageLoaded(true)}
+          onClick={() => onProductClick && onProductClick(product)}
         />
         
         {/* Бейджи */}
@@ -59,7 +60,10 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
         </span>
 
         {/* Название */}
-        <h3 className="text-body-md font-medium text-text-main mt-1 mb-2 line-clamp-2">
+        <h3 
+          className="text-body-md font-medium text-text-main mt-1 mb-2 line-clamp-2 cursor-pointer hover:text-primary transition-colors"
+          onClick={() => onProductClick && onProductClick(product)}
+        >
           {product.name}
         </h3>
 
@@ -102,19 +106,27 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite }) => 
           <div>Размер: {product.size}</div>
         </div>
 
-        {/* Кнопка добавления в корзину */}
-        <button
-          onClick={() => onAddToCart(product)}
-          disabled={!product.inStock}
-          className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${
-            product.inStock
-              ? 'bg-primary text-white hover:bg-primary-dark'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
-        >
-          <ShoppingCart size={16} />
-          {product.inStock ? 'В корзину' : 'Нет в наличии'}
-        </button>
+        {/* Кнопки */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => onProductClick && onProductClick(product)}
+            className="flex-1 py-2 px-3 border border-border-light text-text-main rounded-lg hover:bg-gray-50 transition-colors text-sm"
+          >
+            Подробнее
+          </button>
+          <button
+            onClick={() => onAddToCart(product)}
+            disabled={!product.inStock}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg font-medium transition-colors duration-200 ${
+              product.inStock
+                ? 'bg-primary text-white hover:bg-primary-dark'
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
+          >
+            <ShoppingCart size={16} />
+            {product.inStock ? 'В корзину' : 'Нет в наличии'}
+          </button>
+        </div>
       </div>
     </div>
   );

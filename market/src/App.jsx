@@ -5,6 +5,8 @@ import ProductGrid from './components/ProductGrid';
 import Filters from './components/Filters';
 import SearchBar from './components/SearchBar';
 import Cart from './components/Cart';
+import FavoritesModal from './components/FavoritesModal';
+import ProductDetail from './components/ProductDetail';
 
 function App() {
   // Состояние фильтров
@@ -19,7 +21,9 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Загрузка данных из localStorage при инициализации
   useEffect(() => {
@@ -138,6 +142,10 @@ function App() {
     );
   };
 
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+  };
+
   const handleResetFilters = () => {
     setSelectedCategory('all');
     setSelectedMaterial('Все');
@@ -182,7 +190,10 @@ function App() {
                 <span className="text-body-sm">Фильтры</span>
               </button>
 
-              <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <button 
+                onClick={() => setIsFavoritesOpen(true)}
+                className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
                 <Heart size={20} />
                 {favorites.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
@@ -258,6 +269,7 @@ function App() {
               onAddToCart={handleAddToCart}
               onToggleFavorite={handleToggleFavorite}
               favorites={favorites}
+              onProductClick={handleProductClick}
             />
           </div>
         </div>
@@ -305,6 +317,25 @@ function App() {
         onRemoveItem={handleRemoveItem}
         onClearCart={handleClearCart}
       />
+
+      {/* Favorites Modal */}
+      <FavoritesModal
+        isOpen={isFavoritesOpen}
+        onClose={() => setIsFavoritesOpen(false)}
+        favorites={favorites}
+        products={mockProducts}
+        onToggleFavorite={handleToggleFavorite}
+        onAddToCart={handleAddToCart}
+      />
+
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onAddToCart={handleAddToCart}
+        />
+      )}
     </div>
   );
 }
