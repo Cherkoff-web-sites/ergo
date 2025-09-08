@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
-import { ShoppingCart, Heart, Star, ArrowLeft, Filter } from 'lucide-react';
+import { ArrowLeft, Filter, ShoppingCart, Heart } from 'lucide-react';
 
 const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { productId } = useParams();
@@ -13,6 +13,15 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   const product = products.find(p => p.id === parseInt(productId));
   const category = categories.find(cat => cat.name === product?.category);
   const seriesItem = series.find(s => s.id === product?.series);
+
+  // Debug logging
+  console.log('ProductPage Debug:', {
+    productId,
+    parsedProductId: parseInt(productId),
+    productsCount: products.length,
+    product,
+    firstProductId: products[0]?.id
+  });
 
   // Получаем товары той же серии для отображения внизу
   const seriesProducts = products.filter(
@@ -51,14 +60,6 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                 Назад
               </Link>
               <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button onClick={openFavorites} className="p-2 text-gray-600 hover:text-gray-900">
-                <Heart size={24} />
-              </button>
-              <button onClick={openCart} className="p-2 text-gray-600 hover:text-gray-900">
-                <ShoppingCart size={24} />
-              </button>
             </div>
           </div>
         </div>
@@ -250,25 +251,6 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                     {product.name}
                   </h2>
                   
-                  {/* Rating */}
-                  <div className="flex items-center mb-4">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={`${
-                            i < Math.floor(product.rating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-sm text-gray-600 ml-2">
-                      {product.rating} ({product.reviews} отзывов)
-                    </span>
-                  </div>
 
                   {/* Price */}
                   <div className="flex items-center mb-6">

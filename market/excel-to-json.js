@@ -59,17 +59,20 @@ function parseProductRow(row, sheetName, rowIndex) {
   // E - МРЦ (розничная цена)
   // F-I - Остатки по складам
   
-  const article = row[1]; // Артикул
-  const nomenclature = row[2]; // Номенклатура
-  const wholesalePrice = parseFloat(row[3]) || 0; // Оптовая цена
-  const retailPrice = parseFloat(row[4]) || 0; // МРЦ
-  const stock = parseInt(row[5]) || 0; // Остаток на основном складе
+  const imagePath = row[0]; // Путь к изображению (колонка A)
+  const article = row[1]; // Артикул (колонка B) - оставляем для ID
+  const columnB = row[1]; // Колонка B - дублируем для фильтрации
+  const nomenclature = row[2]; // Номенклатура (колонка C)
+  const wholesalePrice = parseFloat(row[3]) || 0; // Оптовая цена (колонка D)
+  const retailPrice = parseFloat(row[4]) || 0; // МРЦ (колонка E)
+  const price = parseFloat(row[7]) || 0; // Основная цена (колонка H)
+  const stock = parseInt(row[9]) || 0; // Остаток на основном складе (колонка J)
   
-  // Пропускаем строки без артикула или названия
-  if (!article || !nomenclature) return null;
+  // Пропускаем строки без номенклатуры
+  if (!nomenclature) return null;
   
-  // Парсим название и описание из номенклатуры
-  const { name, description, material, color, dimensions } = parseNomenclature(nomenclature);
+  // Парсим название и описание из номенклатуры, исключая данные из колонки B
+  const { name, description, material, color, dimensions } = parseNomenclature(nomenclature, columnB);
   
   // Определяем категорию по листу
   const category = mapSheetToCategory(sheetName);
@@ -77,13 +80,16 @@ function parseProductRow(row, sheetName, rowIndex) {
   // Определяем серию по артикулу или листу
   const series = extractSeries(article, sheetName);
   
+  // Обрабатываем путь к изображению
+  const image = processImagePath(imagePath, article);
+  
   return {
     id: generateId(article, rowIndex),
     name: name || nomenclature.substring(0, 50),
     description: description || nomenclature,
-    price: retailPrice || wholesalePrice,
+    price: price || retailPrice || wholesalePrice,
     oldPrice: retailPrice > wholesalePrice ? retailPrice : null,
-    image: '/img/product_example_for_app.png', // Заглушка, потом заменим на реальные изображения
+    image: image,
     category: category,
     material: material || 'Не указан',
     color: color || 'Не указан',
@@ -94,17 +100,23 @@ function parseProductRow(row, sheetName, rowIndex) {
     article: article,
     wholesalePrice: wholesalePrice,
     retailPrice: retailPrice,
-    isNew: false,
-    rating: Math.random() * 2 + 3, // Случайный рейтинг от 3 до 5
-    reviews: Math.floor(Math.random() * 50) + 1
+    isNew: false
   };
 }
 
 // Функция для парсинга номенклатуры
-function parseNomenclature(nomenclature) {
+function parseNomenclature(nomenclature, columnB) {
   if (!nomenclature) return {};
   
-  const text = nomenclature.toString();
+  let text = nomenclature.toString();
+  
+  // Исключаем данные из колонки B из названия
+  if (columnB) {
+    const columnBText = columnB.toString().trim();
+    if (columnBText && text.includes(columnBText)) {
+      text = text.replace(columnBText, '').trim();
+    }
+  }
   
   // Извлекаем размеры (например: 1500х900х750, 2200x1800x750)
   const dimensionsMatch = text.match(/(\d+)[хx](\d+)[хx](\d+)/i);
@@ -169,6 +181,43 @@ function extractSeries(article, sheetName) {
   return seriesMap[sheetName] || 'NORDEN';
 }
 
+// Функция для обработки путей к изображениям
+function processImagePath(imagePath, article) {
+  if (!imagePath) {
+    return '/img/product_example_for_app.png'; // Заглушка если нет изображения
+  }
+  
+  const path = imagePath.toString().trim();
+  
+  // Если пустая строка или только пробелы
+  if (!path || path.length === 0) {
+    return '/img/product_example_for_app.png';
+  }
+  
+  // Если это уже полный URL
+  if (path.startsWith('http')) {
+    return path;
+  }
+  
+  // Если это уже полный путь от корня
+  if (path.startsWith('/')) {
+    return path;
+  }
+  
+  // Если это относительный путь, добавляем базовую папку
+  if (path.includes('.jpg') || path.includes('.jpeg') || path.includes('.png') || path.includes('.webp')) {
+    return `/img/products/${path}`;
+  }
+  
+  // Если это имя файла без расширения, добавляем расширение
+  if (path.length > 0 && !path.includes('.')) {
+    return `/img/products/${path}.jpg`;
+  }
+  
+  // Заглушка по умолчанию
+  return '/img/product_example_for_app.png';
+}
+
 // Функция для генерации ID
 function generateId(article, rowIndex) {
   if (article) {
@@ -193,16 +242,21 @@ function createCategories(products) {
   ];
   
   Object.entries(categoryCounts).forEach(([name, count]) => {
-    const id = name.toLowerCase().replace(/\s+/g, '_').replace(/[а-яё]/g, (match) => {
-      const map = {
-        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo',
-        'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
-        'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
-        'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch',
-        'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'
-      };
-      return map[match] || match;
-    });
+    const id = name.toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[а-яё]/g, (match) => {
+        const map = {
+          'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo',
+          'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
+          'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+          'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch',
+          'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'
+        };
+        return map[match] || '';
+      })
+      .replace(/[^a-z0-9_]/g, '') // Удаляем все символы кроме букв, цифр и подчеркиваний
+      .replace(/_+/g, '_') // Заменяем множественные подчеркивания на одно
+      .replace(/^_|_$/g, ''); // Удаляем подчеркивания в начале и конце
     
     categories.push({ id, name, count });
   });
@@ -289,7 +343,7 @@ export const excelColors = ${JSON.stringify(result.colors, null, 2)};
 }
 
 // Запускаем если файл вызван напрямую
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === `file://${process.argv[1]}` || process.argv[1].endsWith('excel-to-json.js')) {
   main();
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Heart, ShoppingCart, Star, ArrowLeft, Plus, Minus } from 'lucide-react';
+import { Heart, ShoppingCart, ArrowLeft, Plus, Minus } from 'lucide-react';
 
 const ProductDetail = ({ product, onClose, onAddToCart, onToggleFavorite, isFavorite }) => {
   const [quantity, setQuantity] = useState(1);
@@ -87,25 +87,6 @@ const ProductDetail = ({ product, onClose, onAddToCart, onToggleFavorite, isFavo
               {product.name}
             </h1>
 
-            {/* Rating */}
-            <div className="flex items-center gap-2">
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className={`${
-                      i < Math.floor(product.rating)
-                        ? 'text-yellow-400 fill-current'
-                        : 'text-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-              <span className="text-body-sm text-text-secondary">
-                {product.rating} ({product.reviews} отзывов)
-              </span>
-            </div>
 
             {/* Price */}
             <div className="flex items-center gap-4">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
+import { Heart, ShoppingCart } from 'lucide-react';
 
 const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onProductClick }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -68,25 +68,6 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
           </h3>
         </Link>
 
-        {/* Рейтинг */}
-        <div className="flex items-center gap-1 mb-3">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                size={12}
-                className={`${
-                  i < Math.floor(product.rating)
-                    ? 'text-yellow-400 fill-current'
-                    : 'text-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-          <span className="text-xs text-text-secondary ml-1">
-            {product.rating} ({product.reviews})
-          </span>
-        </div>
 
         {/* Цена */}
         <div className="flex items-center gap-2 mb-4">

@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
 import ProductCard from './ProductCard';
-import { ShoppingCart, Heart, Filter } from 'lucide-react';
+import { Filter } from 'lucide-react';
 
 const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { categoryId, seriesId } = useParams();
@@ -10,14 +10,33 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
   const [selectedColor, setSelectedColor] = useState('Все');
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  
+  // Пагинация
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 24; // 24 товара на странице (4 ряда по 6)
 
   const category = categories.find(cat => cat.id === categoryId);
   const seriesItem = series.find(s => s.id === seriesId);
   const seriesProducts = products.filter(
     product => product.category === category?.name && product.series === seriesId
   );
+  
+  // Дебаунс для поиска
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // Сброс страницы при изменении фильтров
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedMaterial, selectedColor, priceRange, debouncedSearchTerm, sortBy]);
 
   // Фильтрация товаров
   const filteredProducts = useMemo(() => {
@@ -43,9 +62,9 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
     }
 
     // Поиск
-    if (searchTerm) {
+    if (debouncedSearchTerm) {
       filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
       );
     }
 
@@ -56,15 +75,21 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
           return a.price - b.price;
         case 'price-desc':
           return b.price - a.price;
-        case 'rating':
-          return b.rating - a.rating;
+        case 'name':
+          return a.name.localeCompare(b.name);
         default:
           return a.name.localeCompare(b.name);
       }
     });
 
     return filtered;
-  }, [seriesProducts, selectedMaterial, selectedColor, priceRange, searchTerm, sortBy]);
+  }, [seriesProducts, selectedMaterial, selectedColor, priceRange, debouncedSearchTerm, sortBy]);
+
+  // Пагинация
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
@@ -91,14 +116,6 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
               <h1 className="text-3xl font-bold text-gray-900">Серия "{seriesItem.name}"</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button onClick={openFavorites} className="p-2 text-gray-600 hover:text-gray-900">
-                <Heart size={24} />
-              </button>
-              <button onClick={openCart} className="p-2 text-gray-600 hover:text-gray-900">
-                <ShoppingCart size={24} />
-              </button>
             </div>
           </div>
         </div>
@@ -171,6 +188,9 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Поиск
+                    {searchTerm !== debouncedSearchTerm && (
+                      <span className="ml-2 text-xs text-blue-600">Поиск...</span>
+                    )}
                   </label>
                   <input
                     type="text"
@@ -228,7 +248,6 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                     <option value="name">По названию</option>
                     <option value="price-asc">По цене (возрастание)</option>
                     <option value="price-desc">По цене (убывание)</option>
-                    <option value="rating">По рейтингу</option>
                   </select>
                 </div>
               </div>
@@ -299,7 +318,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredProducts.map((product) => (
+                  {currentProducts.map((product) => (
                     <ProductCard
                       key={product.id}
                       product={product}
@@ -313,6 +332,59 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
             </div>
           </div>
         </div>
+
+        {/* Results info */}
+        <div className="text-center text-sm text-gray-600 mb-4">
+          Показано {startIndex + 1}-{Math.min(endIndex, filteredProducts.length)} из {filteredProducts.length} товаров
+        </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center space-x-2 mb-8">
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Назад
+            </button>
+            
+            {[...Array(Math.min(5, totalPages))].map((_, i) => {
+              let pageNum;
+              if (totalPages <= 5) {
+                pageNum = i + 1;
+              } else if (currentPage <= 3) {
+                pageNum = i + 1;
+              } else if (currentPage >= totalPages - 2) {
+                pageNum = totalPages - 4 + i;
+              } else {
+                pageNum = currentPage - 2 + i;
+              }
+              
+              return (
+                <button
+                  key={pageNum}
+                  onClick={() => setCurrentPage(pageNum)}
+                  className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                    currentPage === pageNum
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {pageNum}
+                </button>
+              );
+            })}
+            
+            <button
+              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Вперед
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
