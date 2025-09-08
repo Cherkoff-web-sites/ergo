@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Heart, Menu, X } from 'lucide-react';
-import { mockProducts } from './data/mockProducts';
+// Используем Excel данные вместо моковых
+import { excelProducts, excelCategories, excelSeries } from './data/excelProducts';
 
 // Components
 import CatalogMain from './components/CatalogMain';
@@ -18,6 +19,20 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+
+  // Состояние данных
+  const [products, setProducts] = useState(excelProducts);
+  const [categories, setCategories] = useState(excelCategories);
+  const [series, setSeries] = useState(excelSeries);
+
+  // Логирование для отладки
+  useEffect(() => {
+    console.log('Excel данные загружены:');
+    console.log('Товары:', products.length);
+    console.log('Категории:', categories.length);
+    console.log('Серии:', series.length);
+    console.log('Первый товар:', products[0]);
+  }, [products, categories, series]);
 
   // Загрузка данных из localStorage при инициализации
   useEffect(() => {
@@ -116,7 +131,7 @@ function App() {
                     </svg>
                   </div>
                 </div>
-              </div>
+      </div>
 
               {/* Actions */}
               <div className="flex items-center space-x-4">
@@ -142,7 +157,7 @@ function App() {
                       {totalItems}
                     </span>
                   )}
-                </button>
+        </button>
               </div>
             </div>
           </div>
@@ -152,11 +167,14 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Navigate to="/catalog" replace />} />
-            <Route path="/catalog" element={<CatalogMain />} />
+            <Route path="/catalog" element={<CatalogMain categories={categories} />} />
             <Route
               path="/catalog/all"
               element={
                 <AllProductsPage
+                  products={products}
+                  categories={categories}
+                  series={series}
                   onAddToCart={handleAddToCart}
                   onToggleFavorite={handleToggleFavorite}
                   favorites={favorites}
@@ -167,6 +185,9 @@ function App() {
               path="/catalog/:categoryId"
               element={
                 <CategoryPage
+                  products={products}
+                  categories={categories}
+                  series={series}
                   onAddToCart={handleAddToCart}
                   onToggleFavorite={handleToggleFavorite}
                   favorites={favorites}
@@ -179,6 +200,9 @@ function App() {
               path="/catalog/:categoryId/series/:seriesId"
               element={
                 <SeriesPage
+                  products={products}
+                  categories={categories}
+                  series={series}
                   onAddToCart={handleAddToCart}
                   onToggleFavorite={handleToggleFavorite}
                   favorites={favorites}
@@ -191,6 +215,9 @@ function App() {
               path="/product/:productId"
               element={
                 <ProductPage
+                  products={products}
+                  categories={categories}
+                  series={series}
                   onAddToCart={handleAddToCart}
                   onToggleFavorite={handleToggleFavorite}
                   favorites={favorites}
@@ -217,7 +244,7 @@ function App() {
           isOpen={isFavoritesOpen}
           onClose={() => setIsFavoritesOpen(false)}
           favorites={favorites}
-          products={mockProducts}
+          products={products}
           onToggleFavorite={handleToggleFavorite}
           onAddToCart={handleAddToCart}
         />

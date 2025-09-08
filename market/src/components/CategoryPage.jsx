@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { mockProducts, categories, series } from '../data/mockProducts';
+// Данные передаются через props
 import ProductCard from './ProductCard';
 import { ShoppingCart, Heart } from 'lucide-react';
 
-const CategoryPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
+const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { categoryId } = useParams();
   const [selectedSeries, setSelectedSeries] = useState('all');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
@@ -14,7 +14,7 @@ const CategoryPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart,
   const [sortBy, setSortBy] = useState('name');
 
   const category = categories.find(cat => cat.id === categoryId);
-  const categoryProducts = mockProducts.filter(product => product.category === category?.name);
+  const categoryProducts = products.filter(product => product.category === category?.name);
   
   // Получаем серии для данной категории
   const categorySeries = useMemo(() => {

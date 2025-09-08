@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { mockProducts, categories, series } from '../data/mockProducts';
+// Данные передаются через props
 import { ShoppingCart, Heart, Star, ArrowLeft, Filter } from 'lucide-react';
 
-const ProductPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
+const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
-  const product = mockProducts.find(p => p.id === parseInt(productId));
+  const product = products.find(p => p.id === parseInt(productId));
   const category = categories.find(cat => cat.name === product?.category);
   const seriesItem = series.find(s => s.id === product?.series);
 
   // Получаем товары той же серии для отображения внизу
-  const seriesProducts = mockProducts.filter(
+  const seriesProducts = products.filter(
     p => p.series === product?.series && p.id !== product?.id
   );
 
@@ -146,9 +146,9 @@ const ProductPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, 
                     Цвет: {selectedColor || product.color}
                   </label>
                   <div className="flex space-x-2">
-                    {[product.color, 'Белый', 'Черный'].map((color) => (
+                    {[product.color, 'Белый', 'Черный'].map((color, index) => (
                       <button
-                        key={color}
+                        key={`color-${index}-${color}`}
                         onClick={() => setSelectedColor(color)}
                         className={`w-8 h-8 rounded-full border-2 ${
                           (selectedColor || product.color) === color
@@ -168,9 +168,9 @@ const ProductPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, 
                     Размер: {selectedSize || product.size}
                   </label>
                   <div className="flex space-x-2">
-                    {[product.size, '500X700', '500X700'].map((size) => (
+                    {[product.size, '500X700', '600X800'].map((size, index) => (
                       <button
-                        key={size}
+                        key={`size-${index}-${size}`}
                         onClick={() => setSelectedSize(size)}
                         className={`px-4 py-2 border rounded-lg text-sm ${
                           (selectedSize || product.size) === size
@@ -320,9 +320,9 @@ const ProductPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, 
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Цвета</h3>
                     <div className="flex space-x-2">
-                      {[product.color, 'Белый', 'Черный'].map((color) => (
+                      {[product.color, 'Белый', 'Черный'].map((color, index) => (
                         <div
-                          key={color}
+                          key={`color-display-${index}-${color}`}
                           className="w-8 h-8 rounded border border-gray-300"
                           style={{ backgroundColor: color === 'Серый' ? '#6B7280' : color === 'Белый' ? '#FFFFFF' : '#000000' }}
                           title={color}

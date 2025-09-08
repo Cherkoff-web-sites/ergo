@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { mockProducts, categories } from '../data/mockProducts';
 import ProductCard from './ProductCard';
 
-const AllProductsPage = ({ onAddToCart, onToggleFavorite, favorites = [] }) => {
+const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [] }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
   const [selectedColor, setSelectedColor] = useState('Все');
@@ -11,7 +10,7 @@ const AllProductsPage = ({ onAddToCart, onToggleFavorite, favorites = [] }) => {
   const [sortBy, setSortBy] = useState('name');
 
   const filteredProducts = useMemo(() => {
-    let filtered = mockProducts;
+    let filtered = products;
 
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(p => p.category === selectedCategory);
@@ -89,14 +88,14 @@ const AllProductsPage = ({ onAddToCart, onToggleFavorite, favorites = [] }) => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Материал</label>
               <select value={selectedMaterial} onChange={(e)=>setSelectedMaterial(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
                 <option value="Все">Все материалы</option>
-                {[...new Set(mockProducts.map(p=>p.material))].map(m=>(<option key={m} value={m}>{m}</option>))}
+                {[...new Set(products.map(p=>p.material))].map(m=>(<option key={m} value={m}>{m}</option>))}
               </select>
             </div>
             <div className="w-full md:w-56">
               <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
               <select value={selectedColor} onChange={(e)=>setSelectedColor(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
                 <option value="Все">Все цвета</option>
-                {[...new Set(mockProducts.map(p=>p.color))].map(c=>(<option key={c} value={c}>{c}</option>))}
+                {[...new Set(products.map(p=>p.color))].map(c=>(<option key={c} value={c}>{c}</option>))}
               </select>
             </div>
             <div className="w-full md:w-56">

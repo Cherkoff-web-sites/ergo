@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { categories } from '../data/mockProducts';
+// Данные передаются через props
 
-const CatalogMain = () => {
+const CatalogMain = ({ categories }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
