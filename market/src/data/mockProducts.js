@@ -256,14 +256,14 @@ export const mockProducts = [
 
 export const categories = [
   { id: 'all', name: 'Все товары', count: mockProducts.length },
-  { id: 'Кабинет руководителя', name: 'Кабинет руководителя', count: mockProducts.filter(p => p.category === 'Кабинет руководителя').length },
-  { id: 'Мебель для персонала', name: 'Мебель для персонала', count: mockProducts.filter(p => p.category === 'Мебель для персонала').length },
-  { id: 'Кресла и стулья', name: 'Кресла и стулья', count: mockProducts.filter(p => p.category === 'Кресла и стулья').length },
-  { id: 'Мягкая мебель', name: 'Мягкая мебель', count: mockProducts.filter(p => p.category === 'Мягкая мебель').length },
-  { id: 'Переговорные столы', name: 'Переговорные столы', count: mockProducts.filter(p => p.category === 'Переговорные столы').length },
-  { id: 'Стойки ресепшен', name: 'Стойки ресепшен', count: mockProducts.filter(p => p.category === 'Стойки ресепшен').length },
-  { id: 'Мебель на заказ', name: 'Мебель на заказ', count: mockProducts.filter(p => p.category === 'Мебель на заказ').length },
-  { id: 'Другое', name: 'Другое', count: mockProducts.filter(p => p.category === 'Другое').length },
+  { id: 'executive_office', name: 'Кабинет руководителя', count: mockProducts.filter(p => p.category === 'Кабинет руководителя').length },
+  { id: 'staff_furniture', name: 'Мебель для персонала', count: mockProducts.filter(p => p.category === 'Мебель для персонала').length },
+  { id: 'chairs_seating', name: 'Кресла и стулья', count: mockProducts.filter(p => p.category === 'Кресла и стулья').length },
+  { id: 'upholstered_furniture', name: 'Мягкая мебель', count: mockProducts.filter(p => p.category === 'Мягкая мебель').length },
+  { id: 'conference_tables', name: 'Переговорные столы', count: mockProducts.filter(p => p.category === 'Переговорные столы').length },
+  { id: 'reception_desks', name: 'Стойки ресепшен', count: mockProducts.filter(p => p.category === 'Стойки ресепшен').length },
+  { id: 'custom_furniture', name: 'Мебель на заказ', count: mockProducts.filter(p => p.category === 'Мебель на заказ').length },
+  { id: 'other', name: 'Другое', count: mockProducts.filter(p => p.category === 'Другое').length },
 ];
 
 export const series = [

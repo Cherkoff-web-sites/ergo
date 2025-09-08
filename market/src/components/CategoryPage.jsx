@@ -6,7 +6,6 @@ import { ShoppingCart, Heart } from 'lucide-react';
 
 const CategoryPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { categoryId } = useParams();
-  const normalizedId = decodeURIComponent(categoryId).replace(/_/g, ' ');
   const [selectedSeries, setSelectedSeries] = useState('all');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
   const [selectedColor, setSelectedColor] = useState('Все');
@@ -14,7 +13,7 @@ const CategoryPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart,
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
 
-  const category = categories.find(cat => cat.id.toLowerCase() === normalizedId.toLowerCase());
+  const category = categories.find(cat => cat.id === categoryId);
   const categoryProducts = mockProducts.filter(product => product.category === category?.name);
   
   // Получаем серии для данной категории
@@ -139,9 +138,9 @@ const CategoryPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart,
             {categories.slice(1).map((cat) => (
               <Link
                 key={cat.id}
-                to={`/catalog/${encodeURIComponent(cat.id.replace(/\s+/g, '_').toLowerCase())}`}
+                to={`/catalog/${cat.id}`}
                 className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
-                  cat.id.toLowerCase() === (normalizedId).toLowerCase()
+                  cat.id === categoryId
                     ? 'bg-white text-primary'
                     : 'text-white hover:bg-white/20'
                 }`}
@@ -207,7 +206,7 @@ const CategoryPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart,
                   return (
                     <Link
                       key={seriesItem.id}
-                      to={`/catalog/${encodeURIComponent(category.id.replace(/\s+/g,'_').toLowerCase())}/series/${seriesItem.id}`}
+                      to={`/catalog/${category.id}/series/${seriesItem.id}`}
                       className="group block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300"
                     >
                       <div className="text-center">

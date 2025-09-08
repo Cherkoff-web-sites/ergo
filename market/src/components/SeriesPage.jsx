@@ -6,7 +6,6 @@ import { ShoppingCart, Heart, Filter } from 'lucide-react';
 
 const SeriesPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { categoryId, seriesId } = useParams();
-  const normalizedId = decodeURIComponent(categoryId).replace(/_/g, ' ');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
   const [selectedColor, setSelectedColor] = useState('Все');
   const [priceRange, setPriceRange] = useState({ min: 0, max: 0 });
@@ -14,7 +13,7 @@ const SeriesPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, o
   const [sortBy, setSortBy] = useState('name');
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
-  const category = categories.find(cat => cat.id.toLowerCase() === normalizedId.toLowerCase());
+  const category = categories.find(cat => cat.id === categoryId);
   const seriesItem = series.find(s => s.id === seriesId);
   const seriesProducts = mockProducts.filter(
     product => product.category === category?.name && product.series === seriesId
@@ -137,9 +136,9 @@ const SeriesPage = ({ onAddToCart, onToggleFavorite, favorites = [], openCart, o
             {categories.slice(1).map((cat) => (
               <Link
                 key={cat.id}
-                to={`/catalog/${encodeURIComponent(cat.id.replace(/\s+/g, '_').toLowerCase())}`}
+                to={`/catalog/${cat.id}`}
                 className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
-                  cat.id.toLowerCase() === normalizedId.toLowerCase()
+                  cat.id === categoryId
                     ? 'bg-white text-primary'
                     : 'text-white hover:bg-white/20'
                 }`}

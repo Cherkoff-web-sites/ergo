@@ -32,7 +32,7 @@ const CatalogMain = () => {
           {categories.slice(1).map((category) => (
             <Link
               key={category.id}
-              to={`/catalog/${encodeURIComponent(category.id.replace(/\s+/g, '_').toLowerCase())}`}
+              to={`/catalog/${category.id}`}
               className="group block p-8 bg-white rounded-xl border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300"
             >
               <div className="text-center">
