@@ -2,6 +2,15 @@ import { Link } from 'react-router-dom';
 // Данные передаются через props
 
 const CatalogMain = ({ categories }) => {
+  const handleCategoryClick = () => {
+    // Плавный скролл наверх
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -21,6 +30,7 @@ const CatalogMain = ({ categories }) => {
         <div className="text-center mb-12">
           <Link
             to="/catalog/all"
+            onClick={handleCategoryClick}
             className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-primary hover:bg-primary-dark transition-colors duration-200"
           >
             ВЕСЬ КАТАЛОГ
@@ -33,6 +43,7 @@ const CatalogMain = ({ categories }) => {
             <Link
               key={category.id}
               to={`/catalog/${category.id}`}
+              onClick={handleCategoryClick}
               className="group block p-8 bg-white rounded-xl border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300"
             >
               <div className="text-center">

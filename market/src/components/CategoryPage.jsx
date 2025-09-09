@@ -102,6 +102,24 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
   };
 
+  const handleSeriesClick = () => {
+    // Плавный скролл наверх
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const handleBreadcrumbClick = () => {
+    // Плавный скролл наверх
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  };
+
   if (!category) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -134,7 +152,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2">
               <li>
-                <Link to="/catalog" className="text-gray-500 hover:text-gray-700">
+                <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
                   КАТАЛОГ
                 </Link>
               </li>
@@ -227,6 +245,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
                     <Link
                       key={seriesItem.id}
                       to={`/catalog/${category.id}/series/${seriesItem.id}`}
+                      onClick={handleSeriesClick}
                       className="group block p-6 bg-white rounded-lg border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300"
                     >
                       <div className="text-center">

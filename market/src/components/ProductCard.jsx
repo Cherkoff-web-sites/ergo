@@ -9,6 +9,20 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
   };
 
+  const handleProductClick = () => {
+    // Плавный скролл наверх
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+    
+    // Вызываем переданную функцию если есть
+    if (onProductClick) {
+      onProductClick();
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl border border-border-light overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {/* Изображение товара */}
@@ -18,7 +32,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
             <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product.id}`} onClick={handleProductClick}>
           <img
             src={product.image}
             alt={product.name}
@@ -62,7 +76,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
         </span>
 
         {/* Название */}
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product.id}`} onClick={handleProductClick}>
           <h3 className="text-body-md font-medium text-text-main mt-1 mb-2 line-clamp-2 cursor-pointer hover:text-primary transition-colors">
             {product.name}
           </h3>
@@ -92,6 +106,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
         <div className="flex gap-2">
           <Link
             to={`/product/${product.id}`}
+            onClick={handleProductClick}
             className="flex-1 py-2 px-3 border border-border-light text-text-main rounded-lg hover:bg-gray-50 transition-colors text-sm text-center"
           >
             Подробнее

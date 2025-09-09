@@ -95,6 +95,15 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
   };
 
+  const handleBreadcrumbClick = () => {
+    // Плавный скролл наверх
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  };
+
   if (!category || !seriesItem) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -127,13 +136,13 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2">
               <li>
-                <Link to="/catalog" className="text-gray-500 hover:text-gray-700">
+                <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
                   КАТАЛОГ
                 </Link>
               </li>
               <li className="text-gray-500">/</li>
               <li>
-                <Link to={`/catalog/${categoryId}`} className="text-gray-500 hover:text-gray-700">
+                <Link to={`/catalog/${categoryId}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
                   {category.name.toUpperCase()}
                 </Link>
               </li>

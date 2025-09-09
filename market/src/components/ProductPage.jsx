@@ -14,14 +14,6 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   const category = categories.find(cat => cat.name === product?.category);
   const seriesItem = series.find(s => s.id === product?.series);
 
-  // Debug logging
-  console.log('ProductPage Debug:', {
-    productId,
-    parsedProductId: parseInt(productId),
-    productsCount: products.length,
-    product,
-    firstProductId: products[0]?.id
-  });
 
   // Получаем товары той же серии для отображения внизу
   const seriesProducts = products.filter(
@@ -30,6 +22,15 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+  };
+
+  const handleBreadcrumbClick = () => {
+    // Плавный скролл наверх
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   };
 
   if (!product) {
@@ -71,13 +72,13 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2">
               <li>
-                <Link to="/catalog" className="text-gray-500 hover:text-gray-700">
+                <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
                   КАТАЛОГ
                 </Link>
               </li>
               <li className="text-gray-500">/</li>
               <li>
-                <Link to={`/catalog/${category?.id}`} className="text-gray-500 hover:text-gray-700">
+                <Link to={`/catalog/${category?.id}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
                   {category?.name.toUpperCase()}
                 </Link>
               </li>
@@ -87,6 +88,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                   <li>
                     <Link 
                       to={`/catalog/${category?.id}/series/${seriesItem.id}`} 
+                      onClick={handleBreadcrumbClick}
                       className="text-gray-500 hover:text-gray-700"
                     >
                       СЕРИЯ "{seriesItem.name}"

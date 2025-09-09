@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, Heart, Menu, X } from 'lucide-react';
 // Используем Excel данные вместо моковых
@@ -12,6 +12,21 @@ import SeriesPage from './components/SeriesPage';
 import ProductPage from './components/ProductPage';
 import Cart from './components/Cart';
 import FavoritesModal from './components/FavoritesModal';
+
+// Компонент для автоматического скролла наверх при смене маршрута
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   // Состояние корзины и избранного
@@ -165,6 +180,7 @@ function App() {
 
         {/* Main Content */}
         <main>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Navigate to="/catalog" replace />} />
             <Route path="/catalog" element={<CatalogMain categories={categories} />} />
