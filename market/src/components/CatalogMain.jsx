@@ -13,53 +13,54 @@ const CatalogMain = ({ categories }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-3xl font-bold text-gray-900">Каталог мебели</h1>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Весь каталог кнопка */}
-        <div className="text-center mb-12">
-          <Link
-            to="/catalog/all"
-            onClick={handleCategoryClick}
-            className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-primary hover:bg-primary-dark transition-colors duration-200"
-          >
-            ВЕСЬ КАТАЛОГ
-          </Link>
+        <div className="w-full mb-12">
+          <div className="bg-transparent border border-card-border rounded-lg p-6">
+            <Link
+              to="/catalog/all"
+              onClick={handleCategoryClick}
+              className="main-catalog-button w-full text-center inline-block"
+            >
+              ВЕСЬ КАТАЛОГ
+            </Link>
+          </div>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-container mx-auto">
           {categories.slice(1).map((category) => (
-            <Link
+            <div
               key={category.id}
-              to={`/catalog/${category.id}`}
-              onClick={handleCategoryClick}
-              className="group block p-8 bg-white rounded-xl border border-gray-200 hover:border-primary hover:shadow-lg transition-all duration-300"
+              className="category-card group relative block p-8 bg-transparent rounded-lg border border-card-border hover:shadow-lg transition-all duration-300"
+              style={{
+                '--bg-image': 'url(/img/product_example_for_app.png)'
+              }}
             >
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                  <span className="text-2xl font-bold text-primary">
-                    {category.name.charAt(0)}
-                  </span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300">
+              <div className="min-h-[262px] flex items-center justify-center relative z-10">
+                <Link
+                  to={`/catalog/${category.id}`}
+                  onClick={handleCategoryClick}
+                  className="category-button w-full text-center inline-block transition-all duration-300"
+                  onMouseEnter={(e) => {
+                    e.target.closest('.category-card').style.setProperty('--after-opacity', '1');
+                    e.target.style.setProperty('--button-bg', 'transparent');
+                    e.target.style.setProperty('--button-color', 'white');
+                    e.target.style.setProperty('--button-border', '1px solid white');
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.closest('.category-card').style.setProperty('--after-opacity', '0');
+                    e.target.style.setProperty('--button-bg', 'rgba(26, 24, 18, 0.05)');
+                    e.target.style.setProperty('--button-color', '#1A1812');
+                    e.target.style.setProperty('--button-border', '1px solid rgba(26, 24, 18, 0.32)');
+                  }}
+                >
                   {category.name.toUpperCase()}
-                </h3>
-                <p className="text-sm text-gray-500">
-                  {category.count} товаров
-                </p>
+                </Link>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

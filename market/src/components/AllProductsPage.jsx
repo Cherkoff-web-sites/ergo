@@ -67,6 +67,11 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
     setCurrentPage(1);
   }, []);
 
+  // Функция для плавного скролла наверх
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleCategoryChange = useCallback((category) => {
     setSelectedCategory(category);
     resetPage();
@@ -190,7 +195,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
         {totalPages > 1 && (
           <div className="flex justify-center items-center space-x-2 mb-8">
             <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)); scrollToTop(); }}
               disabled={currentPage === 1}
               className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -214,7 +219,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
                 return (
                   <button
                     key={pageNum}
-                    onClick={() => setCurrentPage(pageNum)}
+                    onClick={() => { setCurrentPage(pageNum); scrollToTop(); }}
                     className={`px-3 py-2 text-sm font-medium rounded-lg ${
                       currentPage === pageNum
                         ? 'bg-blue-600 text-white'
@@ -228,7 +233,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
             </div>
             
             <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              onClick={() => { setCurrentPage(Math.min(totalPages, currentPage + 1)); scrollToTop(); }}
               disabled={currentPage === totalPages}
               className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >

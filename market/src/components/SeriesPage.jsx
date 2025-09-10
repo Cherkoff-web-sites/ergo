@@ -38,6 +38,11 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
     setCurrentPage(1);
   }, [selectedMaterial, selectedColor, priceRange, debouncedSearchTerm, sortBy]);
 
+  // Функция для плавного скролла наверх
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Фильтрация товаров
   const filteredProducts = useMemo(() => {
     let filtered = seriesProducts;
@@ -156,17 +161,17 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
       </div>
 
       {/* Category Navigation */}
-      <div className="bg-primary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-black">
           <div className="flex space-x-1 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
               <Link
                 key={cat.id}
                 to={`/catalog/${cat.id}`}
-                className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors duration-200 ${
+                className={`px-3 py-1 rounded-[5px] text-xl font-semibold whitespace-nowrap transition-all duration-300 ${
                   cat.id === categoryId
-                    ? 'bg-white text-primary'
-                    : 'text-white hover:bg-white/20'
+                    ? 'bg-transparent text-primary border border-primary'
+                    : 'bg-gray-100 text-gray-800 border border-gray-300 hover:bg-gray-200'
                 }`}
               >
                 {cat.name.toUpperCase()}
@@ -351,7 +356,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
         {totalPages > 1 && (
           <div className="flex justify-center items-center space-x-2 mb-8">
             <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)); scrollToTop(); }}
               disabled={currentPage === 1}
               className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -373,7 +378,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
               return (
                 <button
                   key={pageNum}
-                  onClick={() => setCurrentPage(pageNum)}
+                  onClick={() => { setCurrentPage(pageNum); scrollToTop(); }}
                   className={`px-3 py-2 text-sm font-medium rounded-lg ${
                     currentPage === pageNum
                       ? 'bg-blue-600 text-white'
@@ -386,7 +391,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
             })}
             
             <button
-              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              onClick={() => { setCurrentPage(Math.min(totalPages, currentPage + 1)); scrollToTop(); }}
               disabled={currentPage === totalPages}
               className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >

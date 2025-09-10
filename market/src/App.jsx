@@ -12,6 +12,7 @@ import SeriesPage from './components/SeriesPage';
 import ProductPage from './components/ProductPage';
 import Cart from './components/Cart';
 import FavoritesModal from './components/FavoritesModal';
+import Footer from './components/Footer';
 
 // Компонент для автоматического скролла наверх при смене маршрута
 const ScrollToTop = () => {
@@ -127,9 +128,9 @@ function App() {
             <div className="flex justify-between items-center py-4">
               {/* Logo */}
               <div className="flex items-center">
-                <Link to="/catalog" className="text-2xl font-bold text-primary">
+                <a href="https://ergo-static.vercel.app/" className="text-2xl font-bold text-primary">
                   ЭРГО
-                </Link>
+                </a>
               </div>
 
               {/* Search */}
@@ -264,6 +265,9 @@ function App() {
           onToggleFavorite={handleToggleFavorite}
           onAddToCart={handleAddToCart}
         />
+
+        {/* Footer */}
+        <Footer />
       </div>
     </Router>
   );

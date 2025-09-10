@@ -57,14 +57,6 @@ ul {
   list-style: none;
 }
 
-button,
-input,
-textarea,
-select {
-  border: none;
-  background-color: transparent;
-}
-
 textarea {
   resize: none;
 }

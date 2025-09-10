@@ -39,6 +39,7 @@
             'primary-reverse': '#1A18120D',       // Реверс кнопки легкое затемнение
             'card-border': '#AAC3AD',             // Цвет границы карточек
             'btn-border': '#1A181252',            // Цвет границы кнопок (32% непрозрачности)
+            'btn-hover': '#00AD5D',               // Основной цвет кнопок при наведении
             'btn-bg': '#1A18120D'                 // Цвет фона кнопок (5% непрозрачности)
           },
           
@@ -103,7 +104,8 @@
           
           // Максимальная ширина
           maxWidth: {
-            'container': '1140px'                 // Максимальная ширина контейнера
+            'full-pc': 'calc(100vw - 60px)',   // Полная ширина минус 60px от краев на pc
+            'full-mob': 'calc(100vw - 20px)'   // Полная ширина минус 20px от краев на mob
           }
         }
       }
@@ -120,11 +122,11 @@
 <body class="font-roboto bg-body text-text text-primary font-light leading-primary font-normal">
   <!-- Верхний хедер -->
   <header class="bg-white shadow-sm">
-    <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-full-mob sm:max-w-full-pc mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Навигационное меню -->
-      <nav class="hidden md:flex space-x-8">
-        <a href="catalog.html" class="text-text px-3 py-2 text-sm font-medium transition-colors">КАТАЛОГ</a>
+      <nav class="hidden md:flex space-x-8 pt-3">
+        <a href="https://ergo-catalog.vercel.app" class="text-text px-3 py-2 text-sm font-medium transition-colors">КАТАЛОГ</a>
         <a href="about.html" class="text-text px-3 py-2 text-sm font-medium transition-colors">О НАС</a>
         <a href="design_project.html" class="text-text px-3 py-2 text-sm font-medium transition-colors">ДИЗАЙН-ПРОЕКТ</a>
         <a href="#" class="text-text px-3 py-2 text-sm font-medium transition-colors">СЕРВИС</a>
@@ -143,8 +145,8 @@
   <!-- Мобильное меню -->
   <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200">
     <div class="px-4 py-2 space-y-2">
-      <a href="catalog.html" class="block text-text hover:text-primary py-2 text-sm font-medium">КАТАЛОГ</a>
-             <a href="about.html" class="block text-text hover:text-primary py-2 text-sm font-medium">О НАС</a>
+      <a href="https://ergo-catalog.vercel.app" class="block text-text hover:text-primary py-2 text-sm font-medium">КАТАЛОГ</a>
+      <a href="about.html" class="block text-text hover:text-primary py-2 text-sm font-medium">О НАС</a>
       <a href="design_project.html" class="block text-text hover:text-primary py-2 text-sm font-medium">ДИЗАЙН-ПРОЕКТ</a>
       <a href="#" class="block text-text hover:text-primary py-2 text-sm font-medium">СЕРВИС</a>
       <a href="#" class="block text-text hover:text-primary py-2 text-sm font-medium">КОНТАКТЫ</a>
@@ -155,50 +157,64 @@
     <!-- Главный баннер -->
     <section class="hero">
       <div class="relative max-w-container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
-        <div class="hero-bg w-full rounded-primary overflow-hidden">
-          <div class="flex flex-col justify-between w-full h-[600px] p-5 bg-[#1A1812]/75">
+        <div class="hero-bg h-[152vw] sm:h-[calc(100vh-72px)] w-full rounded-primary overflow-hidden">
+          <div class="flex flex-col justify-between w-full h-full p-5 bg-[#1A1812]/75">
             <div class="">
               <!-- Первая строка хедера -->
-              <div class="flex justify-between items-center pb-4 border-b border-white">
+              <div class="flex justify-between flex-wrap items-center pb-4 border-b border-white">
                 <!-- Левая колонка: Логотип + Поиск -->
-                <div class="flex items-center gap-header-gap">
+                <div class="flex items-end gap-header-gap md:w-5/12 w-full">
                   <!-- Логотип -->
-                  <a href="index.html" class="text-logo font-tenor font-bold text-primary">ЭРГО</a>
+                  <a href="index.html" class="text-logo font-tenor text-sm 2xl:text-xl font-bold text-primary">ЭРГО</a>
                   <!-- Поиск -->
                   <div class="flex-1">
                     <div class="relative">
-                      <input type="text" placeholder="поиск" class="w-full px-3 py-2 border border-white rounded-lg bg-transparent text-white placeholder-white focus:outline-none focus:ring-2 focus:ring-white">
-                      <svg class="w-4 h-4 text-white absolute right-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      <input type="search" placeholder="поиск" class="w-full px-3 py-1 border border-white rounded-lg bg-transparent text-white placeholder-white placeholder:font-light placeholder:italic placeholder:uppercase focus:outline-none focus:ring-2 focus:ring-white">
+                      <svg class="w-4 h-4 text-white absolute right-3 top-1/2 transform -translate-y-1/2" width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.16203 1.32123C8.72774 2.04474 9.41036 3.90054 8.68698 5.46627C8.027 6.89449 6.42568 7.58655 4.96099 7.14829L2.88818 11.6339L2.07793 11.2595L4.15073 6.77387C2.86801 5.94234 2.35708 4.27425 3.01699 2.84618C3.74057 1.28062 5.59637 0.597874 7.16203 1.32123Z" stroke="#FDFFEE" stroke-width="0.892329"/>
                       </svg>
                     </div>
                   </div>
                 </div>
                 
                 <!-- Правая колонка: Кнопки действий -->
-                <div class="flex items-center gap-header-gap">
-                  <button class="px-4 py-2 border border-white rounded-lg text-white hover:bg-white hover:text-black transition-colors">ИЗБРАННОЕ (00)</button>
-                  <button class="px-4 py-2 border border-white rounded-lg text-white hover:bg-white hover:text-black transition-colors">КОРЗИНА (00)</button>
-                  <button class="px-4 py-2 border border-primary rounded-lg text-primary hover:bg-primary hover:text-white transition-colors flex items-center gap-2">
-                    ОСТАВИТЬ ЗАЯВКУ
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 17V7H7"></path>
-                    </svg>
-                  </button>
+                <div class="flex items-center gap-header-gap md:w-5/12 w-full">
+                  <div class="w-full grid grid-cols-10 gap-4 2xl:gap-6">
+                    <div class="col-span-3">
+                      <button class="w-full flex items-center justify-between px-4 py-1 border border-white rounded-lg text-white hover:bg-white hover:text-black transition-colors">
+                        ИЗБРАННОЕ
+                        <span class="text-sm 2xl:text-xs italic font-light">(00)</span>
+                      </button>
+                    </div>
+                    <div class="col-span-3">
+                      <button class="w-full flex items-center justify-between px-4 py-1 border border-white rounded-lg text-white hover:bg-white hover:text-black transition-colors">
+                        КОРЗИНА
+                        <span class="text-sm 2xl:text-xs italic font-light">(00)</span>
+                      </button>
+                    </div>
+                    <div class="col-span-4">
+                      <button class="w-full flex items-center justify-between px-4 py-1 border border-primary rounded-lg text-primary hover:bg-primary hover:text-white transition-colors flex items-center gap-2">
+                        ОСТАВИТЬ ЗАЯВКУ
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17l9.2-9.2M17 17V7H7"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               
               <!-- Вторая строка хедера -->
-              <div class="flex justify-between items-center pt-4">
+              <div class="flex justify-between flex-wrap items-center pt-4">
                 <!-- Левая колонка: Навигация -->
-                <div class="flex items-center gap-header-gap">
-                  <a href="catalog.html" class="text-white hover:text-primary transition-colors">КАБИНЕТ РУКОВОДИТЕЛЯ</a>
-                  <a href="catalog.html" class="text-white hover:text-primary transition-colors">МЕБЕЛЬ ДЛЯ ПЕРСОНАЛА</a>
-                  <a href="catalog.html" class="text-white hover:text-primary transition-colors">КРЕСЛА И СТУЛЬЯ</a>
+                <div class="flex items-center justify-between gap-header-gap md:w-5/12 w-full">
+                  <a href="https://ergo-catalog.vercel.app" class="text-white transition-colors text-sm 2xl:text-xl hover:text-btn-hover">КАБИНЕТ РУКОВОДИТЕЛЯ</a>
+                  <a href="https://ergo-catalog.vercel.app" class="text-white transition-colors text-sm 2xl:text-xl hover:text-btn-hover">МЕБЕЛЬ ДЛЯ ПЕРСОНАЛА</a>
+                  <a href="https://ergo-catalog.vercel.app" class="text-white transition-colors text-sm 2xl:text-xl hover:text-btn-hover">КРЕСЛА И СТУЛЬЯ</a>
                 </div>
                 
                 <!-- Правая колонка: Контакты -->
-                <div class="flex items-center gap-header-gap">
+                <div class="flex items-center gap-header-gap md:w-5/12 w-full">
                   <span class="text-white">ПН-ПТ</span>
                   <span class="text-white font-medium">+7(812) 945-44-78</span>
                   <span class="text-white">САНКТ-ПЕТЕРБУРГ</span>
@@ -224,7 +240,7 @@
                   </span>
                 </p>
               </div>
-              <a href="catalog.html" class="text-center w-full lg:w-1/4 bg-primary hover:bg-[#037D44] text-text-reverse px-1 py-1 text-lg font-medium rounded-lg border border-primary transition-colors duration-200">
+              <a href="https://ergo-catalog.vercel.app" class="text-center w-full lg:w-[293px] 2xl:w-[24%] bg-primary hover:bg-[#037D44] text-text-reverse px-1 py-1 text-lg 2xl:text-xl font-medium rounded-lg border border-primary transition-colors duration-200">
                 КАТАЛОГ
               </a>
             </div>
@@ -251,7 +267,7 @@
           <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
             <h3 class="text-title-3 font-normal mb-title-3">КАБИНЕТ РУКОВОДИТЕЛЯ</h3>
             <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_1.webp" alt="Кабинет руководителя">
-            <a href="catalog.html" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
@@ -260,7 +276,7 @@
           <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
             <h3 class="text-title-3 font-normal mb-title-3">МЕБЕЛЬ ДЛЯ ПЕРСОНАЛА</h3>
             <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_2.webp" alt="Мебель для персонала">
-            <a href="catalog.html" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
@@ -269,7 +285,7 @@
           <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
             <h3 class="text-title-3 font-normal mb-title-3">СТОЛЫ ПЕРЕГОВОРОВ</h3>
             <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_3.webp" alt="Столы переговоров">
-            <a href="catalog.html" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn text-text font-semibold py-1 px-2 rounded-btn transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
@@ -278,7 +294,7 @@
           <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
             <h3 class="text-title-3 font-normal mb-title-3">СТУЛЬЯ И КРЕСЛА</h3>
             <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_4.webp" alt="Стулья и кресла">
-            <a href="catalog.html" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
@@ -288,13 +304,13 @@
 
 
     <!-- слайдер -->
-<section class="w-full h-[600px] mb-section-mb">
+<section class="w-full mb-section-mb">
   <div class="relative max-w-container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="swiper mySwiper w-full h-full rounded-primary overflow-hidden">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <img src="img/slide_1.webp" class="inset-0 w-full h-full object-cover">
-          <a href="catalog.html" class="absolute top-[37%] left-[38%]" href="">
+          <a href="https://ergo-catalog.vercel.app" class="absolute top-[37%] left-[38%]">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
               <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
@@ -303,7 +319,7 @@
         </div>
         <div class="swiper-slide">
           <img src="img/slide_2.webp" class="inset-0 w-full h-full object-cover">
-          <a href="catalog.html" class="absolute top-[37%] left-[23%]" href="">
+          <a href="https://ergo-catalog.vercel.app" class="absolute top-[37%] left-[23%]">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
               <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
@@ -312,7 +328,7 @@
         </div>
         <div class="swiper-slide">
           <img src="img/slide_3.webp" class="inset-0 w-full h-full object-cover">
-          <a href="catalog.html" class="absolute top-[42%] left-[40%]" href="">
+          <a href="https://ergo-catalog.vercel.app" class="absolute top-[42%] left-[40%]">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
               <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
@@ -387,7 +403,7 @@
            
            <!-- Правая колонка - 3D изображение -->
            <div class="relative flex justify-center items-center h-full border border-card-border rounded-primary">
-             <img src="img/3d.webp" alt="3D макет офиса" class="w-full h-auto object-cover rounded-lg">
+             <img src="img/3d.webp" alt="3D макет офиса" class="w-full h-auto object-cover rounded-lg relative scale-110">
            </div>
          </div>
        </div>
@@ -483,7 +499,7 @@
      </section>
    </main>
   
-    <footer class="bg-[#1A1812]/95 text-white">
+    <footer class="bg-[#1A1812]/95 text-white overflow-hidden">
      <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
        <!-- Основной контент футера -->
        <div class="py-12 lg:py-16">
@@ -508,7 +524,7 @@
            <!-- Колонка 2: Контакты -->
            <div class="space-y-4">
              <h3 class="text-title-3 font-semibold text-text-reverse mb-6">КОНТАКТЫ</h3>
-             <div class="space-y-3">
+             <div class="space-y-2">
                <p class="text-text-reverse/80">Телефон: +7(812) 945-44-78</p>
                <p class="text-text-reverse/80">E-mail: ra@ergospb.ru</p>
                <p class="text-text-reverse/80">Режим: Пн-Пт (10:00-18:00)</p>
@@ -519,8 +535,8 @@
            <!-- Колонка 3: Меню -->
            <div class="space-y-4">
              <h3 class="text-title-3 font-semibold text-text-reverse mb-6">МЕНЮ</h3>
-             <ul class="space-y-3">
-               <li><a href="catalog.html" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Каталог</a></li>
+             <ul class="space-y-2">
+               <li><a href="https://ergo-catalog.vercel.app" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Каталог</a></li>
                <li><a href="about.html" class="text-text-reverse/80 hover:text-text-reverse transition-colors">О нас</a></li>
                <li><a href="design_project.html" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Дизайн-проект</a></li>
                <li><a href="#" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Сервис</a></li>
@@ -531,7 +547,7 @@
            <!-- Колонка 4: Каталог -->
            <div class="space-y-4">
              <h3 class="text-title-3 font-semibold text-text-reverse mb-6">КАТАЛОГ</h3>
-             <ul class="space-y-3">
+             <ul class="space-y-2">
                <li><a href="#" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Кабинет руководителя</a></li>
                <li><a href="#" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Мебель для персонала</a></li>
                <li><a href="#" class="text-text-reverse/80 hover:text-text-reverse transition-colors">Кресла и стулья</a></li>
@@ -547,18 +563,15 @@
            </div>
          </div>
        </div>
-       
-       <!-- Нижняя строка с логотипом и слоганом -->
-       <div class="border-t border-text-reverse/20">
-         <div class="flex flex-col sm:flex-row items-center">
-           <!-- Логотип и слоган -->
-           <div class="flex items-center space-x-6">
-             <span class="text-4xl font-tenor text-text-reverse/17">ЭРГО МЕБЕЛЬ</span>
-             <span class="text-xl text-text-reverse/17">15 лет на рынке - качество, проверенное временем</span>
-           </div>
-         </div>
-       </div>
-     </div>
+      </div>
+      
+      <!-- Логотип и слоган -->
+      <div class="w-full flex flex-col sm:flex-row items-start sm:items-end justify-between space-x-6">
+        <p class="text-4xl leading-lh-100" style="color: #FDFFEE2B;">
+          <span class="font-tenor leading-lh-100 text-9xl">ЭРГО</span><span class="font-roboto leading-lh-100 font-extralight italic text-3xl">МЕБЕЛЬ</span>
+        </p>
+        <span class="text-xl leading-lh-100 font-medium" style="color: #FDFFEE2B;">15 лет на рынке - качество, проверенное временем</span>
+      </div>
    </footer>
   
   <!-- JavaScript -->

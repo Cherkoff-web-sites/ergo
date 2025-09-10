@@ -1,10 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Каталог мебели ЭРГО</title>
+    
+    <!-- Google Fonts - Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,9 +22,16 @@
             colors: {
               'primary': '#00AD5D',                 // Основной цвет сайта
               'primary-dark': '#037D44',            // Темный вариант основного цвета
-              'text-main': '#1A1812',               // Основной цвет текста
+              'text': '#1A1812',                    // Основной цвет текста
               'text-secondary': '#666666',          // Вторичный цвет текста
-              'text-reverse': '#FFFFFF',            // Белый текст
+              'text-reverse': '#FDFFEE',            // Белый текст (обратный к основному)
+              'body': '#FDFFEE',                    // Цвет фона страницы
+              'footer': '#1A1812F2',                // Цвет фона footer
+              'primary-reverse': '#1A18120D',       // Реверс кнопки легкое затемнение
+              'card-border': '#AAC3AD',             // Цвет границы карточек
+              'btn-border': '#1A181252',            // Цвет границы кнопок (32% непрозрачности)
+              'btn-hover': '#00AD5D',               // Основной цвет кнопок при наведении
+              'btn-bg': '#1A18120D',                // Цвет фона кнопок (5% непрозрачности)
               'bg-light': '#F8F8F8',                // Светлый фон
               'bg-dark': '#1A1812',                 // Темный фон
               'border-light': '#E5E5E5',            // Светлая граница
@@ -33,37 +46,125 @@
             
             // Размеры шрифтов
             fontSize: {
-              'title-1': ['48px', { lineHeight: '56px', fontWeight: '700' }],
-              'title-2': ['36px', { lineHeight: '44px', fontWeight: '400' }],
-              'title-3': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+              'title-1': '112px',                   // Заголовок 1 уровня
+              'title-2': '54px',                    // Заголовок 2 уровня
+              'title-3': '18px',                    // Заголовок 3 уровня
+              'primary': '13px',                    // Основной текст
+              'subtitle': '30px',                   // Подзаголовок (первая строка)
+              'title-2-medium': '40px',              // Заголовок 2 уровня уменьшенный
+              'logo': '20px',                       // Размер логотипа
+              'big-text': '16px',                   // Большой текст
               'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
               'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
               'body-sm': ['14px', { lineHeight: '20px', fontWeight: '400' }],
               'caption': ['12px', { lineHeight: '16px', fontWeight: '400' }]
             },
+
+            // Высота строки
+            lineHeight: {
+              'primary': '1.15',                   // Основная высота строки
+              'lh-100': '1'                        // Основная высота строки
+            },
+
+            // Толщина шрифта
+            fontWeight: {
+              'thin': '100',                        // Очень тонкий шрифт
+              'extralight': '200',                  // Экстра-светлый шрифт
+              'light': '300',                       // Светлый шрифт
+              'normal': '400',                      // Обычный шрифт
+              'medium': '500',                      // Средний шрифт
+              'semibold': '600',                    // Полужирный шрифт
+              'bold': '700',                        // Жирный шрифт
+              'extrabold': '800',                   // Очень жирный шрифт
+              'black': '900'                        // Черный шрифт
+            },
             
             // Отступы
             spacing: {
               'section': '80px',
-              'mb-section': '80px'
+              'mb-section': '80px',
+              'title-1': '23px',                 // Внешний отступ под заголовком 1
+              'title-2': '38px',                 // Внешний отступ под заголовком 2
+              'title-3': '14px',                 // Внешний отступ под заголовком 3
+              'section-pt': '40px',              // Верхний паддинг секций
+              'section-mb': '120px',              // Нижний отступ секций
+              'card-padding': '14px',            // Внутренний отступ карточек
+              'img-bottom': '19px',              // Нижний отступ картинок
+              'header-gap': '15px'               // Отступ между элементами хедера
             },
             
             // Максимальная ширина
             maxWidth: {
-              'container': '1200px'
+              'container': '1200px',
+              'full-pc': 'calc(100vw - 60px)',   // Полная ширина минус 60px
+              'full-mob': 'calc(100vw - 60px)'   // Полная ширина минус 60px
             },
             
             // Скругления
             borderRadius: {
               'lg': '12px',
-              'xl': '16px'
+              'xl': '16px',
+              'primary': '10px',                    // основное у блоков
+              'btn': '5px'                          // у кнопок
             }
           }
         }
       }
     </script>
+    
+    <!-- Custom styles for category cards -->
+    <style>
+      .category-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: var(--bg-image);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        opacity: var(--after-opacity, 0);
+        transition: opacity 0.3s ease;
+        border-radius: 8px;
+        z-index: 0;
+      }
+      
+      .category-button {
+        padding: 3px 12px;
+        background: var(--button-bg, rgba(26, 24, 18, 0.05));
+        border: var(--button-border, 1px solid rgba(26, 24, 18, 0.32));
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-transform: uppercase;
+        color: var(--button-color, #1A1812);
+        transition: all 0.3s ease;
+      }
+      
+      .main-catalog-button {
+        padding: 3px 12px;
+        background: rgba(26, 24, 18, 0.05);
+        border: 1px solid rgba(26, 24, 18, 0.32);
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-transform: uppercase;
+        color: #1A1812;
+        transition: all 0.3s ease;
+      }
+      
+      .main-catalog-button:hover {
+        background: transparent;
+        color: white;
+        border: 1px solid white;
+      }
+    </style>
   </head>
-  <body>
+  <body class="font-roboto bg-body text-text text-primary font-light leading-primary font-normal">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
