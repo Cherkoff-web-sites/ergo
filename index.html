@@ -38,6 +38,7 @@
             'card-border': '#AAC3AD',             // Цвет границы карточек
             'btn-border': '#1A181252',            // Цвет границы кнопок (32% непрозрачности)
             'btn-hover': '#00AD5D',               // Основной цвет кнопок при наведении
+            'btn-hover-border': '#037D44',        // Цвет границы кнопок при наведении
             'btn-bg': '#1A18120D'                 // Цвет фона кнопок (5% непрозрачности)
           },
           
@@ -49,13 +50,9 @@
           
           // Размеры шрифтов
           fontSize: {
-            'title-1': '112px',                   // Заголовок 1 уровня
             'title-2': '54px',                    // Заголовок 2 уровня
-            'title-3': '18px',                    // Заголовок 3 уровня
             'primary': '13px',                    // Основной текст
             'subtitle': '30px',                   // Подзаголовок (первая строка)
-            'title-2-medium': '40px',              // Заголовок 2 уровня уменьшенный
-            'logo': '20px'                        // Размер логотипа
           },
 
           // Высота строки
@@ -79,13 +76,6 @@
           
           // Отступы и размеры
           spacing: {
-            'title-1': '23px',                 // Внешний отступ под заголовком 1
-            'title-2': '38px',                 // Внешний отступ под заголовком 2
-            'title-3': '14px',                 // Внешний отступ под заголовком 3
-            'section-pt': '40px',              // Верхний паддинг секций
-            'section-mb': '120px',              // Нижний отступ секций
-            'card-padding': '14px',            // Внутренний отступ карточек
-            'img-bottom': '19px',              // Нижний отступ картинок
             'header-gap': '15px'               // Отступ между элементами хедера
           },
 
@@ -323,123 +313,122 @@
       </div>
     </section>
 
-
-
-
-
-
-
-
-
     <!-- Популярные категории -->
-    <section class="">
-      <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="mb-title-2 text-center font-tenor">
-          <span class="text-subtitle font-thin italic">
+    <section class="categories mb-24 md:mb-40">
+      <div class="max-w-full-mob md:max-w-full-pc mx-auto">
+        <h2 class="mb-5 md:mb-9 text-center uppercase">
+          <span class="text-xl md:text-3xl xxl:text-4xl font-roboto font-extralight italic">
             ПОПУЛЯРНЫЕ
           </span>
           <br>
-          <span class="text-title-2-medium">
+          <span class="text-[28px] md:text-[40px] xxl:text-5xl font-tenor">
             КАТЕГОРИИ ТОВАРОВ
           </span>
         </h2>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
           <!-- Категория 1 -->
-          <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
-            <h3 class="text-title-3 font-normal mb-title-3">КАБИНЕТ РУКОВОДИТЕЛЯ</h3>
-            <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_1.webp" alt="Кабинет руководителя">
-            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+          <div class="p-2.5 md:p-3.5 border border-card-border rounded-primary">
+            <h3 class="mb-1.5 md:mb-3.5 xxl:mb-5 text-sm md:text-lg xxl:text-2xl">КАБИНЕТ РУКОВОДИТЕЛЯ</h3>
+            <img class="hidden md:block w-full mb-5 rounded-btn object-cover" src="img/category_1_2x.webp" alt="Кабинет руководителя">
+            <img class="md:hidden w-full mb-2 rounded-btn object-cover" src="img/category_1_mob_2x.webp" alt="Кабинет руководителя">
+            <a href="https://ergo-catalog.vercel.app" class="inline-block w-full p-1 md:p-1.5 border border-btn-border rounded-btn text-center text-xs md:text-sm xxl:text-lg font-semibold bg-btn-bg hover:border-btn-hover-border hover:bg-btn-hover hover:text-text-reverse transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
-             
           <!-- Категория 2 -->
-          <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
-            <h3 class="text-title-3 font-normal mb-title-3">МЕБЕЛЬ ДЛЯ ПЕРСОНАЛА</h3>
-            <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_2.webp" alt="Мебель для персонала">
-            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+          <div class="p-2.5 md:p-3.5 border border-card-border rounded-primary">
+            <h3 class="mb-1.5 md:mb-3.5 xxl:mb-5 text-sm md:text-lg xxl:text-2xl">МЕБЕЛЬ ДЛЯ ПЕРСОНАЛА</h3>
+            <img class="hidden md:block w-full mb-5 rounded-btn object-cover" src="img/category_2_2x.webp" alt="Мебель для персонала">
+            <img class="md:hidden w-full mb-2 rounded-btn object-cover" src="img/category_2_mob_2x.webp" alt="Мебель для персонала">
+            <a href="https://ergo-catalog.vercel.app" class="inline-block w-full p-1 md:p-1.5 border border-btn-border rounded-btn text-center text-xs md:text-sm xxl:text-lg font-semibold bg-btn-bg hover:border-btn-hover-border hover:bg-btn-hover hover:text-text-reverse transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
-            
           <!-- Категория 3 -->
-          <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
-            <h3 class="text-title-3 font-normal mb-title-3">СТОЛЫ ПЕРЕГОВОРОВ</h3>
-            <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_3.webp" alt="Столы переговоров">
-            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+          <div class="p-2.5 md:p-3.5 border border-card-border rounded-primary">
+            <h3 class="mb-1.5 md:mb-3.5 xxl:mb-5 text-sm md:text-lg xxl:text-2xl">СТОЛЫ ПЕРЕГОВОРОВ</h3>
+            <img class="hidden md:block w-full mb-5 rounded-btn object-cover" src="img/category_3_2x.webp" alt="Столы переговоров">
+            <img class="md:hidden w-full mb-2 rounded-btn object-cover" src="img/category_3_mob_2x.webp" alt="Столы переговоров">
+            <a href="https://ergo-catalog.vercel.app" class="inline-block w-full p-1 md:p-1.5 border border-btn-border rounded-btn text-center text-xs md:text-sm xxl:text-lg font-semibold bg-btn-bg hover:border-btn-hover-border hover:bg-btn-hover hover:text-text-reverse transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
-            
           <!-- Категория 4 -->
-          <div class="bg-white rounded-primary border border-card-border p-card-padding hover:shadow-lg transition-shadow">
-            <h3 class="text-title-3 font-normal mb-title-3">СТУЛЬЯ И КРЕСЛА</h3>
-            <img class="w-full mb-img-bottom object-cover rounded-btn" src="img/category_4.webp" alt="Стулья и кресла">
-            <a href="https://ergo-catalog.vercel.app" class="text-center inline-block btn__category w-full bg-btn-bg border border-btn-border text-text font-semibold py-1 px-2 rounded-btn transition-colors">
+          <div class="p-2.5 md:p-3.5 border border-card-border rounded-primary">
+            <h3 class="mb-1.5 md:mb-3.5 xxl:mb-5 text-sm md:text-lg xxl:text-2xl">СТУЛЬЯ И КРЕСЛА</h3>
+            <img class="hidden md:block w-full mb-5 rounded-btn object-cover" src="img/category_4_2x.webp" alt="Стулья и кресла">
+            <img class="md:hidden w-full mb-2 rounded-btn object-cover" src="img/category_4_mob_2x.webp" alt="Стулья и кресла">
+            <a href="https://ergo-catalog.vercel.app" class="inline-block w-full p-1 md:p-1.5 border border-btn-border rounded-btn text-center text-xs md:text-sm xxl:text-lg font-semibold bg-btn-bg hover:border-btn-hover-border hover:bg-btn-hover hover:text-text-reverse transition-colors">
               ПЕРЕЙТИ В КАТЕГОРИЮ
             </a>
           </div>
         </div>
       </div>
     </section>
+
+
+
+    <!-------------------------- !!В ПРОЦЕССЕ!! -------------------------->
+    
+    <!-------------------------- /!!В ПРОЦЕССЕ!! -------------------------->
 
 
     <!-- слайдер -->
-<section class="w-full mb-section-mb">
-  <div class="relative max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="swiper mySwiper w-full h-full rounded-primary overflow-hidden">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="img/slide_1.webp" class="inset-0 w-full h-full object-cover">
-          <a href="https://ergo-catalog.vercel.app" class="absolute top-[37%] left-[38%]">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
-              <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
-            </svg>
-          </a>
+    <section class="w-full mb-section-mb">
+      <div class="relative max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="swiper mySwiper w-full h-full rounded-primary overflow-hidden">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/slide_1.webp" class="inset-0 w-full h-full object-cover">
+              <a href="https://ergo-catalog.vercel.app" class="absolute top-[37%] left-[38%]">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
+                  <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
+                </svg>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <img src="img/slide_2.webp" class="inset-0 w-full h-full object-cover">
+              <a href="https://ergo-catalog.vercel.app" class="absolute top-[37%] left-[23%]">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
+                  <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
+                </svg>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <img src="img/slide_3.webp" class="inset-0 w-full h-full object-cover">
+              <a href="https://ergo-catalog.vercel.app" class="absolute top-[42%] left-[40%]">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
+                  <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="swiper-slide">
-          <img src="img/slide_2.webp" class="inset-0 w-full h-full object-cover">
-          <a href="https://ergo-catalog.vercel.app" class="absolute top-[37%] left-[23%]">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
-              <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
-            </svg>
-          </a>
-        </div>
-        <div class="swiper-slide">
-          <img src="img/slide_3.webp" class="inset-0 w-full h-full object-cover">
-          <a href="https://ergo-catalog.vercel.app" class="absolute top-[42%] left-[40%]">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0.5" y="0.5" width="39" height="39" rx="4.5" fill="#F8FAD6" stroke="#DADBA2"/>
-              <path d="M24.834 19.7637V20.8672H15.0879V19.7637H24.834ZM20.5078 15.2227V25.5742H19.3359V15.2227H20.5078Z" fill="#1A1812"/>
-            </svg>
-          </a>
+          
+        <div class="flex items-center justify-center w-full absolute -bottom-4 left-0 right-0 z-10">
+          <div class="flex items-center gap-6 bg-body px-4 py-1 uppercase font-semibold rounded-btn">
+            <div class="swiper-button-prev">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.6818 4.75613L3.21946 4.75613L6.0483 1.93723L5.02415 0.903142L0.440341 5.49689L5.02415 10.0807L6.0483 9.06649L3.21946 6.23766L10.6818 6.23766V4.75613Z" fill="#1A1812"/>
+              </svg>
+            </div>
+            <span>переговорная</span>
+            <div class="swiper-button-next">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.318182 4.75613L7.78054 4.75613L4.9517 1.93723L5.97585 0.903142L10.5597 5.49689L5.97585 10.0807L4.9517 9.06649L7.78054 6.23766L0.318182 6.23766V4.75613Z" fill="#1A1812"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-      
-    <div class="flex items-center justify-center w-full absolute -bottom-4 left-0 right-0 z-10">
-      <div class="flex items-center gap-6 bg-body px-4 py-1 uppercase font-semibold rounded-btn">
-        <div class="swiper-button-prev">
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.6818 4.75613L3.21946 4.75613L6.0483 1.93723L5.02415 0.903142L0.440341 5.49689L5.02415 10.0807L6.0483 9.06649L3.21946 6.23766L10.6818 6.23766V4.75613Z" fill="#1A1812"/>
-          </svg>
-        </div>
-        <span>переговорная</span>
-        <div class="swiper-button-next">
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.318182 4.75613L7.78054 4.75613L4.9517 1.93723L5.97585 0.903142L10.5597 5.49689L5.97585 10.0807L4.9517 9.06649L7.78054 6.23766L0.318182 6.23766V4.75613Z" fill="#1A1812"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
     </section>
 
            <!-- ДИЗАЙН ПРОЕКТ - Верхняя секция -->
-      <section class="pt-section-pt mb-section-mb">
+      <section class="">
        <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
            <!-- Левая колонка - Контент -->
@@ -492,7 +481,7 @@
      </section>
 
      <!-- Баннер с госзаказами -->
-     <section class="pt-section mb-section-mb">
+     <section class="">
        <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
          <div class="relative h-[400px] rounded-primary bg-cover bg-center bg-no-repeat" style="background-image: url('img/gos_order.webp');">
            <div class="absolute bottom-5 left-5 bg-body p-6 rounded-primary rounded-bl-primary w-1/2">
@@ -504,7 +493,7 @@
      </section>
 
            <!-- Схема работы -->
-      <section class="pt-section-pt mb-section-mb">
+      <section class="">
        <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
                                                            <h2 class="text-title-2 mb-title-2 text-center font-tenor">СХЕМА РАБОТЫ</h2>
          
