@@ -1,11 +1,6 @@
-body {
-  touch-action: pan-x pan-y;
-}
+/*----------- ГЛАВНАЯ ------------*/
 
 /* hero */
-.hero {
-  margin-bottom: 70px;
-}
 .hero-bg {
   background-image: url('../img/hero.webp');
   background-size: cover;
@@ -13,13 +8,7 @@ body {
   background-repeat: no-repeat;
 }
 
-
-/* category */
-.btn__category {
-  border: 1px solid #1A181252;
-}
-
-/* Swiper кнопки навигации */
+/* Swiper кнопки навигации - стили для главной */
 .swiper-button-next,
 .swiper-button-prev {
   position: static;
@@ -27,10 +16,16 @@ body {
   padding: 0;
   width: 14px;
 }
-
 .swiper-button-next::before,
 .swiper-button-next::after,
 .swiper-button-prev::before,
 .swiper-button-prev::after {
   content: '';
+}
+
+/* MOBILE */
+@media (max-width: 767px) {
+  .hero-bg {
+    background-image: url('../img/hero_mob.webp');
+  }
 }
