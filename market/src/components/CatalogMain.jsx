@@ -15,7 +15,7 @@ const CatalogMain = ({ categories }) => {
     <div className="min-h-screen bg-gray-50">
 
       {/* Main Content */}
-      <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-12">
         {/* Весь каталог кнопка */}
         <div className="w-full mb-12">
           <div className="bg-transparent border border-card-border rounded-lg p-6">

@@ -243,7 +243,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
           {categorySeries.length > 0 && (
             <div>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Серии</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 {categorySeries.map((seriesItem) => {
                   const seriesProducts = categoryProducts.filter(p => p.series === seriesItem.id);
                   return (
@@ -257,12 +257,12 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
                         <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300">
                           {seriesItem.name}
                         </h3>
-                        <p className="text-sm text-gray-600 mb-4">
+                        {/* <p className="text-sm text-gray-600 mb-4">
                           {seriesItem.description}
                         </p>
                         <p className="text-sm text-gray-500">
                           {seriesProducts.length} товаров
-                        </p>
+                        </p> */}
                       </div>
                     </Link>
                   );

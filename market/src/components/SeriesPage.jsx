@@ -274,11 +274,8 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
             <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Series Image Placeholder */}
-                <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="text-4xl mb-2">🖼️</div>
-                    <p>Изображение серии</p>
-                  </div>
+                <div className="rounded-lg h-64 overflow-hidden">
+                  <img src="/img/service_catalog_link_bg_2x.webp" className="w-full h-full object-cover" alt={`Изображение серии ${seriesItem.name}`} />
                 </div>
 
                 {/* Series Info */}
