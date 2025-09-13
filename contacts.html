@@ -694,5 +694,73 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Search functionality
+      const searchForm = document.getElementById('search-form');
+      if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const searchInput = document.getElementById('search-input');
+          const searchTerm = searchInput.value.trim();
+          if (searchTerm) {
+            window.location.href = `https://ergo-catalog.vercel.app/catalog/all?search=${encodeURIComponent(searchTerm)}`;
+          } else {
+            window.location.href = 'https://ergo-catalog.vercel.app/catalog/all';
+          }
+        });
+      }
+
+      // Modal functionality
+      const contactModal = document.getElementById('contactModal');
+      const closeModal = document.getElementById('closeModal');
+      const contactForm = document.getElementById('contactForm');
+      const contactButtons = document.querySelectorAll('[data-contact-modal]');
+
+      contactButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          contactModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      closeModal.addEventListener('click', function() {
+        contactModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      });
+
+      contactModal.addEventListener('click', function(e) {
+        if (e.target === contactModal) {
+          contactModal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !contactModal.classList.contains('hidden')) {
+          contactModal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        const data = {
+          name: formData.get('name'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          message: formData.get('message')
+        };
+        console.log('Данные формы:', data);
+        alert('Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.');
+        contactModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        contactForm.reset();
+      });
+    });
+  </script>
 </body>
 </html>

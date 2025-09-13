@@ -396,6 +396,20 @@
       </div>
 
     </section>
+
+    <section class="min-h-[100vh] h-[100vh]" style="background-image: url('img/hero_service_2x.webp');">
+      <div class="max-w-full-mob md:max-w-full-pc mx-auto h-full flex flex-col justify-center items-center p-[]">
+        <div class="p-3 bg-body rounded-primary flex flex-col items-center mb-6 gap-6">
+          <p class="uppercase text-2xl font-tenor">
+            перейти к товарам
+          </p>
+          <img class="maw-w-[460px]" src="img/service_catalog_link_2x.webp" alt="">
+          <a href="https://ergo-catalog.vercel.app" class="bg-primary hover:bg-[#037D44] text-white px-8 py-2 text-lg font-medium rounded-lg border border-primary transition-colors duration-200 uppercase">
+            в каталог
+          </a>
+        </div>
+      </div>
+    </section>
    </main>
   
   <footer class="bg-[#1A1812]/95 text-white overflow-hidden">
@@ -684,5 +698,73 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Search functionality
+      const searchForm = document.getElementById('search-form');
+      if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const searchInput = document.getElementById('search-input');
+          const searchTerm = searchInput.value.trim();
+          if (searchTerm) {
+            window.location.href = `https://ergo-catalog.vercel.app/catalog/all?search=${encodeURIComponent(searchTerm)}`;
+          } else {
+            window.location.href = 'https://ergo-catalog.vercel.app/catalog/all';
+          }
+        });
+      }
+
+      // Modal functionality
+      const contactModal = document.getElementById('contactModal');
+      const closeModal = document.getElementById('closeModal');
+      const contactForm = document.getElementById('contactForm');
+      const contactButtons = document.querySelectorAll('[data-contact-modal]');
+
+      contactButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          contactModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      closeModal.addEventListener('click', function() {
+        contactModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      });
+
+      contactModal.addEventListener('click', function(e) {
+        if (e.target === contactModal) {
+          contactModal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !contactModal.classList.contains('hidden')) {
+          contactModal.classList.add('hidden');
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        const data = {
+          name: formData.get('name'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          message: formData.get('message')
+        };
+        console.log('Данные формы:', data);
+        alert('Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.');
+        contactModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+        contactForm.reset();
+      });
+    });
+  </script>
 </body>
 </html>
