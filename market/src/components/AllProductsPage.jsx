@@ -1,14 +1,15 @@
 import { useMemo, useState, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [] }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
   const [selectedColor, setSelectedColor] = useState('Все');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchParams.get('search') || '');
   const [sortBy, setSortBy] = useState('name');
   
   // Пагинация
@@ -19,10 +20,18 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearchTerm(searchTerm);
+      // Обновляем URL с поисковым запросом
+      const newSearchParams = new URLSearchParams(searchParams);
+      if (searchTerm.trim()) {
+        newSearchParams.set('search', searchTerm.trim());
+      } else {
+        newSearchParams.delete('search');
+      }
+      setSearchParams(newSearchParams, { replace: true });
     }, 300);
     
     return () => clearTimeout(timer);
-  }, [searchTerm]);
+  }, [searchTerm, searchParams, setSearchParams]);
 
   const filteredProducts = useMemo(() => {
     let filtered = products;

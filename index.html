@@ -276,12 +276,12 @@
               <div class="w-full md:w-[44%] xl:w-[37%] xxl:w-[40%] flex items-end gap-header-gap">
                 <a href="index.html" class="font-tenor text-primary text-xl xxl:text-2xl">ЭРГО</a>
                 <div class="flex-1 relative">
-                  <a class="w-full" href="https://ergo-catalog.vercel.app/">
-                    <input type="search" placeholder="поиск" class="w-full px-2 py-1 border border-text-reverse rounded-btn bg-[#1A18120E] text-text-reverse placeholder-text-reverse placeholder:font-light placeholder:italic placeholder:uppercase focus:outline-none">
+                  <form id="search-form" class="w-full">
+                    <input type="search" id="search-input" placeholder="поиск" class="w-full px-2 py-1 border border-text-reverse rounded-btn bg-[#1A18120E] text-text-reverse placeholder-text-reverse placeholder:font-light placeholder:italic placeholder:uppercase focus:outline-none">
                     <svg class="w-4 h-4 text-text-reverse absolute right-2 top-1/2 transform -translate-y-1/2" width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.16203 1.32123C8.72774 2.04474 9.41036 3.90054 8.68698 5.46627C8.027 6.89449 6.42568 7.58655 4.96099 7.14829L2.88818 11.6339L2.07793 11.2595L4.15073 6.77387C2.86801 5.94234 2.35708 4.27425 3.01699 2.84618C3.74057 1.28062 5.59637 0.597874 7.16203 1.32123Z" stroke="#FDFFEE" stroke-width="0.892329"/>
                     </svg>
-                  </a>
+                  </form>
                 </div>
               </div>
               
@@ -1107,6 +1107,27 @@
           categoryLink.classList.remove('opacity-100', 'pointer-events-auto');
           categoryLink.classList.add('opacity-0', 'pointer-events-none');
           plusButton.classList.remove('opacity-50');
+        });
+      }
+    });
+
+    // Обработка поиска
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchForm = document.getElementById('search-form');
+      const searchInput = document.getElementById('search-input');
+
+      if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const searchTerm = searchInput.value.trim();
+          
+          if (searchTerm) {
+            // Переходим на страницу каталога с поисковым запросом
+            window.location.href = `https://ergo-catalog.vercel.app/catalog/all?search=${encodeURIComponent(searchTerm)}`;
+          } else {
+            // Если поисковый запрос пустой, просто переходим на каталог
+            window.location.href = 'https://ergo-catalog.vercel.app/catalog/all';
+          }
         });
       }
     });

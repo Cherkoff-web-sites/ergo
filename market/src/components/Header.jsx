@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCatalogMenuOpen, setIsCatalogMenuOpen] = useState(false);
   const [isDesktopCatalogMenuOpen, setIsDesktopCatalogMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -15,6 +18,15 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
 
   const toggleDesktopCatalogMenu = () => {
     setIsDesktopCatalogMenuOpen(!isDesktopCatalogMenuOpen);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/catalog/all?search=${encodeURIComponent(searchTerm.trim())}`);
+    } else {
+      navigate('/catalog/all');
+    }
   };
 
   // Закрытие меню при клике вне его
@@ -43,12 +55,18 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
             <div className="w-full md:w-[44%] xl:w-[37%] xxl:w-[40%] flex items-end gap-header-gap">
               <a href="https://ergo-static.vercel.app/" className="font-tenor text-primary text-xl xxl:text-2xl">ЭРГО</a>
               <div className="flex-1 relative">
-                <a className="w-full" href="https://ergo-catalog.vercel.app/">
-                  <input type="search" placeholder="поиск" className="w-full px-2 py-1 border border-text rounded-btn bg-[#1A18120E] text-text placeholder-text placeholder:font-light placeholder:italic placeholder:uppercase focus:outline-none" />
+                <form onSubmit={handleSearchSubmit} className="w-full">
+                  <input 
+                    type="search" 
+                    placeholder="поиск" 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full px-2 py-1 border border-text rounded-btn bg-[#1A18120E] text-text placeholder-text placeholder:font-light placeholder:italic placeholder:uppercase focus:outline-none" 
+                  />
                   <svg className="w-4 h-4 text-text absolute right-2 top-1/2 transform -translate-y-1/2" width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7.16203 1.32123C8.72774 2.04474 9.41036 3.90054 8.68698 5.46627C8.027 6.89449 6.42568 7.58655 4.96099 7.14829L2.88818 11.6339L2.07793 11.2595L4.15073 6.77387C2.86801 5.94234 2.35708 4.27425 3.01699 2.84618C3.74057 1.28062 5.59637 0.597874 7.16203 1.32123Z" stroke="#FDFFEE" strokeWidth="0.892329"/>
                   </svg>
-                </a>
+                </form>
               </div>
             </div>
             
