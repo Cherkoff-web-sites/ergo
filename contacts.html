@@ -190,7 +190,7 @@
                 </svg>
               </button> -->
 
-              <a href="contacts.html" class="flex items-center justify-between gap-2 w-full px-2 py-1 border border-primary rounded-btn text-primary">
+              <button data-contact-modal class="flex items-center justify-between gap-2 w-full px-2 py-1 border border-primary rounded-btn text-primary">
                 <p class="xxl:text-sm font-bold">
                   ОСТАВИТЬ ЗАЯВКУ
                 </p>
@@ -640,5 +640,59 @@
       }
     });
   </script>
+
+  <!-- Модальное окно формы обратной связи -->
+  <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <!-- Заголовок и кнопка закрытия -->
+        <div class="flex justify-between items-center p-6 border-b border-gray-200">
+          <h2 class="text-2xl font-bold text-text">ФОРМА ОБРАТНОЙ СВЯЗИ</h2>
+          <button id="closeModal" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Форма -->
+        <form id="contactForm" class="p-6 space-y-4">
+          <!-- Имя -->
+          <div>
+            <label class="block text-sm font-semibold text-text mb-2">ИМЯ</label>
+            <input type="text" name="name" placeholder="Ваше имя" class="w-full px-3 py-2 border border-card-border rounded-btn bg-white text-text placeholder-gray-400 focus:outline-none focus:border-primary" required>
+          </div>
+
+          <!-- Телефон -->
+          <div>
+            <label class="block text-sm font-semibold text-text mb-2">ТЕЛЕФОН</label>
+            <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" class="w-full px-3 py-2 border border-card-border rounded-btn bg-white text-text placeholder-gray-400 focus:outline-none focus:border-primary" required>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-sm font-semibold text-text mb-2">E-MAIL</label>
+            <input type="email" name="email" placeholder="your@email.com" class="w-full px-3 py-2 border border-card-border rounded-btn bg-white text-text placeholder-gray-400 focus:outline-none focus:border-primary" required>
+          </div>
+
+          <!-- Сообщение -->
+          <div>
+            <label class="block text-sm font-semibold text-text mb-2">СООБЩЕНИЕ</label>
+            <textarea name="message" rows="4" placeholder="Ваше сообщение" class="w-full px-3 py-2 border border-card-border rounded-btn bg-white text-text placeholder-gray-400 focus:outline-none focus:border-primary resize-none"></textarea>
+          </div>
+
+          <!-- Кнопка отправки -->
+          <button type="submit" class="w-full bg-primary hover:bg-[#037D44] text-text-reverse py-3 px-4 rounded-btn font-semibold transition-colors duration-200">
+            ОТПРАВИТЬ
+          </button>
+
+          <!-- Согласие -->
+          <p class="text-xs text-gray-600">
+            Нажимая на кнопку «Отправить», вы соглашаетесь на обработку персональных данных в соответствии с пользовательским соглашением
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
