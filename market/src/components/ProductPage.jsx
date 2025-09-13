@@ -34,7 +34,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Товар не найден</h1>
           <Link to="/catalog" className="text-primary hover:text-primary-dark">
@@ -46,62 +46,58 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <Link
-                to={category ? `/catalog/${category.id}` : '/catalog'}
-                className="flex items-center text-gray-600 hover:text-gray-900 mr-4"
-              >
-                <ArrowLeft size={20} className="mr-2" />
-                Назад
-              </Link>
-              <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-6">
+          <div className="flex items-center">
+            <Link
+              to={category ? `/catalog/${category.id}` : '/catalog'}
+              className="flex items-center text-gray-600 hover:text-gray-900 mr-4"
+            >
+              <ArrowLeft size={20} className="mr-2" />
+              Назад
+            </Link>
+            <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
           </div>
         </div>
       </div>
 
       {/* Breadcrumbs */}
-      <div className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2">
-              <li>
-                <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                  КАТАЛОГ
-                </Link>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li>
-                <Link to={`/catalog/${category?.id}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                  {category?.name.toUpperCase()}
-                </Link>
-              </li>
-              {seriesItem && (
-                <>
-                  <li className="text-gray-500">/</li>
-                  <li>
-                    <Link 
-                      to={`/catalog/${category?.id}/series/${seriesItem.id}`} 
-                      onClick={handleBreadcrumbClick}
-                      className="text-gray-500 hover:text-gray-700"
-                    >
-                      СЕРИЯ "{seriesItem.name}"
-                    </Link>
-                  </li>
-                </>
-              )}
-              <li className="text-gray-500">/</li>
-              <li>
-                <span className="text-gray-900 font-medium">{product.name.toUpperCase()}</span>
-              </li>
-            </ol>
-          </nav>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav className="flex" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2">
+            <li>
+              <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
+                КАТАЛОГ
+              </Link>
+            </li>
+            <li className="text-gray-500">/</li>
+            <li>
+              <Link to={`/catalog/${category?.id}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
+                {category?.name.toUpperCase()}
+              </Link>
+            </li>
+            {seriesItem && (
+              <>
+                <li className="text-gray-500">/</li>
+                <li>
+                  <Link 
+                    to={`/catalog/${category?.id}/series/${seriesItem.id}`} 
+                    onClick={handleBreadcrumbClick}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    СЕРИЯ "{seriesItem.name}"
+                  </Link>
+                </li>
+              </>
+            )}
+            <li className="text-gray-500">/</li>
+            <li>
+              <span className="text-gray-900 font-medium">{product.name.toUpperCase()}</span>
+            </li>
+          </ol>
+        </nav>
       </div>
 
       {/* Category Navigation */}
@@ -131,7 +127,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
           {/* Main Content */}
           <div className="flex-1">
             {/* Product Info */}
-            <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <div className="mb-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Product Image Slider */}
                 <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center relative">

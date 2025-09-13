@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCatalogMenuOpen, setIsCatalogMenuOpen] = useState(false);
+  const [isDesktopCatalogMenuOpen, setIsDesktopCatalogMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -11,6 +12,24 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
   const toggleCatalogMenu = () => {
     setIsCatalogMenuOpen(!isCatalogMenuOpen);
   };
+
+  const toggleDesktopCatalogMenu = () => {
+    setIsDesktopCatalogMenuOpen(!isDesktopCatalogMenuOpen);
+  };
+
+  // Закрытие меню при клике вне его
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isDesktopCatalogMenuOpen && !event.target.closest('.catalog-dropdown')) {
+        setIsDesktopCatalogMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDesktopCatalogMenuOpen]);
 
   return (
     <header>
@@ -74,7 +93,53 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
           <div className="flex justify-between flex-wrap items-center pt-3">
             {/* Левая колонка: Навигация */}
             <nav className="hidden md:flex justify-between gap-2 md:w-[44%] xl:w-[37%] xxl:w-[40%]">
-              <a href="https://ergo-catalog.vercel.app" className="text-sm xxl:text-xl font-medium transition-colors">КАТАЛОГ</a>
+              <div className="relative catalog-dropdown">
+                <button 
+                  onClick={toggleDesktopCatalogMenu}
+                  className="text-sm xxl:text-xl font-medium transition-colors hover:text-primary"
+                >
+                  КАТАЛОГ
+                </button>
+                {/* Выпадающее меню каталога */}
+                {isDesktopCatalogMenuOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                    <ul className="py-2">
+                      <li>
+                        <a 
+                          href="https://ergo-catalog.vercel.app" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Кабинет руководителя
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://ergo-catalog.vercel.app" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Мебель для персонала
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://ergo-catalog.vercel.app" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Столы переговоров
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="https://ergo-catalog.vercel.app" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Стулья и кресла
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
               <a href="https://ergo-static.vercel.app/about.html" className="text-sm xxl:text-xl font-medium transition-colors">О НАС</a>
               <a href="https://ergo-static.vercel.app/design_project.html" className="text-sm xxl:text-xl font-medium transition-colors">ДИЗАЙН-ПРОЕКТ</a>
               <a href="https://ergo-static.vercel.app/service.html" className="text-sm xxl:text-xl font-medium transition-colors">СЕРВИС</a>
@@ -147,9 +212,10 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
             <a href="https://ergo-static.vercel.app" className="py-1 text-sm font-medium uppercase">Главная</a>
             <button onClick={toggleCatalogMenu} className="py-1 text-sm font-medium uppercase">КАТАЛОГ</button>
             <ul className={`flex flex-col items-center gap-1 ${isCatalogMenuOpen ? 'block' : 'hidden'}`}>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Кресла и стулья</a></li>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Переговорные столы</a></li>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Другое</a></li>
+              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Кабинет руководителя</a></li>
+              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Мебель для персонала</a></li>
+              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Столы переговоров</a></li>
+              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Стулья и кресла</a></li>
             </ul>
             <a href="https://ergo-static.vercel.app/about.html" className="py-1 text-sm font-medium uppercase">О НАС</a>
             <a href="https://ergo-static.vercel.app/design_project.html" className="py-1 text-sm font-medium uppercase">ДИЗАЙН-ПРОЕКТ</a>

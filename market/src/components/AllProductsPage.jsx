@@ -93,34 +93,30 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <h1 className="text-3xl font-bold text-gray-900">Весь каталог</h1>
-          </div>
+    <div className="min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-6">
+          <h1 className="text-3xl font-bold text-gray-900">Весь каталог</h1>
         </div>
       </div>
 
-      <div className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2">
-              <li>
-                <Link to="/catalog" className="text-gray-500 hover:text-gray-700">КАТАЛОГ</Link>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li>
-                <span className="text-gray-900 font-medium">ВСЕ ТОВАРЫ</span>
-              </li>
-            </ol>
-          </nav>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav className="flex" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2">
+            <li>
+              <Link to="/catalog" className="text-gray-500 hover:text-gray-700">КАТАЛОГ</Link>
+            </li>
+            <li className="text-gray-500">/</li>
+            <li>
+              <span className="text-gray-900 font-medium">ВСЕ ТОВАРЫ</span>
+            </li>
+          </ol>
+        </nav>
       </div>
 
       {/* Filters row */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-8">
+        <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
             <div className="w-full md:w-56">
               <label className="block text-sm font-medium text-gray-700 mb-2">Категория</label>

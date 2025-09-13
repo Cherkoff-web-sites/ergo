@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
 import ProductCard from './ProductCard';
-import { Filter } from 'lucide-react';
 
 const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { categoryId, seriesId } = useParams();
@@ -12,7 +11,6 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   
   // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
@@ -111,7 +109,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
 
   if (!category || !seriesItem) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Серия не найдена</h1>
           <Link to="/catalog" className="text-primary hover:text-primary-dark">
@@ -123,41 +121,37 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-3xl font-bold text-gray-900">Серия "{seriesItem.name}"</h1>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-6">
+          <div className="flex items-center">
+            <h1 className="text-3xl font-bold text-gray-900">Серия "{seriesItem.name}"</h1>
           </div>
         </div>
       </div>
 
       {/* Breadcrumbs */}
-      <div className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2">
-              <li>
-                <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                  КАТАЛОГ
-                </Link>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li>
-                <Link to={`/catalog/${categoryId}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                  {category.name.toUpperCase()}
-                </Link>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li>
-                <span className="text-gray-900 font-medium">СЕРИЯ "{seriesItem.name}"</span>
-              </li>
-            </ol>
-          </nav>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav className="flex" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2">
+            <li>
+              <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
+                КАТАЛОГ
+              </Link>
+            </li>
+            <li className="text-gray-500">/</li>
+            <li>
+              <Link to={`/catalog/${categoryId}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
+                {category.name.toUpperCase()}
+              </Link>
+            </li>
+            <li className="text-gray-500">/</li>
+            <li>
+              <span className="text-gray-900 font-medium">СЕРИЯ "{seriesItem.name}"</span>
+            </li>
+          </ol>
+        </nav>
       </div>
 
       {/* Category Navigation */}
@@ -183,95 +177,69 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar Filters */}
-          <div className="lg:w-64">
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">Фильтры</h3>
-                <button
-                  onClick={() => setIsFiltersOpen(!isFiltersOpen)}
-                  className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
-                >
-                  <Filter size={20} />
-                </button>
-              </div>
-
-              <div className={`space-y-6 ${isFiltersOpen ? 'block' : 'hidden lg:block'}`}>
-                {/* Search */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Поиск
-                    {searchTerm !== debouncedSearchTerm && (
-                      <span className="ml-2 text-xs text-blue-600">Поиск...</span>
-                    )}
-                  </label>
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Поиск товаров..."
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                  />
-                </div>
-
-                {/* Material Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Материал
-                  </label>
-                  <select
-                    value={selectedMaterial}
-                    onChange={(e) => setSelectedMaterial(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                  >
-                    <option value="Все">Все материалы</option>
-                    {[...new Set(seriesProducts.map(p => p.material))].map(material => (
-                      <option key={material} value={material}>{material}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Color Filter */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Цвет
-                  </label>
-                  <select
-                    value={selectedColor}
-                    onChange={(e) => setSelectedColor(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                  >
-                    <option value="Все">Все цвета</option>
-                    {[...new Set(seriesProducts.map(p => p.color))].map(color => (
-                      <option key={color} value={color}>{color}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Sort */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Сортировка
-                  </label>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                  >
-                    <option value="name">По названию</option>
-                    <option value="price-asc">По цене (возрастание)</option>
-                    <option value="price-desc">По цене (убывание)</option>
-                  </select>
-                </div>
-              </div>
+        {/* Filters row */}
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Поиск
+                {searchTerm !== debouncedSearchTerm && (
+                  <span className="ml-2 text-xs text-blue-600">Поиск...</span>
+                )}
+              </label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Поиск товаров..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              />
+            </div>
+            <div className="w-full md:w-56">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Материал</label>
+              <select
+                value={selectedMaterial}
+                onChange={(e) => setSelectedMaterial(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              >
+                <option value="Все">Все материалы</option>
+                {[...new Set(seriesProducts.map(p => p.material))].map(material => (
+                  <option key={material} value={material}>{material}</option>
+                ))}
+              </select>
+            </div>
+            <div className="w-full md:w-56">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
+              <select
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              >
+                <option value="Все">Все цвета</option>
+                {[...new Set(seriesProducts.map(p => p.color))].map(color => (
+                  <option key={color} value={color}>{color}</option>
+                ))}
+              </select>
+            </div>
+            <div className="w-full md:w-56">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Сортировка</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              >
+                <option value="name">По названию</option>
+                <option value="price-asc">По цене (возрастание)</option>
+                <option value="price-desc">По цене (убывание)</option>
+              </select>
             </div>
           </div>
+        </div>
 
-          {/* Main Content */}
-          <div className="flex-1">
+        {/* Main Content */}
+        <div>
             {/* Series Info */}
-            <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <div className="mb-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Series Image Placeholder */}
                 <div className="rounded-lg h-64 overflow-hidden">
@@ -341,7 +309,6 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                 </div>
               )}
             </div>
-          </div>
         </div>
 
         {/* Results info */}

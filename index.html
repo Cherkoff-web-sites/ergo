@@ -114,7 +114,36 @@
     <div class="max-w-full-mob md:max-w-full-pc mx-auto pt-6 md:pt-5 sm:px-5 xxl:px-6 pb-4 md:pb-2">
       <!-- Навигационное меню пк -->
       <nav class="hidden md:flex justify-between gap-2 md:w-[44%] xl:w-[37%] xxl:w-[40%]">
-        <a href="https://ergo-catalog.vercel.app" class="text-sm xxl:text-xl font-medium transition-colors">КАТАЛОГ</a>
+        <div class="relative catalog-dropdown">
+          <button onclick="toggleDesktopCatalogMenu()" class="text-sm xxl:text-xl font-medium transition-colors hover:text-primary">
+            КАТАЛОГ
+          </button>
+          <!-- Выпадающее меню каталога -->
+          <div id="desktopCatalogMenu" class="hidden absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+            <ul class="py-2">
+              <li>
+                <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Кабинет руководителя
+                </a>
+              </li>
+              <li>
+                <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Мебель для персонала
+                </a>
+              </li>
+              <li>
+                <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Столы переговоров
+                </a>
+              </li>
+              <li>
+                <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Стулья и кресла
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
         <a href="about.html" class="text-sm xxl:text-xl font-medium transition-colors">О НАС</a>
         <a href="design_project.html" class="text-sm xxl:text-xl font-medium transition-colors">ДИЗАЙН-ПРОЕКТ</a>
         <a href="service.html" class="text-sm xxl:text-xl font-medium transition-colors">СЕРВИС</a>
@@ -178,12 +207,13 @@
         
         <!-- Навигационные ссылки -->
         <div class="h-[60vh] flex flex-col justify-center items-center gap-2">
-          <a href="https://ergo-static.vercel.app" class="py-1 text-sm font-medium uppercase">Главная</a>
+          <a href="index.html" class="py-1 text-sm font-medium uppercase">Главная</a>
           <button onclick="toggleCatalogMenu()" class="py-1 text-sm font-medium uppercase">КАТАЛОГ</button>
           <ul id="catalogMenu" class="hidden flex flex-col items-center gap-1">
-            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Кресла и стулья</a></li>
-            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Переговорные столы</a></li>
-            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Другое</a></li>
+            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Кабинет руководителя</a></li>
+            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Мебель для персонала</a></li>
+            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Столы переговоров</a></li>
+            <li><a class="text-sm font-light" href="https://ergo-catalog.vercel.app">Стулья и кресла</a></li>
           </ul>
           <a href="about.html" class="py-1 text-sm font-medium uppercase">О НАС</a>
           <a href="design_project.html" class="py-1 text-sm font-medium uppercase">ДИЗАЙН-ПРОЕКТ</a>
@@ -986,6 +1016,30 @@
         catalogMenu.classList.add('hidden');
       }
     }
+
+    // Открытие/закрытие десктопного меню каталога
+    function toggleDesktopCatalogMenu() {
+      const desktopCatalogMenu = document.getElementById('desktopCatalogMenu');
+      const isHidden = desktopCatalogMenu.classList.contains('hidden');
+      
+      if (isHidden) {
+        // Открываем подменю
+        desktopCatalogMenu.classList.remove('hidden');
+      } else {
+        // Закрываем подменю
+        desktopCatalogMenu.classList.add('hidden');
+      }
+    }
+
+    // Закрытие десктопного меню при клике вне его
+    document.addEventListener('click', function(event) {
+      const desktopCatalogMenu = document.getElementById('desktopCatalogMenu');
+      const catalogDropdown = document.querySelector('.catalog-dropdown');
+      
+      if (desktopCatalogMenu && !catalogDropdown.contains(event.target)) {
+        desktopCatalogMenu.classList.add('hidden');
+      }
+    });
   </script>
 
   <!-- Swiper JS -->

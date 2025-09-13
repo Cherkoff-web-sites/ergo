@@ -12,17 +12,17 @@ const CatalogMain = ({ categories }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
 
       {/* Main Content */}
       <div className="max-w-full-mob md:max-w-full-pc mx-auto py-12">
         {/* Весь каталог кнопка */}
         <div className="w-full mb-12">
-          <div className="bg-transparent border border-card-border rounded-lg p-6">
+          <div className="bg-transparent border border-card-border rounded-lg p-6 flex justify-center items-center">
             <Link
               to="/catalog/all"
               onClick={handleCategoryClick}
-              className="main-catalog-button w-full text-center inline-block"
+              className="main-catalog-button text-center inline-block"
             >
               ВЕСЬ КАТАЛОГ
             </Link>
@@ -31,14 +31,29 @@ const CatalogMain = ({ categories }) => {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-container mx-auto">
-          {categories.slice(1).map((category) => (
-            <div
-              key={category.id}
-              className="category-card group relative block p-8 bg-transparent rounded-lg border border-card-border hover:shadow-lg transition-all duration-300"
-              style={{
-                '--bg-image': 'url(/img/product_example_for_app.png)'
-              }}
-            >
+          {categories.slice(1).map((category) => {
+            // Определяем фоновое изображение для каждой категории
+            const getBackgroundImage = (categoryId) => {
+              switch (categoryId) {
+                case 'kresla_i_stulya':
+                  return 'url(/img/kresla_i_stylia.webp)';
+                case 'drugoe':
+                  return 'url(/img/other.webp)';
+                case 'peregovornye_stoly':
+                  return 'url(/img/meet_table.webp)';
+                default:
+                  return 'url(/img/product_example_for_app.png)';
+              }
+            };
+
+            return (
+              <div
+                key={category.id}
+                className="category-card group relative block p-8 bg-transparent rounded-lg border border-card-border hover:shadow-lg transition-all duration-300"
+                style={{
+                  '--bg-image': getBackgroundImage(category.id)
+                }}
+              >
               <div className="min-h-[262px] flex items-center justify-center relative z-10">
                 <Link
                   to={`/catalog/${category.id}`}
@@ -61,7 +76,8 @@ const CatalogMain = ({ categories }) => {
                 </Link>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

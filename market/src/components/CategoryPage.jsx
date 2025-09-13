@@ -127,7 +127,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
 
   if (!category) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Категория не найдена</h1>
           <Link to="/catalog" className="text-primary hover:text-primary-dark">
@@ -139,35 +139,31 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-3xl font-bold text-gray-900">{category.name}</h1>
-            </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-6">
+          <div className="flex items-center">
+            <h1 className="text-3xl font-bold text-gray-900">{category.name}</h1>
           </div>
         </div>
       </div>
 
       {/* Breadcrumbs */}
-      <div className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2">
-              <li>
-                <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                  КАТАЛОГ
-                </Link>
-              </li>
-              <li className="text-gray-500">/</li>
-              <li>
-                <span className="text-gray-900 font-medium">{category.name.toUpperCase()}</span>
-              </li>
-            </ol>
-          </nav>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <nav className="flex" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2">
+            <li>
+              <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
+                КАТАЛОГ
+              </Link>
+            </li>
+            <li className="text-gray-500">/</li>
+            <li>
+              <span className="text-gray-900 font-medium">{category.name.toUpperCase()}</span>
+            </li>
+          </ol>
+        </nav>
       </div>
 
       {/* Category Navigation */}
@@ -194,7 +190,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Filters Row */}
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-8">
+        <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-700 mb-2">
