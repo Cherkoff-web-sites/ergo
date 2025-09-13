@@ -114,7 +114,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
               <div className="relative catalog-dropdown">
                 <button 
                   onClick={toggleDesktopCatalogMenu}
-                  className="text-sm xxl:text-xl font-medium transition-colors hover:text-primary"
+                  className="text-sm xxl:text-xl font-medium transition-colors"
                 >
                   КАТАЛОГ
                 </button>
