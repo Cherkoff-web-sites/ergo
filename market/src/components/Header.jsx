@@ -101,12 +101,12 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                   КАТАЛОГ
                 </button>
                 {/* Выпадающее меню каталога */}
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-48 bg-body border border-text rounded-primary z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <ul className="py-2">
                       <li>
                         <a 
                           href="/catalog/boss_cabinet" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Кабинет руководителя
                         </a>
@@ -114,7 +114,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/personnel_furniture" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Мебель для персонала
                         </a>
@@ -122,7 +122,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/kresla_i_stulya" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Кресла и стулья
                         </a>
@@ -130,7 +130,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/soft_furniture" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Мягкая мебель
                         </a>
@@ -138,7 +138,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/peregovornye_stoly" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Переговорные столы
                         </a>
@@ -146,7 +146,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/reception_furniture" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Стойки ресепшен
                         </a>
@@ -154,7 +154,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/custom_furniture" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Мебель на заказ
                         </a>
@@ -162,7 +162,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       <li>
                         <a 
                           href="/catalog/drugoe" 
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Другое
                         </a>
