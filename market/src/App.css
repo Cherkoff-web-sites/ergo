@@ -40,3 +40,36 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Стили для кнопки "ВЕСЬ КАТАЛОГ" - без изменения цвета при наведении */
+.main-catalog-button {
+  background-color: rgba(26, 24, 18, 0.05) !important;
+  color: #1A1812 !important;
+  border: 1px solid rgba(26, 24, 18, 0.32) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  transition: all 0.3s ease !important;
+}
+
+.main-catalog-button:hover {
+  background-color: rgba(26, 24, 18, 0.05) !important;
+  color: #1A1812 !important;
+  border: 1px solid rgba(26, 24, 18, 0.32) !important;
+  text-decoration: none !important;
+}
+
+.main-catalog-button:focus {
+  background-color: rgba(26, 24, 18, 0.05) !important;
+  color: #1A1812 !important;
+  border: 1px solid rgba(26, 24, 18, 0.32) !important;
+  text-decoration: none !important;
+}
+
+.main-catalog-button:active {
+  background-color: rgba(26, 24, 18, 0.05) !important;
+  color: #1A1812 !important;
+  border: 1px solid rgba(26, 24, 18, 0.32) !important;
+  text-decoration: none !important;
+}

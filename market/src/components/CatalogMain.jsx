@@ -31,6 +31,26 @@ const CatalogMain = ({ categories, openCart, openFavorites, totalFavorites, tota
               to="/catalog/all"
               onClick={handleCategoryClick}
               className="main-catalog-button text-center inline-block"
+              style={{
+                backgroundColor: 'rgba(26, 24, 18, 0.05)',
+                color: '#1A1812',
+                border: '1px solid rgba(26, 24, 18, 0.32)',
+                borderRadius: '8px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                display: 'inline-block',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(26, 24, 18, 0.05)';
+                e.target.style.color = '#1A1812';
+                e.target.style.border = '1px solid rgba(26, 24, 18, 0.32)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(26, 24, 18, 0.05)';
+                e.target.style.color = '#1A1812';
+                e.target.style.border = '1px solid rgba(26, 24, 18, 0.32)';
+              }}
             >
               ВЕСЬ КАТАЛОГ
             </Link>
@@ -43,12 +63,22 @@ const CatalogMain = ({ categories, openCart, openFavorites, totalFavorites, tota
             // Определяем фоновое изображение для каждой категории
             const getBackgroundImage = (categoryId) => {
               switch (categoryId) {
+                case 'boss_cabinet':
+                  return 'url(/img/boss_cabinet.webp)';
+                case 'personnel_furniture':
+                  return 'url(/img/mebel_personal.webp)';
                 case 'kresla_i_stulya':
                   return 'url(/img/kresla_i_stylia.webp)';
-                case 'drugoe':
-                  return 'url(/img/other.webp)';
+                case 'soft_furniture':
+                  return 'url(/img/soft_mebel.webp)';
                 case 'peregovornye_stoly':
                   return 'url(/img/meet_table.webp)';
+                case 'reception_furniture':
+                  return 'url(/img/table_recepsion.webp)';
+                case 'custom_furniture':
+                  return 'url(/img/mebel_individual.webp)';
+                case 'drugoe':
+                  return 'url(/img/other.webp)';
                 default:
                   return 'url(/img/product_example_for_app.png)';
               }
@@ -57,16 +87,16 @@ const CatalogMain = ({ categories, openCart, openFavorites, totalFavorites, tota
             return (
               <div
                 key={category.id}
-                className="category-card group relative block p-8 bg-transparent rounded-lg border border-card-border hover:shadow-lg transition-all duration-300"
+                className="category-card group relative block p-8 bg-transparent rounded-lg border border-card-border transition-all duration-300"
                 style={{
                   '--bg-image': getBackgroundImage(category.id)
                 }}
               >
-              <div className="min-h-[262px] flex items-center justify-center relative z-10">
+              <div className="min-h-[262px] xxl:min-h-[362px] flex items-center justify-center relative z-10">
                 <Link
                   to={`/catalog/${category.id}`}
                   onClick={handleCategoryClick}
-                  className="category-button w-full text-center inline-block transition-all duration-300"
+                  className="category-button text-center inline-block transition-all duration-300"
                   onMouseEnter={(e) => {
                     e.target.closest('.category-card').style.setProperty('--after-opacity', '1');
                     e.target.style.setProperty('--button-bg', 'transparent');

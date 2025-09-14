@@ -105,7 +105,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                     <ul className="py-2">
                       <li>
                         <a 
-                          href="https://ergo-catalog.vercel.app" 
+                          href="/catalog/boss_cabinet" 
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Кабинет руководителя
@@ -113,7 +113,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       </li>
                       <li>
                         <a 
-                          href="https://ergo-catalog.vercel.app" 
+                          href="/catalog/personnel_furniture" 
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
                           Мебель для персонала
@@ -121,22 +121,54 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       </li>
                       <li>
                         <a 
-                          href="https://ergo-catalog.vercel.app" 
+                          href="/catalog/kresla_i_stulya" 
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                          Столы переговоров
+                          Кресла и стулья
                         </a>
                       </li>
                       <li>
                         <a 
-                          href="https://ergo-catalog.vercel.app" 
+                          href="/catalog/soft_furniture" 
                           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                          Стулья и кресла
+                          Мягкая мебель
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="/catalog/peregovornye_stoly" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Переговорные столы
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="/catalog/reception_furniture" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Стойки ресепшен
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="/catalog/custom_furniture" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Мебель на заказ
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="/catalog/drugoe" 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          Другое
                         </a>
                       </li>
                     </ul>
-                  </div>
+                </div>
               </div>
               <a href="https://ergo-static.vercel.app/about.html" className="text-sm xxl:text-xl font-medium transition-colors">О НАС</a>
               <a href="https://ergo-static.vercel.app/design_project.html" className="text-sm xxl:text-xl font-medium transition-colors">ДИЗАЙН-ПРОЕКТ</a>
@@ -210,10 +242,14 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
             <a href="https://ergo-static.vercel.app" className="py-1 text-sm font-medium uppercase">Главная</a>
             <button onClick={toggleCatalogMenu} className="py-1 text-sm font-medium uppercase">КАТАЛОГ</button>
             <ul className={`flex flex-col items-center gap-1 ${isCatalogMenuOpen ? 'block' : 'hidden'}`}>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Кабинет руководителя</a></li>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Мебель для персонала</a></li>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Столы переговоров</a></li>
-              <li><a className="text-sm font-light" href="https://ergo-catalog.vercel.app">Стулья и кресла</a></li>
+              <li><a className="text-sm font-light" href="/catalog/boss_cabinet">Кабинет руководителя</a></li>
+              <li><a className="text-sm font-light" href="/catalog/personnel_furniture">Мебель для персонала</a></li>
+              <li><a className="text-sm font-light" href="/catalog/kresla_i_stulya">Кресла и стулья</a></li>
+              <li><a className="text-sm font-light" href="/catalog/soft_furniture">Мягкая мебель</a></li>
+              <li><a className="text-sm font-light" href="/catalog/peregovornye_stoly">Переговорные столы</a></li>
+              <li><a className="text-sm font-light" href="/catalog/reception_furniture">Стойки ресепшен</a></li>
+              <li><a className="text-sm font-light" href="/catalog/custom_furniture">Мебель на заказ</a></li>
+              <li><a className="text-sm font-light" href="/catalog/drugoe">Другое</a></li>
             </ul>
             <a href="https://ergo-static.vercel.app/about.html" className="py-1 text-sm font-medium uppercase">О НАС</a>
             <a href="https://ergo-static.vercel.app/design_project.html" className="py-1 text-sm font-medium uppercase">ДИЗАЙН-ПРОЕКТ</a>
