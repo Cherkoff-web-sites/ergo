@@ -3,6 +3,7 @@ import { ShoppingCart, X, Plus, Minus, Trash2 } from 'lucide-react';
 
 const Cart = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem, onClearCart }) => {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
@@ -145,9 +146,23 @@ const Cart = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem, onCl
           cartItems={cartItems}
           totalPrice={totalPrice}
           onOrderSuccess={() => {
+            console.log('Order success callback triggered');
             setIsOrderModalOpen(false);
             onClearCart();
-            onClose();
+            // Показываем окно благодарности БЕЗ закрытия корзины
+            console.log('Showing thank you modal');
+            setIsThankYouModalOpen(true);
+          }}
+        />
+      )}
+
+      {/* Thank You Modal */}
+      {isThankYouModalOpen && (
+        <ThankYouModal
+          isOpen={isThankYouModalOpen}
+          onClose={() => {
+            setIsThankYouModalOpen(false);
+            onClose(); // Закрываем корзину после закрытия окна благодарности
           }}
         />
       )}
@@ -170,14 +185,22 @@ const OrderModal = ({ isOpen, onClose, cartItems, totalPrice, onOrderSuccess }) 
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Имитация отправки заказа
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Имитация отправки заказа
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Здесь будет реальная отправка на email
-    console.log('Заказ отправлен:', { formData, cartItems, totalPrice });
-    
-    setIsSubmitting(false);
-    onOrderSuccess();
+      // Здесь будет реальная отправка на email
+      console.log('Заказ отправлен:', { formData, cartItems, totalPrice });
+      
+      // Только после успешной отправки показываем окно благодарности
+      console.log('Form submitted successfully, calling onOrderSuccess');
+      onOrderSuccess();
+    } catch (error) {
+      console.error('Ошибка при отправке заказа:', error);
+      // Здесь можно показать сообщение об ошибке
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -281,6 +304,43 @@ const OrderModal = ({ isOpen, onClose, cartItems, totalPrice, onOrderSuccess }) 
             </div>
           </form>
         </div>
+      </div>
+    </div>
+  );
+};
+
+// Thank You Modal Component
+const ThankYouModal = ({ isOpen, onClose }) => {
+  console.log('ThankYouModal render - isOpen:', isOpen);
+  if (!isOpen) {
+    console.log('ThankYouModal not rendering - isOpen is false');
+    return null;
+  }
+
+  console.log('ThankYouModal rendering modal content');
+  return (
+    <div 
+      className="fixed inset-0 bg-black/50 z-[80] flex items-center justify-center p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div className="bg-white rounded-lg max-w-md w-full p-6 text-center">
+        <div className="mb-4">
+          <svg className="w-16 h-16 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 className="text-xl font-bold text-text-main mb-4">Спасибо за заказ!</h3>
+        <p className="text-gray-600 mb-6">Ваш заказ принят в обработку. Мы свяжемся с вами в ближайшее время для уточнения деталей.</p>
+        <button
+          onClick={onClose}
+          className="w-full bg-primary hover:bg-[#037D44] text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
+        >
+          Закрыть
+        </button>
       </div>
     </div>
   );

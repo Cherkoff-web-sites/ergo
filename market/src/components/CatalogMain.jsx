@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 // Данные передаются через props
+import Header from './Header';
 
-const CatalogMain = ({ categories }) => {
+const CatalogMain = ({ categories, openCart, openFavorites }) => {
   const handleCategoryClick = () => {
     // Плавный скролл наверх
     window.scrollTo({
@@ -13,6 +14,13 @@ const CatalogMain = ({ categories }) => {
 
   return (
     <div className="min-h-screen">
+      {/* Header */}
+      <Header 
+        onOpenFavorites={openFavorites}
+        onOpenCart={openCart}
+        totalFavorites={0}
+        totalItems={0}
+      />
 
       {/* Main Content */}
       <div className="max-w-full-mob md:max-w-full-pc mx-auto py-12">

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест окна благодарности</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide-react@latest/dist/umd/lucide-react.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+        const { ShoppingCart, X, Plus, Minus, Trash2 } = LucideReact;
+
+        // Thank You Modal Component
+        const ThankYouModal = ({ isOpen, onClose }) => {
+            console.log('ThankYouModal render - isOpen:', isOpen);
+            if (!isOpen) return null;
+
+            return (
+                <div 
+                    className="fixed inset-0 bg-black/50 z-[80] flex items-center justify-center p-4"
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                            onClose();
+                        }
+                    }}
+                >
+                    <div className="bg-white rounded-lg max-w-md w-full p-6 text-center">
+                        <div className="mb-4">
+                            <svg className="w-16 h-16 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-4">Спасибо за заказ!</h3>
+                        <p className="text-gray-600 mb-6">Ваш заказ принят в обработку. Мы свяжемся с вами в ближайшее время для уточнения деталей.</p>
+                        <button
+                            onClick={onClose}
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
+                        >
+                            Закрыть
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // Test App
+        const TestApp = () => {
+            const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
+
+            const showThankYou = () => {
+                console.log('Showing thank you modal');
+                setIsThankYouModalOpen(true);
+            };
+
+            return (
+                <div>
+                    <h1>Тест окна благодарности</h1>
+                    <button className="test-button" onClick={showThankYou}>
+                        Показать окно благодарности
+                    </button>
+                    
+                    {isThankYouModalOpen && (
+                        <ThankYouModal
+                            isOpen={isThankYouModalOpen}
+                            onClose={() => {
+                                console.log('Closing thank you modal');
+                                setIsThankYouModalOpen(false);
+                            }}
+                        />
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<TestApp />, document.getElementById('root'));
+    </script>
+</body>
+</html>

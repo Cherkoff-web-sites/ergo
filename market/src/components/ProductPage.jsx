@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
 import { ArrowLeft, ShoppingCart, Heart } from 'lucide-react';
+import Header from './Header';
 
 const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
   const { productId } = useParams();
@@ -48,6 +49,14 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   return (
     <div className="min-h-screen">
       {/* Header */}
+      <Header 
+        onOpenFavorites={openFavorites}
+        onOpenCart={openCart}
+        totalFavorites={favorites.length}
+        totalItems={0} // Можно добавить подсчет товаров в корзине если нужно
+      />
+      
+      {/* Page Title */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">

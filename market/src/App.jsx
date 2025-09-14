@@ -123,20 +123,21 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-body">
-        {/* Header */}
-        <Header 
-          onOpenFavorites={() => setIsFavoritesOpen(true)}
-          onOpenCart={() => setIsCartOpen(true)}
-          totalFavorites={totalFavorites}
-          totalItems={totalItems}
-        />
-
         {/* Main Content */}
         <main>
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Navigate to="/catalog" replace />} />
-            <Route path="/catalog" element={<CatalogMain categories={categories} />} />
+            <Route 
+              path="/catalog" 
+              element={
+                <CatalogMain 
+                  categories={categories}
+                  openCart={() => setIsCartOpen(true)}
+                  openFavorites={() => setIsFavoritesOpen(true)}
+                />
+              } 
+            />
             <Route
               path="/catalog/all"
               element={
@@ -147,6 +148,8 @@ function App() {
                   onAddToCart={handleAddToCart}
                   onToggleFavorite={handleToggleFavorite}
                   favorites={favorites}
+                  openCart={() => setIsCartOpen(true)}
+                  openFavorites={() => setIsFavoritesOpen(true)}
                 />
               }
             />

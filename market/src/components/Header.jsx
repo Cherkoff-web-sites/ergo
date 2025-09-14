@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCatalogMenuOpen, setIsCatalogMenuOpen] = useState(false);
-  const [isDesktopCatalogMenuOpen, setIsDesktopCatalogMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
@@ -16,10 +15,6 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
     setIsCatalogMenuOpen(!isCatalogMenuOpen);
   };
 
-  const toggleDesktopCatalogMenu = () => {
-    setIsDesktopCatalogMenuOpen(!isDesktopCatalogMenuOpen);
-  };
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -29,19 +24,7 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
     }
   };
 
-  // Закрытие меню при клике вне его
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isDesktopCatalogMenuOpen && !event.target.closest('.catalog-dropdown')) {
-        setIsDesktopCatalogMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isDesktopCatalogMenuOpen]);
+  // useEffect больше не нужен для каталога, так как используется hover
 
   return (
     <header>
@@ -111,16 +94,14 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
           <div className="flex justify-between flex-wrap items-center pt-3">
             {/* Левая колонка: Навигация */}
             <nav className="hidden md:flex justify-between gap-2 md:w-[44%] xl:w-[37%] xxl:w-[40%]">
-              <div className="relative catalog-dropdown">
+              <div className="relative catalog-dropdown group">
                 <button 
-                  onClick={toggleDesktopCatalogMenu}
                   className="text-sm xxl:text-xl font-medium transition-colors"
                 >
                   КАТАЛОГ
                 </button>
                 {/* Выпадающее меню каталога */}
-                {isDesktopCatalogMenuOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <ul className="py-2">
                       <li>
                         <a 
@@ -156,7 +137,6 @@ const Header = ({ onOpenFavorites, onOpenCart, totalFavorites, totalItems }) => 
                       </li>
                     </ul>
                   </div>
-                )}
               </div>
               <a href="https://ergo-static.vercel.app/about.html" className="text-sm xxl:text-xl font-medium transition-colors">О НАС</a>
               <a href="https://ergo-static.vercel.app/design_project.html" className="text-sm xxl:text-xl font-medium transition-colors">ДИЗАЙН-ПРОЕКТ</a>

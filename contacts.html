@@ -206,7 +206,36 @@
         <div class="flex justify-between flex-wrap items-center pt-3">
           <!-- Левая колонка: Навигация -->
           <nav class="hidden md:flex justify-between gap-2 md:w-[44%] xl:w-[37%] xxl:w-[40%]">
-            <a href="https://ergo-catalog.vercel.app" class="text-sm xxl:text-xl font-medium transition-colors">КАТАЛОГ</a>
+            <div class="relative catalog-dropdown group">
+              <button class="text-sm xxl:text-xl font-medium transition-colors">
+                КАТАЛОГ
+              </button>
+              <!-- Выпадающее меню каталога -->
+              <div class="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <ul class="py-2">
+                  <li>
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Кабинет руководителя
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Мебель для персонала
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Столы переговоров
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Стулья и кресла
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <a href="about.html" class="text-sm xxl:text-xl font-medium transition-colors">О НАС</a>
             <a href="design_project.html" class="text-sm xxl:text-xl font-medium transition-colors">ДИЗАЙН-ПРОЕКТ</a>
             <a href="service.html" class="text-sm xxl:text-xl font-medium transition-colors">СЕРВИС</a>
@@ -331,20 +360,20 @@
     <!-- Страница контактов -->
     <section class="pt-14 mb-14">
       <div class="max-w-full-mob md:max-w-full-pc mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           
           <!-- Левая колонка: Реквизиты компании -->
-          <div class="space-y-6">
+          <div class="space-y-6 lg:col-span-7">
             <!-- Контактная информация -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <!-- Телефон СПБ -->
               <div>
-                <h3 class="text-title-3 font-semibold text-text mb-2">ТЕЛЕФОН (СПБ)</h3>
-                <div class="flex items-center gap-2">
-                  <div class="flex-1 px-3 py-2 border border-card-border rounded-btn bg-white">
+                <h3 class="text-title-3 font-semibold text-text mb-2">ТЕЛЕФОН <span class="font-thin italic">(СПБ)</span></h3>
+                <div class="relative">
+                  <div class="px-3 py-2 border border-card-border rounded-btn bg-white pr-10">
                     <span class="text-text">+7(812) 945-44-78</span>
                   </div>
-                  <button onclick="copyToClipboard('+7(812) 945-44-78')" class="p-2 hover:bg-gray-100 rounded-btn transition-colors">
+                  <button onclick="copyToClipboard('+7(812) 945-44-78')" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors">
                     <svg class="w-4 h-4 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
@@ -354,12 +383,12 @@
 
               <!-- Телефон МСК -->
               <div>
-                <h3 class="text-title-3 font-semibold text-text mb-2">ТЕЛЕФОН (МСК)</h3>
-                <div class="flex items-center gap-2">
-                  <div class="flex-1 px-3 py-2 border border-card-border rounded-btn bg-white">
+                <h3 class="text-title-3 font-semibold text-text mb-2">ТЕЛЕФОН <span class="font-thin italic">(МСК)</span></h3>
+                <div class="relative">
+                  <div class="px-3 py-2 border border-card-border rounded-btn bg-white pr-10">
                     <span class="text-text">+7(905) 745-68-71</span>
                   </div>
-                  <button onclick="copyToClipboard('+7(905) 745-68-71')" class="p-2 hover:bg-gray-100 rounded-btn transition-colors">
+                  <button onclick="copyToClipboard('+7(905) 745-68-71')" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors">
                     <svg class="w-4 h-4 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
@@ -370,11 +399,11 @@
               <!-- Email -->
               <div>
                 <h3 class="text-title-3 font-semibold text-text mb-2">E-MAIL</h3>
-                <div class="flex items-center gap-2">
-                  <div class="flex-1 px-3 py-2 border border-card-border rounded-btn bg-white">
+                <div class="relative">
+                  <div class="px-3 py-2 border border-card-border rounded-btn bg-white pr-10">
                     <span class="text-text">ra@ergospb.ru</span>
                   </div>
-                  <button onclick="copyToClipboard('ra@ergospb.ru')" class="p-2 hover:bg-gray-100 rounded-btn transition-colors">
+                  <button onclick="copyToClipboard('ra@ergospb.ru')" class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 hover:bg-gray-100 rounded transition-colors">
                     <svg class="w-4 h-4 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
@@ -385,29 +414,47 @@
 
             <!-- Название компании -->
             <div>
-              <h2 class="text-3xl font-bold text-text mb-6">ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ (ЭРГО)</h2>
+              <h2 class="text-xl font-bold text-text mb-4">ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ (ЭРГО)</h2>
             </div>
 
             <!-- Реквизиты -->
-            <div class="space-y-3 text-sm text-text">
-              <div><span class="font-semibold">Юридический адрес организации:</span><br>197372, РОССИЯ, Г САНКТ-ПЕТЕРБУРГ, Г. САНКТ-ПЕТЕРБУРГ, АВИАКОНСТРУКТОРОВ ПР-КТ, Д 3, КОРП 1, ЛИТЕРА A</div>
-              <div><span class="font-semibold">ИНН:</span> 7802638129</div>
-              <div><span class="font-semibold">КПП:</span> 781401001</div>
-              <div><span class="font-semibold">ОГРН:</span> 1177847346093</div>
-              <div><span class="font-semibold">Расчетный счет:</span> 40702810410000227288</div>
-              <div><span class="font-semibold">Банк:</span> АО «ТИНЬКОФФ БАНК»</div>
-              <div><span class="font-semibold">ИНН банка:</span> 7710140679</div>
-              <div><span class="font-semibold">БИК банка:</span> 044525974</div>
-              <div><span class="font-semibold">Корреспондентский счет банка:</span> 30101810145250000974</div>
-              <div><span class="font-semibold">Юридический адрес банка:</span><br>Москва, 127287, ул. Хуторская 2-я, д. 38А, стр. 26</div>
+            <div class="relative">
+              <div class="px-3 py-2 border border-card-border rounded-btn bg-white pr-10 min-h-[200px]">
+                <div class="space-y-1 text-sm text-text">
+                  <div>Юридический адрес организации</div>
+                  <div>197372, РОССИЯ, Г САНКТ-ПЕТЕРБУРГ, Г. САНКТ-ПЕТЕРБУРГ, АВИАКОНСТРУКТОРОВ ПР-КТ, Д 3, КОРП 1, ЛИТЕРА A</div>
+                  <div>ИНН</div>
+                  <div>7802638129</div>
+                  <div>КПП</div>
+                  <div>781401001</div>
+                  <div>ОГРН</div>
+                  <div>1177847346093</div>
+                  <div>Расчетный счет</div>
+                  <div>40702810410000227288</div>
+                  <div>Банк</div>
+                  <div>АО «ТИНЬКОФФ БАНК»</div>
+                  <div>ИНН банка</div>
+                  <div>7710140679</div>
+                  <div>БИК банка</div>
+                  <div>044525974</div>
+                  <div>Корреспондентский счет банка</div>
+                  <div>30101810145250000974</div>
+                  <div>Юридический адрес банка</div>
+                  <div>Москва, 127287, ул. Хуторская 2-я, д. 38А, стр. 26</div>
+                </div>
+              </div>
+              <button onclick="copyLegalData()" class="absolute right-2 top-2 p-1 hover:bg-gray-100 rounded transition-colors">
+                <svg class="w-4 h-4 text-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+              </button>
             </div>
           </div>
 
           <!-- Правая колонка: Форма обратной связи -->
-          <div class="space-y-6">
-            <h2 class="text-3xl font-bold text-text mb-6">ФОРМА ОБРАТНОЙ СВЯЗИ</h2>
+          <div class="border border-card-border rounded-primary p-6 lg:col-span-5">
             
-            <form class="space-y-4">
+            <form id="mainContactForm" class="space-y-4">
               <!-- Имя -->
               <div>
                 <label class="block text-sm font-semibold text-text mb-2">ИМЯ</label>
@@ -432,15 +479,15 @@
                 <textarea rows="4" placeholder="текст" class="w-full px-3 py-2 border border-card-border rounded-btn bg-white text-text placeholder-gray-400 focus:outline-none focus:border-primary resize-none"></textarea>
               </div>
 
-              <!-- Кнопка отправки -->
-              <button type="submit" class="w-full bg-primary hover:bg-[#037D44] text-text-reverse py-3 px-4 rounded-btn font-semibold transition-colors duration-200">
+              <!-- Кнопка отправки и согласие -->
+              <div class="flex items-center gap-4">
+                <button type="submit" class="bg-primary hover:bg-[#037D44] text-text-reverse py-3 px-4 rounded-btn font-semibold transition-colors duration-200 w-[35%]">
                 ОТПРАВИТЬ
               </button>
-
-              <!-- Согласие -->
               <p class="text-xs text-gray-600">
                 Нажимая на кнопку «Отправить», вы соглашаетесь на обработку персональных данных в соответствии с пользовательским соглашением
               </p>
+              </div>
             </form>
           </div>
 
@@ -619,8 +666,77 @@
       });
     }
 
+    function copyLegalData() {
+      const legalText = `Юридический адрес организации
+197372, РОССИЯ, Г САНКТ-ПЕТЕРБУРГ, Г. САНКТ-ПЕТЕРБУРГ, АВИАКОНСТРУКТОРОВ ПР-КТ, Д 3, КОРП 1, ЛИТЕРА A
+ИНН
+7802638129
+КПП
+781401001
+ОГРН
+1177847346093
+Расчетный счет
+40702810410000227288
+Банк
+АО «ТИНЬКОФФ БАНК»
+ИНН банка
+7710140679
+БИК банка
+044525974
+Корреспондентский счет банка
+30101810145250000974
+Юридический адрес банка
+Москва, 127287, ул. Хуторская 2-я, д. 38А, стр. 26`;
+      
+      copyToClipboard(legalText);
+    }
+
+    function showThankYouModal() {
+      // Создаем модальное окно
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      modal.innerHTML = `
+        <div class="bg-white rounded-primary p-8 max-w-md mx-4 text-center">
+          <div class="mb-4">
+            <svg class="w-16 h-16 text-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <h3 class="text-xl font-bold text-text mb-2">Спасибо за обращение!</h3>
+            <p class="text-gray-600">Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.</p>
+          </div>
+          <button onclick="closeThankYouModal()" class="bg-primary hover:bg-[#037D44] text-white px-6 py-2 rounded-btn font-semibold transition-colors duration-200">
+            Закрыть
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // Очищаем форму
+      const form = document.getElementById('mainContactForm');
+      if (form) {
+        form.reset();
+      }
+    }
+
+    function closeThankYouModal() {
+      const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50');
+      if (modal) {
+        modal.remove();
+      }
+    }
+
     // Обработка поиска
     document.addEventListener('DOMContentLoaded', function() {
+      // Обработка формы контактов
+      const contactForm = document.getElementById('mainContactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          showThankYouModal();
+        });
+      }
+
       const searchForm = document.getElementById('search-form');
       const searchInput = document.getElementById('search-input');
 
@@ -682,7 +798,7 @@
           </div>
 
           <!-- Кнопка отправки -->
-          <button type="submit" class="w-full bg-primary hover:bg-[#037D44] text-text-reverse py-3 px-4 rounded-btn font-semibold transition-colors duration-200">
+          <button class="w-full bg-primary hover:bg-[#037D44] text-text-reverse py-3 px-4 rounded-btn font-semibold transition-colors duration-200">
             ОТПРАВИТЬ
           </button>
 
@@ -692,6 +808,22 @@
           </p>
         </form>
       </div>
+    </div>
+  </div>
+
+  <!-- Модалка благодарности -->
+  <div id="thankYouModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-md w-full p-6 text-center">
+      <div class="mb-4">
+        <svg class="w-16 h-16 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-text mb-4">Спасибо за предоставленную информацию!</h3>
+      <p class="text-gray-600 mb-6">Мы с Вами свяжемся</p>
+      <button id="closeThankYouModal" class="w-full bg-primary hover:bg-[#037D44] text-text-reverse py-3 px-4 rounded-btn font-semibold transition-colors duration-200">
+        Закрыть
+      </button>
     </div>
   </div>
 
@@ -755,10 +887,30 @@
           message: formData.get('message')
         };
         console.log('Данные формы:', data);
-        alert('Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.');
+        
+        // Показываем модалку благодарности
+        const thankYouModal = document.getElementById('thankYouModal');
+        thankYouModal.classList.remove('hidden');
+        
+        // Закрываем модальное окно формы
         contactModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
         contactForm.reset();
+      });
+
+      // Обработчик закрытия модалки благодарности
+      const closeThankYouModal = document.getElementById('closeThankYouModal');
+      const thankYouModal = document.getElementById('thankYouModal');
+      
+      closeThankYouModal.addEventListener('click', function() {
+        thankYouModal.classList.add('hidden');
+      });
+
+      // Закрытие по клику на фон
+      thankYouModal.addEventListener('click', function(e) {
+        if (e.target === thankYouModal) {
+          thankYouModal.classList.add('hidden');
+        }
       });
     });
   </script>
