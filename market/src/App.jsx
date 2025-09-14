@@ -135,6 +135,8 @@ function App() {
                   categories={categories}
                   openCart={() => setIsCartOpen(true)}
                   openFavorites={() => setIsFavoritesOpen(true)}
+                  totalFavorites={totalFavorites}
+                  totalItems={totalItems}
                 />
               } 
             />
@@ -150,6 +152,8 @@ function App() {
                   favorites={favorites}
                   openCart={() => setIsCartOpen(true)}
                   openFavorites={() => setIsFavoritesOpen(true)}
+                  totalFavorites={totalFavorites}
+                  totalItems={totalItems}
                 />
               }
             />
@@ -165,6 +169,8 @@ function App() {
                   favorites={favorites}
                   openCart={() => setIsCartOpen(true)}
                   openFavorites={() => setIsFavoritesOpen(true)}
+                  totalFavorites={totalFavorites}
+                  totalItems={totalItems}
                 />
               }
             />
@@ -180,6 +186,8 @@ function App() {
                   favorites={favorites}
                   openCart={() => setIsCartOpen(true)}
                   openFavorites={() => setIsFavoritesOpen(true)}
+                  totalFavorites={totalFavorites}
+                  totalItems={totalItems}
                 />
               }
             />
@@ -195,6 +203,8 @@ function App() {
                   favorites={favorites}
                   openCart={() => setIsCartOpen(true)}
                   openFavorites={() => setIsFavoritesOpen(true)}
+                  totalFavorites={totalFavorites}
+                  totalItems={totalItems}
                 />
               }
             />

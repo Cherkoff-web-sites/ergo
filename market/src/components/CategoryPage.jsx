@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import Header from './Header';
 
-const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
+const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites, totalFavorites, totalItems }) => {
   const { categoryId } = useParams();
   const [selectedSeries, setSelectedSeries] = useState('all');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
@@ -145,8 +145,8 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
       <Header 
         onOpenFavorites={openFavorites}
         onOpenCart={openCart}
-        totalFavorites={favorites.length}
-        totalItems={0} // Можно добавить подсчет товаров в корзине если нужно
+        totalFavorites={totalFavorites}
+        totalItems={totalItems}
       />
       
       {/* Page Title */}

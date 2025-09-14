@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 // Данные передаются через props
 import Header from './Header';
 
-const CatalogMain = ({ categories, openCart, openFavorites }) => {
+const CatalogMain = ({ categories, openCart, openFavorites, totalFavorites, totalItems }) => {
   const handleCategoryClick = () => {
     // Плавный скролл наверх
     window.scrollTo({
@@ -18,8 +18,8 @@ const CatalogMain = ({ categories, openCart, openFavorites }) => {
       <Header 
         onOpenFavorites={openFavorites}
         onOpenCart={openCart}
-        totalFavorites={0}
-        totalItems={0}
+        totalFavorites={totalFavorites}
+        totalItems={totalItems}
       />
 
       {/* Main Content */}

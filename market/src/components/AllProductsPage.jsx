@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Header from './Header';
 
-const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
+const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites, totalFavorites, totalItems }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedMaterial, setSelectedMaterial] = useState('Все');
@@ -108,8 +108,8 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
       <Header 
         onOpenFavorites={openFavorites}
         onOpenCart={openCart}
-        totalFavorites={favorites.length}
-        totalItems={0} // Можно добавить подсчет товаров в корзине если нужно
+        totalFavorites={totalFavorites}
+        totalItems={totalItems}
       />
       
       {/* Page Title */}

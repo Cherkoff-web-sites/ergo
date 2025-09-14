@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Heart } from 'lucide-react';
 import Header from './Header';
 
-const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites }) => {
+const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites, totalFavorites, totalItems }) => {
   const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
@@ -52,8 +52,8 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       <Header 
         onOpenFavorites={openFavorites}
         onOpenCart={openCart}
-        totalFavorites={favorites.length}
-        totalItems={0} // Можно добавить подсчет товаров в корзине если нужно
+        totalFavorites={totalFavorites}
+        totalItems={totalItems}
       />
       
       {/* Page Title */}
