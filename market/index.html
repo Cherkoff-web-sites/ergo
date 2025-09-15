@@ -126,7 +126,37 @@
         z-index: 0;
       }
       
+      .series-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: var(--bg-image);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        opacity: var(--after-opacity, 0);
+        transition: opacity 0.3s ease;
+        border-radius: 8px;
+        z-index: 0;
+      }
+      
       .category-button {
+        padding: 3px 12px;
+        background: var(--button-bg, rgba(26, 24, 18, 0.05));
+        border: var(--button-border, 1px solid rgba(26, 24, 18, 0.32));
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 23px;
+        text-transform: uppercase;
+        color: var(--button-color, #1A1812);
+        transition: all 0.3s ease;
+      }
+      
+      .series-button {
         padding: 3px 12px;
         background: var(--button-bg, rgba(26, 24, 18, 0.05));
         border: var(--button-border, 1px solid rgba(26, 24, 18, 0.32));

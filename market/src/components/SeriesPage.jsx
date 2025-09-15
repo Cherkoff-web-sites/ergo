@@ -130,51 +130,19 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
         totalFavorites={totalFavorites}
         totalItems={totalItems}
       />
-      
-      {/* Page Title */}
-      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
-        <div className="flex justify-between items-center py-6">
-          <div className="flex items-center">
-            <h1 className="text-3xl font-bold text-gray-900">Серия "{seriesItem.name}"</h1>
-          </div>
-        </div>
-      </div>
-
-      {/* Breadcrumbs */}
-      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4">
-        <nav className="flex" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-2">
-            <li>
-              <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                КАТАЛОГ
-              </Link>
-            </li>
-            <li className="text-gray-500">/</li>
-            <li>
-              <Link to={`/catalog/${categoryId}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                {category.name.toUpperCase()}
-              </Link>
-            </li>
-            <li className="text-gray-500">/</li>
-            <li>
-              <span className="text-gray-900 font-medium">СЕРИЯ "{seriesItem.name}"</span>
-            </li>
-          </ol>
-        </nav>
-      </div>
 
       {/* Category Navigation */}
-      <div className="bg-transparent">
-        <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-black">
-          <div className="flex space-x-1 py-4 overflow-x-auto">
+      <div className="bg-transparent mt-16 xxl:mt-20">
+        <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
+          <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
               <Link
                 key={cat.id}
                 to={`/catalog/${cat.id}`}
-                className={`px-3 py-1 rounded-[5px] text-xl font-semibold whitespace-nowrap transition-all duration-300 ${
+                className={`px-3 py-1 rounded-btn text-sm xxl:text-lg leading-lh-100 font-semibold whitespace-nowrap transition-all duration-300 ${
                   cat.id === categoryId
-                    ? 'bg-transparent text-primary border border-primary'
-                    : 'bg-gray-100 text-gray-800 border border-gray-300 hover:bg-gray-200'
+                    ? 'bg-btn-bg text-primary border border-primary'
+                    : 'bg-btn-bg text-text border border-btn-border hover:bg-[#F0F2B063]'
                 }`}
               >
                 {cat.name.toUpperCase()}
@@ -183,86 +151,54 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
           </div>
         </div>
       </div>
-
-      {/* Main Content */}
-      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-8">
-        {/* Filters row */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Поиск
-                {searchTerm !== debouncedSearchTerm && (
-                  <span className="ml-2 text-xs text-blue-600">Поиск...</span>
-                )}
-              </label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Поиск товаров..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-              />
-            </div>
-            <div className="w-full md:w-56">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Материал</label>
-              <select
-                value={selectedMaterial}
-                onChange={(e) => setSelectedMaterial(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-              >
-                <option value="Все">Все материалы</option>
-                {[...new Set(seriesProducts.map(p => p.material))].map(material => (
-                  <option key={material} value={material}>{material}</option>
-                ))}
-              </select>
-            </div>
-            <div className="w-full md:w-56">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
-              <select
-                value={selectedColor}
-                onChange={(e) => setSelectedColor(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-              >
-                <option value="Все">Все цвета</option>
-                {[...new Set(seriesProducts.map(p => p.color))].map(color => (
-                  <option key={color} value={color}>{color}</option>
-                ))}
-              </select>
-            </div>
-            <div className="w-full md:w-56">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Сортировка</label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-              >
-                <option value="name">По названию</option>
-                <option value="price-asc">По цене (возрастание)</option>
-                <option value="price-desc">По цене (убывание)</option>
-              </select>
-            </div>
+      
+      {/* Breadcrumbs */}
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4 mb-4">
+        <nav className="flex" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2 text-btn-border font-semibold">
+            <li>
+              <Link to="/catalog" onClick={handleBreadcrumbClick} className="hover:text-text">
+                КАТАЛОГ
+              </Link>
+            </li>
+            <li className="">&gt;</li>
+            <li>
+              <Link to={`/catalog/${categoryId}`} onClick={handleBreadcrumbClick} className="hover:text-text">
+                {category.name.toUpperCase()}
+              </Link>
+            </li>
+            <li className="">&gt;</li>
+            <li>
+              <span className="">СЕРИЯ "{seriesItem.name}"</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      
+      {/* Page Title */}
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <h1 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase mb-3">СЕРИЯ "{seriesItem.name}"</h1>
           </div>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto ">
 
         {/* Main Content */}
         <div>
             {/* Series Info */}
             <div className="mb-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* Series Image Placeholder */}
-                <div className="rounded-lg h-64 overflow-hidden">
+                <div className="rounded-lg min-h-[291px] max-h-[45vh] overflow-hidden col-span-5">
                   <img src="/img/service_catalog_link_bg_2x.webp" className="w-full h-full object-cover" alt={`Изображение серии ${seriesItem.name}`} />
                 </div>
 
                 {/* Series Info */}
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                    Серия "{seriesItem.name}"
-                  </h2>
-                  <p className="text-gray-600 mb-6">
-                    {seriesItem.description}
-                  </p>
+                <div className="col-span-5">
                   
                   {/* Characteristics */}
                   <div className="mb-6">
@@ -295,6 +231,65 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                 <h2 className="text-xl font-semibold text-gray-900">
                   Товары серии ({filteredProducts.length})
                 </h2>
+              </div>
+
+              {/* Filters row */}
+              <div className="mb-8">
+                <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Поиск
+                      {searchTerm !== debouncedSearchTerm && (
+                        <span className="ml-2 text-xs text-blue-600">Поиск...</span>
+                      )}
+                    </label>
+                    <input
+                      type="text"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      placeholder="Поиск товаров..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    />
+                  </div>
+                  <div className="w-full md:w-56">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Материал</label>
+                    <select
+                      value={selectedMaterial}
+                      onChange={(e) => setSelectedMaterial(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    >
+                      <option value="Все">Все материалы</option>
+                      {[...new Set(seriesProducts.map(p => p.material))].map(material => (
+                        <option key={material} value={material}>{material}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="w-full md:w-56">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
+                    <select
+                      value={selectedColor}
+                      onChange={(e) => setSelectedColor(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    >
+                      <option value="Все">Все цвета</option>
+                      {[...new Set(seriesProducts.map(p => p.color))].map(color => (
+                        <option key={color} value={color}>{color}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="w-full md:w-56">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Сортировка</label>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+                    >
+                      <option value="name">По названию</option>
+                      <option value="price-asc">По цене (возрастание)</option>
+                      <option value="price-desc">По цене (убывание)</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               {/* Products Grid */}

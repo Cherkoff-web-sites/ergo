@@ -55,72 +55,20 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
         totalFavorites={totalFavorites}
         totalItems={totalItems}
       />
+
       
-      {/* Page Title */}
-      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
-        <div className="flex justify-between items-center py-6">
-          <div className="flex items-center">
-            <Link
-              to={category ? `/catalog/${category.id}` : '/catalog'}
-              className="flex items-center text-gray-600 hover:text-gray-900 mr-4"
-            >
-              <ArrowLeft size={20} className="mr-2" />
-              Назад
-            </Link>
-            <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
-          </div>
-        </div>
-      </div>
-
-      {/* Breadcrumbs */}
-      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4">
-        <nav className="flex" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-2">
-            <li>
-              <Link to="/catalog" onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                КАТАЛОГ
-              </Link>
-            </li>
-            <li className="text-gray-500">/</li>
-            <li>
-              <Link to={`/catalog/${category?.id}`} onClick={handleBreadcrumbClick} className="text-gray-500 hover:text-gray-700">
-                {category?.name.toUpperCase()}
-              </Link>
-            </li>
-            {seriesItem && (
-              <>
-                <li className="text-gray-500">/</li>
-                <li>
-                  <Link 
-                    to={`/catalog/${category?.id}/series/${seriesItem.id}`} 
-                    onClick={handleBreadcrumbClick}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    СЕРИЯ "{seriesItem.name}"
-                  </Link>
-                </li>
-              </>
-            )}
-            <li className="text-gray-500">/</li>
-            <li>
-              <span className="text-gray-900 font-medium">{product.name.toUpperCase()}</span>
-            </li>
-          </ol>
-        </nav>
-      </div>
-
       {/* Category Navigation */}
-      <div className="bg-transparent">
-        <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-black">
-          <div className="flex space-x-1 py-4 overflow-x-auto">
+      <div className="bg-transparent mt-16 xxl:mt-20">
+        <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
+          <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
               <Link
                 key={cat.id}
                 to={`/catalog/${cat.id}`}
-                className={`px-3 py-1 rounded-[5px] text-xl font-semibold whitespace-nowrap transition-all duration-300 ${
+                className={`px-3 py-1 rounded-btn text-sm xxl:text-lg leading-lh-100 font-semibold whitespace-nowrap transition-all duration-300 ${
                   cat.id === category?.id
-                    ? 'bg-transparent text-primary border border-primary'
-                    : 'bg-gray-100 text-gray-800 border border-gray-300 hover:bg-gray-200'
+                    ? 'bg-btn-bg text-primary border border-primary'
+                    : 'bg-btn-bg text-text border border-btn-border hover:bg-[#F0F2B063]'
                 }`}
               >
                 {cat.name.toUpperCase()}
@@ -130,8 +78,65 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
         </div>
       </div>
 
+      
+      {/* Breadcrumbs */}
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4 mb-4">
+        <nav className="flex" aria-label="Breadcrumb">
+          <ol className="flex items-center space-x-2 text-btn-border font-semibold">
+            <li>
+              <Link to="/catalog" onClick={handleBreadcrumbClick} className="hover:text-text">
+                КАТАЛОГ
+              </Link>
+            </li>
+            <li className="">&gt;</li>
+            <li>
+              <Link to={`/catalog/${category?.id}`} onClick={handleBreadcrumbClick} className="hover:text-text">
+                {category?.name.toUpperCase()}
+              </Link>
+            </li>
+            {seriesItem && (
+              <>
+                <li className="">&gt;</li>
+                <li>
+                  <Link 
+                    to={`/catalog/${category?.id}/series/${seriesItem.id}`} 
+                    onClick={handleBreadcrumbClick}
+                    className="hover:text-text"
+                  >
+                    СЕРИЯ "{seriesItem.name}"
+                  </Link>
+                </li>
+              </>
+            )}
+            <li className="">&gt;</li>
+            <li>
+              <span className="">{product.name.toUpperCase()}</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      
+      {/* Page Title */}
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            <Link
+              to={category ? `/catalog/${category.id}` : '/catalog'}
+              className="hidden flex items-center text-gray-600 hover:text-gray-900 mr-4"
+            >
+              <ArrowLeft size={20} className="mr-2" />
+              Назад
+            </Link>
+            <h1 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase mb-3">{product.name}</h1>
+          </div>
+        </div>
+      </div>
+
+
+
       {/* Main Content */}
-      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto pb-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1">
@@ -139,18 +144,26 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
             <div className="mb-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Product Image Slider */}
-                <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center relative">
+                <div className="bg-[#ADADA0] rounded-lg min-h-[291px] max-h-[45vh] flex items-center justify-center relative">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="max-w-full max-h-full object-contain"
                   />
                   {/* Slider arrows placeholder */}
-                  <div className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center cursor-pointer">
-                    <span className="text-gray-600">‹</span>
+                  <div className="absolute left-2 top-1/2 transform -translate-y-1/2 w-7 h-5 flex items-center justify-center cursor-pointer">
+                    <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="30" height="19" rx="5" transform="matrix(-1 0 0 1 30 0.410156)" fill="#FDFFEE" fill-opacity="0.05"/>
+                      <rect x="-0.5" y="0.5" width="29" height="18" rx="4.5" transform="matrix(-1 0 0 1 29 0.410156)" stroke="#FDFFEE" stroke-opacity="0.32"/>
+                      <path d="M13.8105 10.1284L17.3447 8.84473V7.49121L12.6826 9.47314V10.4185L13.8105 10.1284ZM17.3447 11.2295L13.8052 9.9082L12.6826 9.65576V10.5957L17.3447 12.5776V11.2295Z" fill="#FDFFEE"/>
+                    </svg>
                   </div>
-                  <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center cursor-pointer">
-                    <span className="text-gray-600">›</span>
+                  <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-7 h-5 flex items-center justify-center cursor-pointer">
+                    <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect y="0.410156" width="30" height="19" rx="5" fill="#FDFFEE" fill-opacity="0.05"/>
+                      <rect x="0.5" y="0.910156" width="29" height="18" rx="4.5" stroke="#FDFFEE" stroke-opacity="0.32"/>
+                      <path d="M16.1895 10.1284L12.6553 8.84473V7.49121L17.3174 9.47314V10.4185L16.1895 10.1284ZM12.6553 11.2295L16.1948 9.9082L17.3174 9.65576V10.5957L12.6553 12.5776V11.2295Z" fill="#FDFFEE"/>
+                    </svg>
                   </div>
                 </div>
 
