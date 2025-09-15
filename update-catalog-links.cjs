@@ -12,60 +12,60 @@ const htmlFiles = [
 
 // Новые ссылки для десктопного меню
 const desktopMenuUpdate = {
-  old: `<a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+  old: `<a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Кабинет руководителя
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Мебель для персонала
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Столы переговоров
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Стулья и кресла
                     </a>`,
-  new: `<a href="https://ergo-catalog.vercel.app/catalog/boss_cabinet" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+  new: `<a href="https://ergo-catalog.vercel.app/catalog/boss_cabinet" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Кабинет руководителя
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/personnel_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/personnel_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Мебель для персонала
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/kresla_i_stulya" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/kresla_i_stulya" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Кресла и стулья
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/soft_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/soft_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Мягкая мебель
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/peregovornye_stoly" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/peregovornye_stoly" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Переговорные столы
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/reception_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/reception_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Стойки ресепшен
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/custom_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/custom_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Мебель на заказ
                     </a>
                   </li>
                   <li>
-                    <a href="https://ergo-catalog.vercel.app/catalog/drugoe" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="https://ergo-catalog.vercel.app/catalog/drugoe" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                       Другое
                     </a>`
 };

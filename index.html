@@ -120,44 +120,44 @@
               </button>
               <!-- Выпадающее меню каталога -->
           <div class="absolute top-full left-0 mt-2 w-48 bg-body border border-text rounded-primary z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            <ul class="py-2">
+            <ul class="">
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/boss_cabinet" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/boss_cabinet" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Кабинет руководителя
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/personnel_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/personnel_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Мебель для персонала
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/kresla_i_stulya" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/kresla_i_stulya" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Кресла и стулья
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/soft_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/soft_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Мягкая мебель
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/peregovornye_stoly" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/peregovornye_stoly" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Переговорные столы
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/reception_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/reception_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Стойки ресепшен
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/custom_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/custom_furniture" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Мебель на заказ
                 </a>
               </li>
               <li>
-                <a href="https://ergo-catalog.vercel.app/catalog/drugoe" class="block px-4 py-1 text-sm text-gray-700 hover:bg-gray-100">
+                <a href="https://ergo-catalog.vercel.app/catalog/drugoe" class="block px-4 py-1 text-sm text-gray-700 hover:bg-[#00AD5D1C]">
                   Другое
                 </a>
               </li>
@@ -617,7 +617,17 @@
               <path d="M10.6818 4.75613L3.21946 4.75613L6.0483 1.93723L5.02415 0.903142L0.440341 5.49689L5.02415 10.0807L6.0483 9.06649L3.21946 6.23766L10.6818 6.23766V4.75613Z" fill="#1A1812"/>
             </svg>
           </div>
-          <span class="text-xs md:text-sm xxl:text-lg leading-lh-100 font-semibold uppercase">переговорная</span>
+          <div class="relative text-xs md:text-sm xxl:text-lg leading-lh-100 font-semibold uppercase min-w-[185px] min-h-[1.2em]">
+            <span id="slide-desc-1" class="slide-description active absolute inset-0 flex items-center justify-center">
+              переговорная
+            </span>
+            <span id="slide-desc-2" class="slide-description absolute inset-0 flex items-center justify-center">
+              каб персонала
+            </span>
+            <span id="slide-desc-3" class="slide-description absolute inset-0 flex items-center justify-center">
+              каб руководителя
+            </span>
+          </div>
           <div class="swiper-button-next">
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0.318182 4.75613L7.78054 4.75613L4.9517 1.93723L5.97585 0.903142L10.5597 5.49689L5.97585 10.0807L4.9517 9.06649L7.78054 6.23766L0.318182 6.23766V4.75613Z" fill="#1A1812"/>
@@ -950,6 +960,19 @@
     // Обработка клика вне элементов больше не нужна для каталога, так как используется hover
   </script>
 
+  <!-- Стили для синхронизации описаний слайдера -->
+  <style>
+    .slide-description {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .slide-description.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- Инициализация Swiper -->
@@ -969,6 +992,23 @@
       effect: "fade",
       fadeEffect: {
         crossFade: true
+      },
+      on: {
+        slideChange: function () {
+          // Убираем активный класс со всех описаний
+          document.querySelectorAll('.slide-description').forEach(desc => {
+            desc.classList.remove('active');
+          });
+          
+          // Получаем текущий активный слайд (учитывая loop)
+          const realIndex = this.realIndex;
+          
+          // Добавляем активный класс к соответствующему описанию
+          const activeDesc = document.getElementById(`slide-desc-${realIndex + 1}`);
+          if (activeDesc) {
+            activeDesc.classList.add('active');
+          }
+        }
       }
     });
   </script>
