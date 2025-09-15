@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
 import { ArrowLeft, ShoppingCart, Heart } from 'lucide-react';
@@ -9,6 +9,8 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
 
   const product = products.find(p => p.id === parseInt(productId));
   const category = categories.find(cat => cat.name === product?.category);
@@ -19,6 +21,17 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   const seriesProducts = products.filter(
     p => p.series === product?.series && p.id !== product?.id
   );
+
+  // Пагинация для товаров серии
+  const totalPages = Math.ceil(seriesProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentSeriesProducts = seriesProducts.slice(startIndex, endIndex);
+
+  // Сброс страницы при смене товара
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [productId]);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
@@ -326,18 +339,23 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
               </div>
             </div>
 
-            {/* Related Products Section */}
+            {/* Related Products Section - Товары серии */}
             {seriesProducts.length > 0 && (
-              <div>
+              <div className="mt-16">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    Товары серии ({seriesProducts.length})
-                  </h2>
+                  <div>
+                    <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                      Товары серии "{seriesItem?.name || product?.series}"
+                    </h2>
+                    <p className="text-gray-600">
+                      Показано {startIndex + 1}-{Math.min(endIndex, seriesProducts.length)} из {seriesProducts.length} товаров
+                    </p>
+                  </div>
                 </div>
 
                 {/* Products Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {seriesProducts.map((relatedProduct) => (
+                  {currentSeriesProducts.map((relatedProduct) => (
                     <Link key={relatedProduct.id} to={`/product/${relatedProduct.id}`} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 block">
                       {/* Product Image */}
                       <div className="relative h-48 bg-gray-100">
@@ -373,6 +391,72 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                     </Link>
                   ))}
                 </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center space-x-2 mt-8">
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={currentPage === 1}
+                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Назад
+                    </button>
+                    
+                    <div className="flex space-x-1">
+                      {(() => {
+                        const maxVisiblePages = 5;
+                        const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                        const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                        const pages = [];
+                        
+                        for (let i = startPage; i <= endPage; i++) {
+                          pages.push(i);
+                        }
+                        
+                        return pages.map(page => (
+                          <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                              currentPage === page
+                                ? 'bg-primary text-white'
+                                : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        ));
+                      })()}
+                    </div>
+                    
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      disabled={currentPage === totalPages}
+                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Вперед
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Если нет товаров серии, показываем сообщение */}
+            {seriesProducts.length === 0 && product?.series && (
+              <div className="mt-16 text-center py-12">
+                <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                  Товары серии "{seriesItem?.name || product?.series}"
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  В данной серии пока нет других товаров
+                </p>
+                <Link 
+                  to={`/catalog/${category?.id}/series/${product?.series}`}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors duration-200 font-medium"
+                >
+                  Посмотреть все товары серии
+                </Link>
               </div>
             )}
           </div>

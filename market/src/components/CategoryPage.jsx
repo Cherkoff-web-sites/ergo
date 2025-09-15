@@ -13,6 +13,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
+  const [isSeriesExpanded, setIsSeriesExpanded] = useState(true);
   
   // Пагинация
   const [currentPage, setCurrentPage] = useState(1);
@@ -205,8 +206,28 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
           {/* Series Section on top */}
           {categorySeries.length > 0 && (
             <div className='mb-12 md:mb-20 xxl:mb-24'>
-              <h2 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase mb-3">Серии</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              <div className="flex items-center gap-4 mb-3">
+                <h2 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase">Серии</h2>
+                <button
+                  onClick={() => setIsSeriesExpanded(!isSeriesExpanded)}
+                  className="hover:opacity-80 transition-opacity duration-200"
+                  title={isSeriesExpanded ? "Свернуть серии" : "Развернуть серии"}
+                >
+                  <svg 
+                    width="37" 
+                    height="18" 
+                    viewBox="0 0 37 18" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect width="37" height="18" rx="5" fill="#FDFFEE" fillOpacity="0.05"/>
+                    <rect x="0.5" y="0.5" width="36" height="17" rx="4.5" stroke="#1A1812" strokeOpacity="0.32"/>
+                    <path d="M18.2817 10.3374L19.5654 6.80322H20.9189L18.937 11.4653H17.9917L18.2817 10.3374ZM17.1807 6.80322L18.502 10.3428L18.7544 11.4653H17.8145L15.8325 6.80322H17.1807Z" fill="#1A1812"/>
+                  </svg>
+                </button>
+              </div>
+              {isSeriesExpanded && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                 {categorySeries.map((seriesItem) => {
                   const seriesProducts = categoryProducts.filter(p => p.series === seriesItem.id);
                   return (
@@ -241,7 +262,8 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
                     </div>
                   );
                 })}
-              </div>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -336,42 +358,42 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
             <button
               onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)); scrollToTop(); }}
               disabled={currentPage === 1}
-              className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Назад
             </button>
             
-            {[...Array(Math.min(5, totalPages))].map((_, i) => {
-              let pageNum;
-              if (totalPages <= 5) {
-                pageNum = i + 1;
-              } else if (currentPage <= 3) {
-                pageNum = i + 1;
-              } else if (currentPage >= totalPages - 2) {
-                pageNum = totalPages - 4 + i;
-              } else {
-                pageNum = currentPage - 2 + i;
-              }
-              
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => { setCurrentPage(pageNum); scrollToTop(); }}
-                  className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                    currentPage === pageNum
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
+            <div className="flex space-x-1">
+              {(() => {
+                const maxVisiblePages = 5;
+                const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                const pages = [];
+                
+                for (let i = startPage; i <= endPage; i++) {
+                  pages.push(i);
+                }
+                
+                return pages.map(page => (
+                  <button
+                    key={page}
+                    onClick={() => { setCurrentPage(page); scrollToTop(); }}
+                    className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                      currentPage === page
+                        ? 'bg-primary text-white'
+                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ));
+              })()}
+            </div>
             
             <button
               onClick={() => { setCurrentPage(Math.min(totalPages, currentPage + 1)); scrollToTop(); }}
               disabled={currentPage === totalPages}
-              className="flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Вперед
             </button>
