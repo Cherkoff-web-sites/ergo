@@ -113,13 +113,13 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
       />
       
       {/* Page Title */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
         <div className="flex justify-between items-center py-6">
           <h1 className="text-3xl font-bold text-gray-900">Весь каталог</h1>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4">
         <nav className="flex" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">
             <li>
@@ -134,7 +134,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
       </div>
 
       {/* Filters row */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-8">
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
             <div className="w-full md:w-56">

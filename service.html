@@ -221,7 +221,7 @@
 
   <main>
     <!-- Главный баннер -->
-    <section class="hero mb-24 md:mb-28">
+    <section class="hero mb-10 md:mb-11 xxl:mb-14">
       <!-- тут хард код в строке style и оптимизировать вложенное - т..к боьлше не нужно было затемнение -->
       <div class="max-w-full-mob md:max-w-full-pc mx-auto h-[152vw] sm:h-[calc(100vh-72px)] w-full rounded-primary overflow-hidden hero-bg" style="background-image: url('img/hero_service_2x.webp');">
         <div class="flex flex-col justify-end md:justify-between w-full h-full p-2.5 md:p-5 xxl:p-6">
@@ -411,16 +411,192 @@
       </div>
     </section>
 
-    <section class="pt-10 mb-20">
+    <!-- Аккордеон -->
+    <section class="mb-24 md:mb-16 xxl:mb-20">
       <div class="max-w-full-mob md:max-w-full-pc mx-auto">
-      <div class="hidden md:block">
-        <img class="w-full h-auto" src="img/fp/service_info_desk.svg" alt="">
-      </div>
-      <div class="md:hidden">
-        <img class="w-full h-auto" src="img/fp/service_info_mob.svg" alt="">
-      </div>
-      </div>
+        <!-- Desktop Accordion -->
+        <div class="hidden md:block">
+          <div class="grid grid-cols-3 gap-4">
+            <!-- ОПЛАТА Section -->
+            <div class="accordion-item">
+              <button class="accordion-header w-full p-3 md:py-16 xxl:py-20 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-primary text-left transition-all duration-300 hover:bg-[rgba(26,24,18,0.08)]" onclick="toggleAccordion('oplata')">
+                <h3 class="text-2xl md:text-4xl xxl:text-5xl font-tenor text-center uppercase">ОПЛАТА</h3>
+              </button>
+              <div id="oplata-content" class="accordion-content hidden">
+                <div class="pt-3.5 md:pt-3 space-y-1 md:space-y-3">
+                  <img class="w-full h-auto" src="img/fp/service_accrd_1_desk.svg" alt="">
+                  
+                    
+                  <!-- <div class="p-4 bg-[rgba(0,173,93,0.11)] rounded-primary">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">КАК ПРОИСХОДИТ ОПЛАТА:</h4>
+                    <ol class="space-y-2">
+                      <li>1/ Высылаем счет</li>
+                      <li>2/ Клиент выполняет перевод денежных средств по реквизитам</li>
+                    </ol>
+                  </div>
+                  
+                  <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn text-center">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">ВНИМАНИЕ !!</h4>
+                    <p class="text-[#1A1812]">После оплаты, получение товара возможно только при наличии печати или доверенности.</p>
+                  </div>
+                  
+                  <div class="space-y-3">
+                    <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn">
+                      <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">СОТРУДНИЧАЕМ С:</h4>
+                      <p class="text-[#1A1812]">Юридическими лицами</p>
+                    </div>
+                    <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn">
+                      <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">СПОСОБ ОПЛАТЫ:</h4>
+                      <p class="text-[#1A1812]">Безналичные платежи</p>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
 
+            <!-- ДОСТАВКА Section -->
+            <div class="accordion-item">
+              <button class="accordion-header w-full p-3 md:py-16 xxl:py-20 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-primary text-left transition-all duration-300 hover:bg-[rgba(26,24,18,0.08)]" onclick="toggleAccordion('dostavka')">
+                <h3 class="text-2xl md:text-4xl xxl:text-5xl font-tenor text-center uppercase">ДОСТАВКА</h3>
+              </button>
+              <div id="dostavka-content" class="accordion-content hidden">
+                <div class="pt-3.5 md:pt-3 space-y-1 md:space-y-3">
+                  <img class="w-full h-auto" src="img/fp/service_accrd_2_desk.svg" alt="">
+
+                  <!-- <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">ПО САНКТ-ПЕТЕРБУРГУ:</h4>
+                    <p class="text-[#1A1812] mb-2">с подъемом до 3-го этажа включительно</p>
+                    <p class="text-lg font-semibold">2000 P.</p>
+                  </div>
+                  
+                  <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">ПО ЛЕНИНГРАДСКОЙ ОБЛ.</h4>
+                    <p class="text-[#1A1812]">рассчитывается из количества км от Кольцевой автодороги.</p>
+                  </div>
+                  
+                  <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn text-center">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">ВНИМАНИЕ !!</h4>
+                    <p class="text-[#1A1812]">подъем выше 3-го этажа оплачивается</p>
+                    <p class="text-[#1A1812]">2% от суммы заказа.</p>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- СБОРКА Section -->
+            <div class="accordion-item">
+              <button class="accordion-header w-full p-3 md:py-16 xxl:py-20 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-primary text-left transition-all duration-300 hover:bg-[rgba(26,24,18,0.08)]" onclick="toggleAccordion('sborka')">
+                <h3 class="text-2xl md:text-4xl xxl:text-5xl font-tenor text-center uppercase">СБОРКА</h3>
+              </button>
+              <div id="sborka-content" class="accordion-content hidden">
+                <div class="pt-3.5 md:pt-3 space-y-1 md:space-y-3">
+                  <img class="w-full h-auto" src="img/fp/service_accrd_3_desk.svg" alt="">
+                  <!-- <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">ОСУЩЕСТВЛЯЕТСЯ:</h4>
+                    <p class="text-[#1A1812]">профессиональными сборщиками, что гарантирует полное соблюдение технологии и уверенность в долгом сроке службы мебели.</p>
+                  </div>
+                  
+                  <div class="p-4 bg-[rgba(26,24,18,0.05)] border border-card-border rounded-btn">
+                    <h4 class="text-sm md:text-lg xxl:text-2xl mb-2">СТОИМОСТЬ:</h4>
+                    <p class="text-[#1A1812] mb-2">рассчитывается от оригинальной цены товара, без учета акций и прочих скидок.</p>
+                    <p class="text-lg font-semibold">8% от суммы заказа</p>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Accordion -->
+        <div class="md:hidden">
+          <div class="space-y-3">
+            <!-- ОПЛАТА Section Mobile -->
+            <div class="accordion-item">
+              <button class="accordion-header w-full p-4 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary text-left transition-all duration-300 hover:bg-[rgba(26,24,18,0.08)]" onclick="toggleAccordion('oplata-mob')">
+                <h3 class="text-2xl md:text-4xl xxl:text-5xl font-tenor text-center uppercase">ОПЛАТА</h3>
+              </button>
+              <div id="oplata-mob-content" class="accordion-content hidden">
+                <div class="pt-3.5 space-y-3">
+                  <img class="w-full h-auto" src="img/fp/service_accrd_1_mob.svg" alt="">
+                  <!-- <div class="p-3 bg-[rgba(0,173,93,0.11)] rounded-primary">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-2">КАК ПРОИСХОДИТ ОПЛАТА:</h4>
+                    <ol class="space-y-1 text-sm text-[#1A1812]">
+                      <li>1/ Высылаем счет</li>
+                      <li>2/ Клиент выполняет перевод денежных средств по реквизитам</li>
+                    </ol>
+                  </div>
+                  
+                  <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary text-center">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-1">ВНИМАНИЕ !!</h4>
+                    <p class="text-sm text-[#1A1812]">После оплаты, получение товара возможно только при наличии печати или доверенности.</p>
+                  </div>
+                  
+                  <div class="space-y-3">
+                    <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary">
+                      <h4 class="text-base font-semibold text-[#1A1812] mb-1">СОТРУДНИЧАЕМ С:</h4>
+                      <p class="text-sm text-[#1A1812]">Юридическими лицами</p>
+                    </div>
+                    <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary">
+                      <h4 class="text-base font-semibold text-[#1A1812] mb-1">СПОСОБ ОПЛАТЫ:</h4>
+                      <p class="text-sm text-[#1A1812]">Безналичные платежи</p>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- ДОСТАВКА Section Mobile -->
+            <div class="accordion-item">
+              <button class="accordion-header w-full p-4 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary text-left transition-all duration-300 hover:bg-[rgba(26,24,18,0.08)]" onclick="toggleAccordion('dostavka-mob')">
+                <h3 class="text-2xl md:text-4xl xxl:text-5xl font-tenor text-center uppercase">ДОСТАВКА</h3>
+              </button>
+              <div id="dostavka-mob-content" class="accordion-content hidden">
+                <div class="pt-3.5 space-y-3">
+                  <img class="w-full h-auto" src="img/fp/service_accrd_2_desk.svg" alt="">
+                  <!-- <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-1">ПО САНКТ-ПЕТЕРБУРГУ:</h4>
+                    <p class="text-sm text-[#1A1812] mb-1">с подъемом до 3-го этажа включительно</p>
+                    <p class="text-base font-semibold text-[#1A1812]">2000 P.</p>
+                  </div>
+                  
+                  <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-1">ПО ЛЕНИНГРАДСКОЙ ОБЛ.</h4>
+                    <p class="text-sm text-[#1A1812]">рассчитывается из количества км от Кольцевой автодороги.</p>
+                  </div>
+                  
+                  <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary text-center">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-1">ВНИМАНИЕ !!</h4>
+                    <p class="text-sm text-[#1A1812]">подъем выше 3-го этажа оплачивается</p>
+                    <p class="text-sm text-[#1A1812]">2% от суммы заказа.</p>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- СБОРКА Section Mobile -->
+            <div class="accordion-item">
+              <button class="accordion-header w-full p-4 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary text-left transition-all duration-300 hover:bg-[rgba(26,24,18,0.08)]" onclick="toggleAccordion('sborka-mob')">
+                <h3 class="text-2xl md:text-4xl xxl:text-5xl font-tenor text-center uppercase">СБОРКА</h3>
+              </button>
+              <div id="sborka-mob-content" class="accordion-content hidden">
+                <div class="pt-3.5 space-y-3">
+                  <img class="w-full h-auto" src="img/fp/service_accrd_3_desk.svg" alt="">
+                  <!-- <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-1">ОСУЩЕСТВЛЯЕТСЯ:</h4>
+                    <p class="text-sm text-[#1A1812]">профессиональными сборщиками, что гарантирует полное соблюдение технологии и уверенность в долгом сроке службы мебели.</p>
+                  </div>
+                  
+                  <div class="p-3 bg-[rgba(26,24,18,0.05)] border border-[rgba(26,24,18,0.32)] rounded-primary">
+                    <h4 class="text-base font-semibold text-[#1A1812] mb-1">СТОИМОСТЬ:</h4>
+                    <p class="text-sm text-[#1A1812] mb-1">рассчитывается от оригинальной цены товара, без учета акций и прочих скидок.</p>
+                    <p class="text-base font-semibold text-[#1A1812]">8% от суммы заказа</p>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="min-h-[100vh] h-[100vh] flex justify-center items-center bg-cover bg-center bg-no-repeat md:bg-[url('img/service_catalog_link_bg_2x.webp')] bg-[url('img/service_catalog_link_bg_2x.webp')]">
@@ -864,5 +1040,34 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Accordion functionality
+    function toggleAccordion(sectionId) {
+      const content = document.getElementById(sectionId + '-content');
+      const isHidden = content.classList.contains('hidden');
+      
+      // Check if this is mobile version (has -mob suffix)
+      const isMobile = sectionId.includes('-mob');
+      
+      if (isMobile) {
+        // Mobile version: close all other sections when opening one
+        const allContents = document.querySelectorAll('.accordion-content');
+        allContents.forEach(item => {
+          if (item.id !== sectionId + '-content') {
+            item.classList.add('hidden');
+          }
+        });
+      }
+      // Desktop version: allow multiple sections to be open simultaneously
+      
+      // Toggle current section
+      if (isHidden) {
+        content.classList.remove('hidden');
+      } else {
+        content.classList.add('hidden');
+      }
+    }
+  </script>
 </body>
 </html>

@@ -150,7 +150,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
       />
       
       {/* Page Title */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
             <h1 className="text-3xl font-bold text-gray-900">{category.name}</h1>
@@ -159,7 +159,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
       </div>
 
       {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4">
         <nav className="flex" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">
             <li>
@@ -177,7 +177,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
 
       {/* Category Navigation */}
       <div className="bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-black">
+        <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-black">
           <div className="flex space-x-1 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
               <Link
@@ -197,7 +197,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-8">
         {/* Filters Row */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">

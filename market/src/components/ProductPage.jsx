@@ -57,7 +57,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       />
       
       {/* Page Title */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
             <Link
@@ -73,7 +73,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       </div>
 
       {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4">
         <nav className="flex" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">
             <li>
@@ -111,7 +111,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
 
       {/* Category Navigation */}
       <div className="bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-black">
+        <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-black">
           <div className="flex space-x-1 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
               <Link
@@ -131,7 +131,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-full-mob md:max-w-full-pc mx-auto py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <div className="flex-1">
