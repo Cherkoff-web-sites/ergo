@@ -151,7 +151,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
           </div>
         </div>
       </div>
-      
+
       {/* Breadcrumbs */}
       <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4 mb-4">
         <nav className="flex" aria-label="Breadcrumb">
@@ -233,63 +233,63 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                 </h2>
               </div>
 
-              {/* Filters row */}
-              <div className="mb-8">
-                <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
-                  <div className="flex-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Поиск
-                      {searchTerm !== debouncedSearchTerm && (
-                        <span className="ml-2 text-xs text-blue-600">Поиск...</span>
-                      )}
-                    </label>
-                    <input
-                      type="text"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      placeholder="Поиск товаров..."
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                    />
-                  </div>
-                  <div className="w-full md:w-56">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Материал</label>
-                    <select
-                      value={selectedMaterial}
-                      onChange={(e) => setSelectedMaterial(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                    >
-                      <option value="Все">Все материалы</option>
-                      {[...new Set(seriesProducts.map(p => p.material))].map(material => (
-                        <option key={material} value={material}>{material}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="w-full md:w-56">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
-                    <select
-                      value={selectedColor}
-                      onChange={(e) => setSelectedColor(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                    >
-                      <option value="Все">Все цвета</option>
-                      {[...new Set(seriesProducts.map(p => p.color))].map(color => (
-                        <option key={color} value={color}>{color}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="w-full md:w-56">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Сортировка</label>
-                    <select
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                    >
-                      <option value="name">По названию</option>
-                      <option value="price-asc">По цене (возрастание)</option>
-                      <option value="price-desc">По цене (убывание)</option>
-                    </select>
-                  </div>
-                </div>
+        {/* Filters row */}
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:gap-6 gap-4">
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Поиск
+                {searchTerm !== debouncedSearchTerm && (
+                  <span className="ml-2 text-xs text-blue-600">Поиск...</span>
+                )}
+              </label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Поиск товаров..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              />
+            </div>
+            <div className="w-full md:w-56">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Материал</label>
+              <select
+                value={selectedMaterial}
+                onChange={(e) => setSelectedMaterial(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              >
+                <option value="Все">Все материалы</option>
+                {[...new Set(seriesProducts.map(p => p.material))].map(material => (
+                  <option key={material} value={material}>{material}</option>
+                ))}
+              </select>
+            </div>
+            <div className="w-full md:w-56">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Цвет</label>
+              <select
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              >
+                <option value="Все">Все цвета</option>
+                {[...new Set(seriesProducts.map(p => p.color))].map(color => (
+                  <option key={color} value={color}>{color}</option>
+                ))}
+              </select>
+            </div>
+            <div className="w-full md:w-56">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Сортировка</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              >
+                <option value="name">По названию</option>
+                <option value="price-asc">По цене (возрастание)</option>
+                <option value="price-desc">По цене (убывание)</option>
+              </select>
+            </div>
+          </div>
               </div>
 
               {/* Products Grid */}
@@ -343,17 +343,17 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
                 }
                 
                 return pages.map(page => (
-                  <button
+                <button
                     key={page}
                     onClick={() => { setCurrentPage(page); scrollToTop(); }}
-                    className={`px-3 py-2 text-sm font-medium rounded-lg ${
+                  className={`px-3 py-2 text-sm font-medium rounded-lg ${
                       currentPage === page
                         ? 'bg-primary text-white'
                         : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
                     }`}
                   >
                     {page}
-                  </button>
+                </button>
                 ));
               })()}
             </div>

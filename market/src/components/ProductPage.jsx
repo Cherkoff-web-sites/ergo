@@ -68,14 +68,14 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
         totalFavorites={totalFavorites}
         totalItems={totalItems}
       />
-
+      
       
       {/* Category Navigation */}
       <div className="bg-transparent mt-16 xxl:mt-20">
         <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
           <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
-              <Link
+            <Link
                 key={cat.id}
                 to={`/catalog/${cat.id}`}
                 className={`px-3 py-1 rounded-btn text-sm xxl:text-lg leading-lh-100 font-semibold whitespace-nowrap transition-all duration-300 ${
@@ -85,13 +85,13 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                 }`}
               >
                 {cat.name.toUpperCase()}
-              </Link>
+            </Link>
             ))}
           </div>
         </div>
       </div>
 
-      
+
       {/* Breadcrumbs */}
       <div className="max-w-full-mob md:max-w-full-pc mx-auto py-4 mb-4">
         <nav className="flex" aria-label="Breadcrumb">
@@ -134,13 +134,13 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       <div className="max-w-full-mob md:max-w-full-pc mx-auto">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <Link
+              <Link
               to={category ? `/catalog/${category.id}` : '/catalog'}
               className="hidden flex items-center text-gray-600 hover:text-gray-900 mr-4"
             >
               <ArrowLeft size={20} className="mr-2" />
               Назад
-            </Link>
+              </Link>
             <h1 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase mb-3">{product.name}</h1>
           </div>
         </div>
@@ -346,7 +346,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                   <div>
                     <h2 className="text-2xl font-semibold text-gray-900 mb-2">
                       Товары серии "{seriesItem?.name || product?.series}"
-                    </h2>
+                  </h2>
                     <p className="text-gray-600">
                       Показано {startIndex + 1}-{Math.min(endIndex, seriesProducts.length)} из {seriesProducts.length} товаров
                     </p>

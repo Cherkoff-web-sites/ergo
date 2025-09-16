@@ -13,6 +13,7 @@ import SeriesPage from './components/SeriesPage';
 import ProductPage from './components/ProductPage';
 import Cart from './components/Cart';
 import FavoritesModal from './components/FavoritesModal';
+// ContactModal removed per request
 import Footer from './components/Footer';
 
 // Компонент для автоматического скролла наверх при смене маршрута
@@ -36,6 +37,7 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+  // const [isContactOpen, setIsContactOpen] = useState(false);
 
   // Состояние данных
   const [products, setProducts] = useState(excelProducts);
@@ -230,6 +232,8 @@ function App() {
           onToggleFavorite={handleToggleFavorite}
           onAddToCart={handleAddToCart}
         />
+
+        {/* Contact modal removed */}
 
         {/* Footer */}
         <Footer />
