@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
-import { ArrowLeft, ShoppingCart, Heart } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import ProductCard from './ProductCard';
 import Header from './Header';
 
@@ -16,6 +16,8 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   const product = products.find(p => p.id === parseInt(productId));
   const category = categories.find(cat => cat.name === product?.category);
   const seriesItem = series.find(s => s.id === product?.series);
+  const isFavorite = favorites.includes(product?.id);
+  const testColors = ['#AAC3AD', '#EFF0CA', '#1A1812'];
 
 
   // Получаем товары той же серии для отображения внизу
@@ -72,8 +74,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       
       
       {/* Category Navigation */}
-      <div className="bg-transparent 
-mt-6 md:mt-16 xxl:mt-20">
+      <div className="bg-transparent mt-6 md:mt-16 xxl:mt-20">
         <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
           <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
@@ -156,14 +157,15 @@ mt-6 md:mt-16 xxl:mt-20">
           {/* Main Content */}
           <div className="flex-1">
             {/* Product Info */}
-            <div className="mb-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="mb-14 md:mb-20 xxl:mb-24">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-4 md:mb-6 xxl:mb-8">
+                <div className="">
                 {/* Product Image Slider */}
-                <div className="bg-[#ADADA0] rounded-lg min-h-[291px] max-h-[45vh] flex items-center justify-center relative">
+                  <div className="bg-[#ADADA0] rounded-lg min-h-[291px] max-h-[45vh] flex items-center justify-center relative overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="max-w-full max-h-full object-contain"
+                      className="w-full h-full object-contain"
                   />
                   {/* Slider arrows placeholder */}
                   <div className="absolute left-2 top-1/2 transform -translate-y-1/2 w-7 h-5 flex items-center justify-center cursor-pointer">
@@ -179,12 +181,15 @@ mt-6 md:mt-16 xxl:mt-20">
                       <rect x="0.5" y="0.910156" width="29" height="18" rx="4.5" stroke="#FDFFEE" stroke-opacity="0.32"/>
                       <path d="M16.1895 10.1284L12.6553 8.84473V7.49121L17.3174 9.47314V10.4185L16.1895 10.1284ZM12.6553 11.2295L16.1948 9.9082L17.3174 9.65576V10.5957L12.6553 12.5776V11.2295Z" fill="#FDFFEE"/>
                     </svg>
+                    </div>
                   </div>
                 </div>
 
                 {/* Product Info */}
-                <div>
-                  <div className="flex items-center mb-2">
+                <div className="grid grid-cols-12 gap-4">
+                  <div className="hidden">
+                    {/* Category and Series */}
+                    <div className="hidden   flex items-center mb-2">
                     <span className="text-sm text-gray-500 uppercase tracking-wide">
                       {product.category}
                     </span>
@@ -197,14 +202,11 @@ mt-6 md:mt-16 xxl:mt-20">
                       </>
                     )}
                   </div>
-                  
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    <h2 className="  hidden  text-gray-900 mb-4">
                     {product.name}
                   </h2>
-                  
-
                   {/* Price */}
-                  <div className="flex items-center mb-6">
+                    <div className="hidden   flex items-center mb-6">
                     <span className="text-3xl font-bold text-gray-900">
                       {formatPrice(product.price)}
                     </span>
@@ -214,15 +216,37 @@ mt-6 md:mt-16 xxl:mt-20">
                       </span>
                     )}
                     {product.isNew && (
-                      <span className="bg-primary text-white text-xs px-2 py-1 rounded-full ml-3">
+                        <span className="hidden    bg-primary text-white text-xs px-2 py-1 rounded-full ml-3">
                         Новинка
                       </span>
                     )}
+                    </div>
+                    {/* Quantity */}
+                    <div className="  hidden  mb-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Количество
+                      </label>
+                      <div className="flex items-center space-x-3">
+                        <button
+                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                          className="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50"
+                        >
+                          -
+                        </button>
+                        <span className="text-lg font-medium w-12 text-center">{quantity}</span>
+                        <button
+                          onClick={() => setQuantity(quantity + 1)}
+                          className="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
                   </div>
-
+                  <div className="col-span-12 md:col-span-5 flex flex-col justify-between gap-4">
                   {/* Characteristics */}
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Характеристики</h3>
+                    <div className="">
+                      <h3 className="uppercase text-base md:text-lg xxl:text-xl mb-2">Характеристики</h3>
                     <div className="space-y-2">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Материал:</span>
@@ -249,43 +273,38 @@ mt-6 md:mt-16 xxl:mt-20">
                     </div>
                   </div>
 
-                  {/* Color Selection */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Цвет: {selectedColor || product.color}
-                    </label>
-                    <div className="flex space-x-2">
-                      {[product.color, 'Белый', 'Черный'].map((color, index) => (
-                        <button
-                          key={`color-${index}-${color}`}
-                          onClick={() => setSelectedColor(color)}
-                          className={`w-8 h-8 rounded-full border-2 ${
-                            (selectedColor || product.color) === color
-                              ? 'border-primary'
-                              : 'border-gray-300'
-                          }`}
-                          style={{ backgroundColor: color === 'Серый' ? '#6B7280' : color === 'Белый' ? '#FFFFFF' : '#000000' }}
-                          title={color}
+                    {/* Colors */}
+                    <div className="">
+                      <h3 className="uppercase text-base md:text-lg xxl:text-xl mb-2">Цвета</h3>
+                      <div className="flex items-center space-x-1.5">
+                        {testColors.map((hex) => (
+                          <div
+                            key={hex}
+                            className="w-6 h-6 md:w-8 md:h-8 xxl:w-9 xxl:h-9 rounded-[2px] border border-text"
+                            style={{ backgroundColor: hex }}
+                            title={hex}
                         />
                       ))}
+                      </div>
                     </div>
                   </div>
 
+                  <div className="col-span-12 md:col-span-1"></div>
+
                   {/* Size Selection */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Размер: {selectedSize || product.size}
+                  <div className="col-span-12 md:col-span-6">
+                    <label className="uppercase text-base md:text-lg xxl:text-xl mb-3">
+                      Размеры
                     </label>
-                    <div className="flex space-x-2">
-                      {[product.size, '500X700', '600X800'].map((size, index) => (
+                    <div className="flex md:flex-col gap-2 md:max-w-[100px]">
+                      {[product.size, '500X700', '600X800']
+                        .filter(size => size && size !== 'Не указан')
+                        .map((size, index) => (
                         <button
                           key={`size-${index}-${size}`}
                           onClick={() => setSelectedSize(size)}
-                          className={`px-4 py-2 border rounded-lg text-sm ${
-                            (selectedSize || product.size) === size
-                              ? 'border-primary bg-primary text-white'
-                              : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                          }`}
+                          className={`px-3 py-2 leading-lh-100 rounded-btn border border-btn-border bg-btn-bg text-sm font-semibold ${selectedSize === size ? 'bg-[#DADBA2]' : ''}`}
+                          style={selectedSize === size ? { backgroundColor: '#DADBA2' } : undefined}
                         >
                           {size}
                         </button>
@@ -293,50 +312,32 @@ mt-6 md:mt-16 xxl:mt-20">
                     </div>
                   </div>
 
-                  {/* Quantity */}
-                  <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
-                      Количество
-                    </label>
-                    <div className="flex items-center space-x-3">
-                      <button
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50"
-                      >
-                        -
-                      </button>
-                      <span className="text-lg font-medium w-12 text-center">{quantity}</span>
-                      <button
-                        onClick={() => setQuantity(quantity + 1)}
-                        className="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50"
-                      >
-                        +
-                      </button>
                     </div>
                   </div>
 
-
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                   {/* Action Buttons */}
-                  <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-5">
                     <button
                       disabled={!product.inStock}
                       onClick={() => { if (product.inStock) { onAddToCart?.(product, quantity); } }}
-                      className={`w-full flex items-center justify-center gap-3 py-4 px-6 rounded-lg font-medium transition-colors duration-200 ${
+                      className={`w-full md:max-w-[248px] xxl:max-w-[310px] py-2 px-3 text-center text-text bg-[#DADBA2] uppercase rounded-btn border border-btn-border text-xs md:text-base xxl:text-lg font-semibold transition-colors duration-200 ${
                         product.inStock
-                          ? 'bg-primary text-white hover:bg-primary-dark'
-                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          ? ''
+                          : 'opacity-[0.5] cursor-not-allowed'
                       }`}
                     >
-                      <ShoppingCart size={20} />
                       {product.inStock ? 'В корзину' : 'Нет в наличии'}
                     </button>
                     
-                    <button onClick={() => onToggleFavorite?.(product.id)} className="w-full flex items-center justify-center gap-3 py-4 px-6 border border-primary text-primary rounded-lg font-medium hover:bg-primary hover:text-white transition-colors duration-200">
-                      <Heart size={20} />
-                      В избранное
+                    <button onClick={() => onToggleFavorite?.(product.id)} className={`p-2 rounded-full transition-bg duration-200 ${isFavorite ? 'bg-[#F0F2B063]' : ''}`}>
+                      <img
+                          src="/img/favorite.png"
+                          alt="Избранное"
+                          className={`min-w-5 min-h-5 w-5 h-5 ${isFavorite ? '' : ''}`}
+                        />
                     </button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -346,12 +347,9 @@ mt-6 md:mt-16 xxl:mt-20">
               <div className="mt-16">
                 <div className="flex justify-between items-center mb-6">
                   <div>
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                    <h2 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase mb-2">
                       Товары серии "{seriesItem?.name || product?.series}"
                   </h2>
-                    <p className="text-gray-600">
-                      Показано {startIndex + 1}-{Math.min(endIndex, seriesProducts.length)} из {seriesProducts.length} товаров
-                    </p>
                   </div>
                 </div>
 
@@ -366,6 +364,11 @@ mt-6 md:mt-16 xxl:mt-20">
                       isFavorite={favorites.includes(relatedProduct.id)}
                     />
                   ))}
+                </div>
+
+                {/* Results info */}
+                <div className="text-center text-sm text-gray-600 mb-4">
+                  Показано {startIndex + 1}-{Math.min(endIndex, seriesProducts.length)} из {seriesProducts.length} товаров
                 </div>
 
                 {/* Pagination */}
@@ -395,6 +398,7 @@ mt-6 md:mt-16 xxl:mt-20">
                             key={page}
                             onClick={() => setCurrentPage(page)}
                             className={`px-3 py-2 text-sm font-medium rounded-btn border border-btn-border bg-btn-bg ${currentPage === page ? 'bg-[#DADBA2]' : ''}`}
+                            style={currentPage === page ? { backgroundColor: '#DADBA2' } : undefined}
                           >
                             {page}
                           </button>

@@ -232,6 +232,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
                     key={page}
                     onClick={() => { setCurrentPage(page); scrollToTop(); }}
                     className={`px-3 py-2 text-sm font-medium rounded-btn border border-btn-border bg-btn-bg ${currentPage === page ? 'bg-[#DADBA2]' : ''}`}
+                    style={currentPage === page ? { backgroundColor: '#DADBA2' } : undefined}
                   >
                     {page}
                   </button>
