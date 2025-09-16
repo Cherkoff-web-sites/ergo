@@ -72,7 +72,8 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
       
       
       {/* Category Navigation */}
-      <div className="bg-transparent mt-16 xxl:mt-20">
+      <div className="bg-transparent 
+mt-6 md:mt-16 xxl:mt-20">
         <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
           <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (

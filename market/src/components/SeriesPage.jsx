@@ -22,6 +22,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
   const seriesProducts = products.filter(
     product => product.category === category?.name && product.series === seriesId
   );
+  const testColors = ['#AAC3AD', '#EFF0CA', '#1A1812'];
   
   // Дебаунс для поиска
   useEffect(() => {
@@ -132,7 +133,8 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
       />
 
       {/* Category Navigation */}
-      <div className="bg-transparent mt-16 xxl:mt-20">
+      <div className="bg-transparent 
+mt-6 md:mt-16 xxl:mt-20">
         <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
           <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
@@ -190,7 +192,7 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
         {/* Main Content */}
         <div>
             {/* Series Info */}
-            <div className="mb-8">
+            <div className="mb-20 md:mb-32 xxl:mb-40">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* Series Image Placeholder */}
                 <div className="rounded-lg min-h-[291px] max-h-[45vh] overflow-hidden col-span-5">
@@ -199,26 +201,28 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
 
                 {/* Series Info */}
                 <div className="col-span-5">
-                  
-                  {/* Characteristics */}
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Характеристики</h3>
-                    <p className="text-gray-600">
-                      Современная мебель высокого качества с эргономичным дизайном и долговечными материалами.
-                    </p>
-                  </div>
+                  <div className="flex flex-col h-full gap-6 justify-between">
+                    {/* Characteristics */}
+                    <div className="">
+                      <h3 className="uppercase text-base md:text-lg xxl:text-xl mb-5">Характеристики</h3>
+                      <p className="max-w-[500px] text-sm md:text-base xxl:text-lg">
+                        Современная мебель высокого качества с эргономичным дизайном и долговечными материалами.
+                      </p>
+                    </div>
 
-                  {/* Colors */}
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Цвета</h3>
-                    <div className="flex space-x-2">
-                      {[...new Set(seriesProducts.map(p => p.color))].slice(0, 3).map(color => (
-                        <div
-                          key={color}
-                          className="w-8 h-8 rounded border border-gray-300 bg-gray-200"
-                          title={color}
-                        />
-                      ))}
+                    {/* Colors */}
+                    <div className="">
+                      <h3 className="uppercase text-base md:text-lg xxl:text-xl mb-2">Цвета</h3>
+                      <div className="flex items-center space-x-1.5">
+                        {testColors.map((hex) => (
+                          <div
+                            key={hex}
+                            className="w-6 h-6 md:w-8 md:h-8 xxl:w-9 xxl:h-9 rounded-[2px] border border-text"
+                            style={{ backgroundColor: hex }}
+                            title={hex}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -228,8 +232,9 @@ const SeriesPage = ({ products, categories, series, onAddToCart, onToggleFavorit
             {/* Products Section */}
             <div>
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  Товары серии ({filteredProducts.length})
+                <h2 className="font-tenor text-2xl md:text-4xl xxl:text-5xl uppercase">
+                  {/* Товары серии ({filteredProducts.length}) */}
+                  Товары серии
                 </h2>
               </div>
 

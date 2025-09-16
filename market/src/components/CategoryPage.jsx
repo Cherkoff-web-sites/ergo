@@ -151,7 +151,8 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
       />
       
       {/* Category Navigation */}
-      <div className="bg-transparent mt-16 xxl:mt-20">
+      <div className="bg-transparent 
+mt-6 md:mt-16 xxl:mt-20">
         <div className="max-w-full-mob md:max-w-full-pc mx-auto border-b border-text">
           <div className="flex space-x-3.5 py-4 overflow-x-auto">
             {categories.slice(1).map((cat) => (
@@ -330,7 +331,7 @@ const CategoryPage = ({ products, categories, series, onAddToCart, onToggleFavor
                 <p className="text-gray-600">Попробуйте изменить параметры поиска или фильтры</p>
               </div>
             ) : (
-              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {currentProducts.map((product) => (
                   <ProductCard
                     key={product.id}

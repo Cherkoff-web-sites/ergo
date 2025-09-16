@@ -78,7 +78,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
             <img
               src="/img/favorite.png"
               alt="Избранное"
-              className={`w-5 h-5 ${isFavorite ? '' : ''}`}
+              className={`min-w-5 min-h-5 w-5 h-5 ${isFavorite ? '' : ''}`}
             />
           </button>
         </div>
@@ -86,7 +86,7 @@ const ProductCard = ({ product, onAddToCart, onToggleFavorite, isFavorite, onPro
 
         {/* Цена */}
         <div className="flex items-center gap-2 mb-7 xxl:mb-8 font-light italic">
-          <span className="text-xs md:text-base xxl:text-xl">
+          <span className="text-sm md:text-base xxl:text-xl">
             {formatPrice(product.price)}
           </span>
           {product.oldPrice && (
