@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 // Данные передаются через props
 import { ArrowLeft, ShoppingCart, Heart } from 'lucide-react';
+import ProductCard from './ProductCard';
 import Header from './Header';
 
 const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavorite, favorites = [], openCart, openFavorites, totalFavorites, totalItems }) => {
@@ -34,7 +35,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
   }, [productId]);
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+    return new Intl.NumberFormat('ru-RU').format(price) + ' р.';
   };
 
   const handleBreadcrumbClick = () => {
@@ -356,39 +357,13 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                 {/* Products Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {currentSeriesProducts.map((relatedProduct) => (
-                    <Link key={relatedProduct.id} to={`/product/${relatedProduct.id}`} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 block">
-                      {/* Product Image */}
-                      <div className="relative h-48 bg-gray-100">
-                        <img
-                          src={relatedProduct.image}
-                          alt={relatedProduct.name}
-                          className="w-full h-full object-cover"
-                        />
-                        
-                        {/* Favorite Button */}
-                        <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleFavorite?.(relatedProduct.id); }} className={`absolute top-3 right-3 p-2 rounded-full transition-colors duration-200 ${favorites.includes(relatedProduct.id) ? 'bg-red-500 text-white' : 'bg-white/80 text-gray-600 hover:bg-white hover:text-red-500'}`}>
-                          <Heart size={16} />
-                        </button>
-                      </div>
-
-                      {/* Product Info */}
-                      <div className="p-4">
-                        <h3 className="text-body-md font-medium text-text-main mb-2 line-clamp-2">
-                          {relatedProduct.name}
-                        </h3>
-                        
-                        <div className="flex items-center gap-2 mb-4">
-                          <span className="text-lg font-bold text-text-main">
-                            {formatPrice(relatedProduct.price)}
-                          </span>
-                        </div>
-
-                        <button onClick={(e) => { e.preventDefault(); onAddToCart?.(relatedProduct, 1); }} className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors duration-200 font-medium">
-                          <ShoppingCart size={16} />
-                          В корзину
-                        </button>
-                      </div>
-                    </Link>
+                    <ProductCard
+                      key={relatedProduct.id}
+                      product={relatedProduct}
+                      onAddToCart={(product) => onAddToCart?.(product, 1)}
+                      onToggleFavorite={onToggleFavorite}
+                      isFavorite={favorites.includes(relatedProduct.id)}
+                    />
                   ))}
                 </div>
 
@@ -398,7 +373,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                     <button
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
-                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-3 py-2 rounded-btn border border-btn-border bg-btn-bg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Назад
                     </button>
@@ -418,11 +393,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                           <button
                             key={page}
                             onClick={() => setCurrentPage(page)}
-                            className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                              currentPage === page
-                                ? 'bg-primary text-white'
-                                : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                            }`}
+                            className={`px-3 py-2 text-sm font-medium rounded-btn border border-btn-border bg-btn-bg ${currentPage === page ? 'bg-[#DADBA2]' : ''}`}
                           >
                             {page}
                           </button>
@@ -433,7 +404,7 @@ const ProductPage = ({ products, categories, series, onAddToCart, onToggleFavori
                     <button
                       onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                       disabled={currentPage === totalPages}
-                      className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-3 py-2 rounded-btn border border-btn-border bg-btn-bg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       Вперед
                     </button>

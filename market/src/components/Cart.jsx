@@ -6,7 +6,7 @@ const Cart = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem, onCl
   const [isThankYouModalOpen, setIsThankYouModalOpen] = useState(false);
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+    return new Intl.NumberFormat('ru-RU').format(price) + ' р.';
   };
 
   const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);

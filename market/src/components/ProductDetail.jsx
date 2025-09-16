@@ -6,7 +6,7 @@ const ProductDetail = ({ product, onClose, onAddToCart, onToggleFavorite, isFavo
   const [selectedImage, setSelectedImage] = useState(0);
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+    return new Intl.NumberFormat('ru-RU').format(price) + ' р.';
   };
 
   const images = [

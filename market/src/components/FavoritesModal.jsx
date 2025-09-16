@@ -2,7 +2,7 @@ import { Heart, X, ShoppingCart } from 'lucide-react';
 
 const FavoritesModal = ({ isOpen, onClose, favorites, products, onToggleFavorite, onAddToCart }) => {
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+    return new Intl.NumberFormat('ru-RU').format(price) + ' р.';
   };
 
   const favoriteProducts = products.filter(product => favorites.includes(product.id));

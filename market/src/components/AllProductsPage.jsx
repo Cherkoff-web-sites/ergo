@@ -211,7 +211,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
             <button
               onClick={() => { setCurrentPage(Math.max(1, currentPage - 1)); scrollToTop(); }}
               disabled={currentPage === 1}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-2 rounded-btn border border-btn-border bg-btn-bg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Назад
             </button>
@@ -231,11 +231,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
                   <button
                     key={page}
                     onClick={() => { setCurrentPage(page); scrollToTop(); }}
-                    className={`px-3 py-2 text-sm font-medium rounded-lg ${
-                      currentPage === page
-                        ? 'bg-primary text-white'
-                        : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
-                    }`}
+                    className={`px-3 py-2 text-sm font-medium rounded-btn border border-btn-border bg-btn-bg ${currentPage === page ? 'bg-[#DADBA2]' : ''}`}
                   >
                     {page}
                   </button>
@@ -246,7 +242,7 @@ const AllProductsPage = ({ products, categories, series, onAddToCart, onToggleFa
             <button
               onClick={() => { setCurrentPage(Math.min(totalPages, currentPage + 1)); scrollToTop(); }}
               disabled={currentPage === totalPages}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-2 rounded-btn border border-btn-border bg-btn-bg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Вперед
             </button>

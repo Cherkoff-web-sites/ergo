@@ -116,7 +116,7 @@ const Filters = ({
             />
           </div>
           <div className="text-xs text-text-secondary">
-            Диапазон: {priceRange.min || 0} - {priceRange.max || '∞'} ₽
+            Диапазон: {priceRange.min || 0} - {priceRange.max || '∞'} р.
           </div>
         </div>
       </div>
