@@ -234,9 +234,12 @@ mt-6 md:mt-16 xxl:mt-20">
                   return (
                     <div
                       key={seriesItem.id}
-                      className="series-card group relative block bg-transparent rounded-lg border border-card-border transition-all duration-300"
+                      className="series-card group relative block rounded-lg border border-card-border transition-all duration-300"
                       style={{
-                        '--bg-image': 'url(/img/series_example_fp.webp)'
+                        backgroundImage: 'url(/img/series_example_fp.webp)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat'
                       }}
                     >
                       <div className="min-h-[114px] xxl:min-h-[164px] flex items-center justify-center relative z-10">
@@ -244,17 +247,10 @@ mt-6 md:mt-16 xxl:mt-20">
                           to={`/catalog/${category.id}/series/${seriesItem.id}`}
                           onClick={handleSeriesClick}
                           className="series-button text-center inline-block transition-all duration-300"
-                          onMouseEnter={(e) => {
-                            e.target.closest('.series-card').style.setProperty('--after-opacity', '1');
-                            e.target.style.setProperty('--button-bg', 'transparent');
-                            e.target.style.setProperty('--button-color', 'white');
-                            e.target.style.setProperty('--button-border', '1px solid white');
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.closest('.series-card').style.setProperty('--after-opacity', '0');
-                            e.target.style.setProperty('--button-bg', 'rgba(26, 24, 18, 0.05)');
-                            e.target.style.setProperty('--button-color', '#1A1812');
-                            e.target.style.setProperty('--button-border', '1px solid rgba(26, 24, 18, 0.32)');
+                          style={{
+                            backgroundColor: 'transparent',
+                            color: 'white',
+                            border: '1px solid white'
                           }}
                         >
                           {seriesItem.name.toUpperCase()}

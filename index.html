@@ -611,22 +611,16 @@
           </div>
         </div>
         <!-- Управление слайдером -->
-        <div class="absolute -bottom-1.5 md:-bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex justify-center items-center gap-14 md:gap-9 xxl:gap-12 px-3 xxl:px-4 py-1.5 md:py-4 xxl:py-5 rounded-btn bg-body">
+        <div class="absolute -bottom-1.5 md:-bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex justify-between items-center gap-3 px-3 xxl:px-4 py-1.5 md:py-4 xxl:py-5 rounded-btn bg-body md:min-w-[312px]">
           <div class="swiper-button-prev">
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.6818 4.75613L3.21946 4.75613L6.0483 1.93723L5.02415 0.903142L0.440341 5.49689L5.02415 10.0807L6.0483 9.06649L3.21946 6.23766L10.6818 6.23766V4.75613Z" fill="#1A1812"/>
             </svg>
           </div>
-          <div class="relative text-xs md:text-sm xxl:text-lg leading-lh-100 font-semibold uppercase min-w-[185px] min-h-[1.2em]">
-            <span id="slide-desc-1" class="slide-description active absolute inset-0 flex items-center justify-center">
+          <div class="text-xs md:text-sm xxl:text-lg leading-lh-100 font-semibold uppercase">
+            <p id="slide-desc-text" class="text-center whitespace-nowrap">
               переговорная
-            </span>
-            <span id="slide-desc-2" class="slide-description absolute inset-0 flex items-center justify-center">
-              каб персонала
-            </span>
-            <span id="slide-desc-3" class="slide-description absolute inset-0 flex items-center justify-center">
-              каб руководителя
-            </span>
+            </p>
           </div>
           <div class="swiper-button-next">
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -995,18 +989,20 @@
       },
       on: {
         slideChange: function () {
-          // Убираем активный класс со всех описаний
-          document.querySelectorAll('.slide-description').forEach(desc => {
-            desc.classList.remove('active');
-          });
-          
           // Получаем текущий активный слайд (учитывая loop)
           const realIndex = this.realIndex;
           
-          // Добавляем активный класс к соответствующему описанию
-          const activeDesc = document.getElementById(`slide-desc-${realIndex + 1}`);
-          if (activeDesc) {
-            activeDesc.classList.add('active');
+          // Массив описаний для каждого слайда
+          const slideDescriptions = [
+            'переговорная',
+            'кабинет персонала', 
+            'кабинет руководителя'
+          ];
+          
+          // Обновляем текст описания
+          const descText = document.getElementById('slide-desc-text');
+          if (descText && slideDescriptions[realIndex]) {
+            descText.textContent = slideDescriptions[realIndex];
           }
         }
       }
